@@ -1,6 +1,9 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.user;
 
 import java.util.ArrayList;
+import sk.stu.fiit.eaGeneration.Information;
+import sk.stu.fiit.eaGeneration.League;
+import sk.stu.fiit.eaGeneration.Match;
 
 /**
  * �udia, ktor� sleduj� z�pasy, t�my, hr��ov...

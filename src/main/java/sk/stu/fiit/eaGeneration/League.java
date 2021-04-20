@@ -1,5 +1,6 @@
 package sk.stu.fiit.eaGeneration;
 
+import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 
 

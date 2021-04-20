@@ -1,7 +1,11 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.user;
 
 import java.util.ArrayList;
-
+import java.util.Date;
+import sk.stu.fiit.eaGeneration.League;
+import sk.stu.fiit.eaGeneration.LeagueCharacteristics;
+import sk.stu.fiit.eaGeneration.RequestLeagueCreation;
+import sk.stu.fiit.eaGeneration.TeamApplicationForLeague;
 
 /**
  * Zakladate� ligy, jej spr�vca, definuje z�kladn� charakteristiky, schva�uje
@@ -18,7 +22,10 @@ public class LeagueOrganizer extends User {
 	private ArrayList<RequestLeagueCreation> requestLeagueCreationList;
 	private ArrayList<LeagueCharacteristics> leagueCharacteristics;
 
-	public LeagueOrganizer(){
-
-	}
-}//end LeagueOrganizer
+    public LeagueOrganizer(String email, String name, String surname, String nickname, String password, Date bornAt) {
+        super(email, name, surname, nickname, password, bornAt);
+    }
+        
+        
+	
+}
