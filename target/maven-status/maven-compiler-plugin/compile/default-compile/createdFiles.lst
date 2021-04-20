@@ -1,2 +1,17 @@
+sk\stu\fiit\user\LeagueOrganizer.class
+sk\stu\fiit\eaGeneration\RequestLeagueCreation.class
+sk\stu\fiit\eaGeneration\PersonalInformation.class
+sk\stu\fiit\user\Player.class
+sk\stu\fiit\user\TeamAdministrator.class
+sk\stu\fiit\user\Spectator.class
+sk\stu\fiit\eaGeneration\TeamApplicationForLeague.class
 sk\stu\fiit\gui\MainGui.class
+sk\stu\fiit\eaGeneration\LeagueCharacteristics.class
+sk\stu\fiit\eaGeneration\Prize.class
+sk\stu\fiit\user\AppAdministrator.class
+sk\stu\fiit\eaGeneration\Match.class
+sk\stu\fiit\eaGeneration\Information.class
+sk\stu\fiit\user\User.class
+sk\stu\fiit\eaGeneration\Team.class
+sk\stu\fiit\eaGeneration\League.class
 sk\stu\fiit\gui\MainGui$1.class
