@@ -13,7 +13,7 @@ import java.util.Date;
 public class Player extends User {
 
     
-    public Player(String email, String name, String surname, String nickname, String password, Date bornAt) {
-        super(email, name, surname, nickname, password, bornAt);
+    public Player(String email, String name, String surrname, String nickname, String password, Date bornAt) {
+        super(email, name, surrname, nickname, password, bornAt);
     }
 }

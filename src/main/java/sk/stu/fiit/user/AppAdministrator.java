@@ -2,9 +2,8 @@ package sk.stu.fiit.user;
 
 import java.util.ArrayList;
 import java.util.Date;
-import sk.stu.fiit.eaGeneration.League;
-import sk.stu.fiit.eaGeneration.RequestLeagueCreation;
-import sk.stu.fiit.eaGeneration.Team;
+import sk.stu.fiit.league.League;
+import sk.stu.fiit.team.Team;
 
 
 /**
@@ -14,13 +13,12 @@ import sk.stu.fiit.eaGeneration.Team;
  * @created 19-apr-2021 18:21:18
  */
 public class AppAdministrator extends User{
-	private ArrayList<RequestLeagueCreation> requestLeagueCreationList;
 	private ArrayList<Team> teamList;
 	private ArrayList<League> leagueList;
 
 
-    public AppAdministrator(String email, String name, String surname, String nickname, String password, Date bornAt) {
-        super(email, name, surname, nickname, password, bornAt);
+    public AppAdministrator(String email, String name, String surrname, String nickname, String password, Date bornAt) {
+        super(email, name, surrname, nickname, password, bornAt);
     }
 
 	

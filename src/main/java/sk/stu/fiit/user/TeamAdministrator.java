@@ -2,8 +2,8 @@ package sk.stu.fiit.user;
 
 import java.util.ArrayList;
 import java.util.Date;
-import sk.stu.fiit.eaGeneration.Team;
-import sk.stu.fiit.eaGeneration.TeamApplicationForLeague;
+import sk.stu.fiit.team.Team;
+import sk.stu.fiit.team.TeamApplicationForLeague;
 
 /**
  * Spr�vca t�mu, ktor� je z�rove� jeho �lenom. Rie�i administrat�vu t�mu.

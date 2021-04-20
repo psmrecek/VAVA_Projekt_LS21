@@ -1,4 +1,4 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.league;
 
 import java.util.Date;
 

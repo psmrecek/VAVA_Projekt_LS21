@@ -12,16 +12,17 @@ import java.util.Date;
  * @author schon
  */
 public abstract class User {
-    private final String email, name, surname, nickname, password;
+    private final String email, name, surrname, nickname, password;
     private final Date bornAt;
 
-    public User(String email, String name, String surname, String nickname, String password, Date bornAt) {
+    public User(String email, String name, String surrname, String nickname, String password, Date bornAt) {
         this.email = email;
         this.name = name;
-        this.surname = surname;
+        this.surrname = surrname;
         this.nickname = nickname;
         this.bornAt = bornAt;
         this.password = password;
+ 
     }
     
 }
