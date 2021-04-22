@@ -27,30 +27,30 @@ import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.LeagueOrganizer;
-import sk.stu.fiit.user.TeamAdministrator;
+import sk.stu.fiit.user.Player;
 
 /**
  *
  * @author PeterSmrecek
  */
-public class TeamWindow extends javax.swing.JFrame {
+public class AddTeamWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form Template
      */
     
-    private final Logger logger = Logger.getLogger(TeamWindow.class.getName());
+    private final Logger logger = Logger.getLogger(AddTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private TeamAdministrator teamAdministrator;
+    private Player player;
     private Lists lists;
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public TeamWindow(TeamAdministrator teamAdministrator, Lists lists) {
+    public AddTeamWindow(Player player, Lists lists) {
         initComponents();
         
-        this.teamAdministrator = teamAdministrator;
+        this.player = player;
         this.lists = lists;
         
         this.tfInfoList = Arrays.asList(nameTf, gameTf);
@@ -403,7 +403,7 @@ public class TeamWindow extends javax.swing.JFrame {
             return;
         }
         
-        Team team = new Team(nameString, description, mottoString, teamAdministrator);
+        Team team = new Team(nameString, description, mottoString, player);
         
         lists.addTeam(team);
         

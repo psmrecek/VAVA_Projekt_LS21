@@ -16,16 +16,16 @@ public class Team {
     private String name;
     private String description;
     private String motto;
-    private ArrayList<TeamAdministrator> adminList = new ArrayList<>();
+    private ArrayList<Player> adminList = new ArrayList<>();
     private ArrayList<Player> playersList = new ArrayList<>();
 
-    public Team(String name, String description, String motto, TeamAdministrator teamAdministrator) {
+    public Team(String name, String description, String motto, Player player) {
         this.name = name;
         this.description = description;
         this.motto = motto;
-        this.adminList.add(teamAdministrator);
+        this.adminList.add(player);
         
-        teamAdministrator.addTeam(this);
+        player.setTeam(this);
     }
 
     

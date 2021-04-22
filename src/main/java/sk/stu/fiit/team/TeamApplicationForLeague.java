@@ -1,6 +1,6 @@
 package sk.stu.fiit.team;
 
-import sk.stu.fiit.user.TeamAdministrator;
+import sk.stu.fiit.user.Player;
 
 /**
  * �iados�, ktor� pod�va Administr�tor t�mu ktor� schva�uje Organiz�tor ligy. Jej
@@ -12,7 +12,7 @@ import sk.stu.fiit.user.TeamAdministrator;
 public class TeamApplicationForLeague {
 
 	private String text;
-	private TeamAdministrator teamAdministrator;
+        private Player admin;
 
 	public TeamApplicationForLeague(){
 
