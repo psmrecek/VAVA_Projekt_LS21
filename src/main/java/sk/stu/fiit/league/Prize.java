@@ -5,12 +5,34 @@ package sk.stu.fiit.league;
  * @created 19-apr-2021 18:21:18
  */
 public class Prize {
+        
+    private String name;
+    private String description;
+    private int position;
+    private double price;
 
-	private String description;
-	private String name;
-	private double price;
+    public Prize(String name, String description, int position, double price) {
+        this.name = name;
+        this.description = description;
+        this.position = position;
+        this.price = price;
+    }
 
-	public Prize(){
+    public String getName() {
+        return name;
+    }
 
-	}
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+
 }//end Prize
