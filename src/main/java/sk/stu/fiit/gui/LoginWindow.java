@@ -132,17 +132,24 @@ public class LoginWindow extends javax.swing.JFrame {
         registrationWindow.setVisible(true);
     }
 
+    private void clear(){
+        passwordField.setText("");
+        nicknameTextField.setText("");
+    }
+    
     private void login(){
         String errorMessage = lists.login(nicknameTextField.getText().trim(), String.valueOf(passwordField.getPassword()).trim());
         if (errorMessage.equals("Admin")){
-            MainGui mainGui = new MainGui(this, "Admin");
+            MainGui mainGui = new MainGui(this, "Admin", lists);
             logger.info("Admin login");
+            clear();
             return;
         }
        if (errorMessage.isEmpty()){
            User user = lists.getUser(nicknameTextField.getText().trim());
-           MainGui mainGui = new MainGui(this, user);
+           MainGui mainGui = new MainGui(this, user, lists);
            logger.info("Login succesful");
+           clear();
        } else {
            JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri prihlasovaní", JOptionPane.WARNING_MESSAGE);
            logger.error("Login error");
