@@ -43,9 +43,12 @@ public class MainGui extends javax.swing.JFrame {
         timeInfoLabel1 = new javax.swing.JLabel();
         setTimeButton = new javax.swing.JButton();
         currentTimeLabel = new javax.swing.JLabel();
+        loginButton = new javax.swing.JButton();
+        registrationButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ešport pro");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
+        setTitle(bundle.getString("Esport ligy")); // NOI18N
         setMinimumSize(new java.awt.Dimension(937, 590));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -53,13 +56,13 @@ public class MainGui extends javax.swing.JFrame {
 
         timeInfoLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         timeInfoLabel1.setForeground(new java.awt.Color(255, 153, 51));
-        timeInfoLabel1.setText("Aktuálny čas:");
+        timeInfoLabel1.setText(bundle.getString("AKTUÁLNY ČAS:")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         jPanel1.add(timeInfoLabel1, gridBagConstraints);
 
-        setTimeButton.setText("Nastav čas");
+        setTimeButton.setText(bundle.getString("NASTAV ČAS")); // NOI18N
         setTimeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 setTimeButtonMouseReleased(evt);
@@ -77,6 +80,18 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         jPanel1.add(currentTimeLabel, gridBagConstraints);
 
+        loginButton.setText(bundle.getString("PRIHLÁSENIE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(loginButton, gridBagConstraints);
+
+        registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(registrationButton, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -91,15 +106,15 @@ public class MainGui extends javax.swing.JFrame {
     
     public void setCurrentTime(CurrentTime currentTime) {
         this.currentTime = currentTime;
-        currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime()));
+        currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
     }
     
     public boolean setCurrentTime(LocalDateTime dateTime){
         if (this.currentTime.setDateTime(dateTime))
-            currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime()));
+            currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
         else{
-            JOptionPane.showMessageDialog(rootPane, "Nastavený čas nemôže byť v minulosti" , "Chyba pri nastavovaní času" , JOptionPane.WARNING_MESSAGE);
-            logger.error("Trying to pick time in the past");  
+            JOptionPane.showMessageDialog(rootPane, java.util.ResourceBundle.getBundle("Bundle").getString("NASTAVENÝ ČAS NEMÔŽE BYŤ V MINULOSTI") , java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA PRI NASTAVOVANÍ ČASU") , JOptionPane.WARNING_MESSAGE);
+            logger.error("Trying to pick time in the past");   //NOI18N
             return false;
         }
         return true;
@@ -115,7 +130,7 @@ public class MainGui extends javax.swing.JFrame {
             @SuppressWarnings("static-access")
             public void run(){
                 while (running == 1){
-                    String date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime());
+                    String date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime()); //NOI18N
                     currentTimeLabel.setText(date);
                     time += 1;
                     if(time % 15 == 0)
@@ -125,7 +140,7 @@ public class MainGui extends javax.swing.JFrame {
                         currentTime.addMinute();
                     } catch (InterruptedException ex) {
                    
-                        logger.error("tickTock problem");
+                        logger.error("tickTock problem"); //NOI18N
                     }
                 }         
             }
@@ -149,7 +164,7 @@ public class MainGui extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) { //NOI18N
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -174,6 +189,8 @@ public class MainGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JButton registrationButton;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables
