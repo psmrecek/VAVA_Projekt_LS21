@@ -3,6 +3,7 @@ package sk.stu.fiit.league;
 import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import sk.stu.fiit.team.Team;
 
 
@@ -23,13 +24,14 @@ public class League {
     private int maxNumberTeams;
     private int numberOfTeamsInMatch;
     private String description;
-    private ArrayList<LeagueOrganizer> leagueOrganizerList;
     private ArrayList<Prize> prizeList;
+    private ImageIcon icon;
 
+    private ArrayList<LeagueOrganizer> leagueOrganizerList = new ArrayList<>();
     private ArrayList<Team> teamList = new ArrayList<>();
     private ArrayList<Match> matchList = new ArrayList<>();
 
-    public League(String name, String game, String genre, Date startDate, Date endDate, int minimalAge, int maxNumberTeams, int numberOfTeamsInMatch, String description, ArrayList<LeagueOrganizer> leagueOrganizerList, ArrayList<Prize> prizeList) {
+    public League(String name, String game, String genre, Date startDate, Date endDate, int minimalAge, int maxNumberTeams, int numberOfTeamsInMatch, String description, LeagueOrganizer leagueOrganizer, ArrayList<Prize> prizeList, ImageIcon icon) {
         this.name = name;
         this.game = game;
         this.genre = genre;
@@ -39,8 +41,11 @@ public class League {
         this.maxNumberTeams = maxNumberTeams;
         this.numberOfTeamsInMatch = numberOfTeamsInMatch;
         this.description = description;
-        this.leagueOrganizerList = leagueOrganizerList;
+        this.leagueOrganizerList.add(leagueOrganizer);
         this.prizeList = prizeList;
+        this.icon = icon;
+        
+        leagueOrganizer.addLeague(this);
     }
     
 
