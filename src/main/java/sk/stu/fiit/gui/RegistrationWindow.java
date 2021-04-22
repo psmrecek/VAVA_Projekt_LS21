@@ -5,7 +5,10 @@
  */
 package sk.stu.fiit.gui;
 
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
+import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 
 /**
@@ -23,8 +26,6 @@ public class RegistrationWindow extends javax.swing.JFrame {
         initComponents();
         this.lists = lists;
     }
-
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +55,7 @@ public class RegistrationWindow extends javax.swing.JFrame {
         emailTextField = new javax.swing.JTextField();
         dayComboBox = new javax.swing.JComboBox<>();
         monthComboBox = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        yearComboBox = new javax.swing.JComboBox<>();
         dayLabel = new javax.swing.JLabel();
         monthLabel = new javax.swing.JLabel();
         yearLabel = new javax.swing.JLabel();
@@ -122,9 +123,9 @@ public class RegistrationWindow extends javax.swing.JFrame {
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         getContentPane().add(monthComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010" }));
-        jComboBox3.setSelectedIndex(100);
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
+        yearComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010" }));
+        yearComboBox.setSelectedIndex(100);
+        getContentPane().add(yearComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
 
         dayLabel.setText("Deň");
         getContentPane().add(dayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, -1, -1));
@@ -139,12 +140,28 @@ public class RegistrationWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
-        
-        lists.addUser(String.valueOf(userTypeComboBox.getSelectedItem()), 
-                emailTextField.getText().trim(), nameTextField.getText().trim(), 
-                surrnameTextField.getText().trim(), nicknameTextField.getText().trim(), 
-                String.valueOf(passwordField.getPassword()).trim(), String.valueOf(checkPasswordField.getPassword()).trim(), 
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/10/2000"));
+        Logger logger = Logger.getLogger(RegistrationWindow.class.getName());
+        try {
+            String errorMessage =lists.addUser(String.valueOf(userTypeComboBox.getSelectedItem()),
+                    emailTextField.getText().trim(), nameTextField.getText().trim(),
+                    surrnameTextField.getText().trim(), nicknameTextField.getText().trim(),
+                    String.valueOf(passwordField.getPassword()).trim(), String.valueOf(checkPasswordField.getPassword()).trim(),
+                    InputProcessor.convertDate(String.valueOf(dayComboBox.getSelectedIndex()+1)+"."+
+                            String.valueOf(monthComboBox.getSelectedIndex()+1)+"."+
+                            String.valueOf(yearComboBox.getSelectedItem())));
+                
+            if (errorMessage.isEmpty()){
+                logger.info("User registration succesful");
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri registracii", JOptionPane.WARNING_MESSAGE);
+                logger.error("Wrong input in registration");
+            }
+            
+        } catch (ParseException ex) {
+            logger.error("Error with date parsing in user registration");
+        }
     }//GEN-LAST:event_registrationButtonMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -153,7 +170,6 @@ public class RegistrationWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> dayComboBox;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JTextField emailTextField;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel mailLabel;
@@ -170,6 +186,7 @@ public class RegistrationWindow extends javax.swing.JFrame {
     private javax.swing.JLabel surrnameLabel;
     private javax.swing.JTextField surrnameTextField;
     private javax.swing.JComboBox<String> userTypeComboBox;
+    private javax.swing.JComboBox<String> yearComboBox;
     private javax.swing.JLabel yearLabel;
     // End of variables declaration//GEN-END:variables
 }
