@@ -19,7 +19,7 @@ import sk.stu.fiit.data.Lists;
  */
 public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
-    private Lists lists;
+    private final Lists lists = new Lists();
     private CurrentTime currentTime = CurrentTime.CurrentTime();
     
     /**
@@ -62,7 +62,7 @@ public class MainGui extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        timeInfoLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        timeInfoLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel1.setForeground(new java.awt.Color(255, 153, 51));
         timeInfoLabel1.setText(bundle.getString("AKTUÁLNY ČAS:")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -81,8 +81,8 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(setTimeButton, gridBagConstraints);
 
-        currentTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        currentTimeLabel.setText("10-4-21 00:00:00");
+        currentTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        currentTimeLabel.setText("null");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -95,6 +95,11 @@ public class MainGui extends javax.swing.JFrame {
         jPanel1.add(loginButton, gridBagConstraints);
 
         registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
+        registrationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                registrationButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
@@ -130,7 +135,7 @@ public class MainGui extends javax.swing.JFrame {
     
     public void checkStatus(){};
     
-     public void tickTock(){
+    private void tickTock(){
         int running = 1;
         Thread thread1 = new Thread(){
             int time = 0;
@@ -160,6 +165,16 @@ public class MainGui extends javax.swing.JFrame {
         ChangeTime changeTime = new ChangeTime();
         changeTime.setChangeTime(this);
     }//GEN-LAST:event_setTimeButtonMouseReleased
+
+    
+    private void registration(){ 
+        RegistrationWindow registrationWindow = new RegistrationWindow(this.lists);
+        registrationWindow.setVisible(true);
+    };
+    
+    private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
+        registration();
+    }//GEN-LAST:event_registrationButtonMouseReleased
 
     /**
      * @param args the command line arguments

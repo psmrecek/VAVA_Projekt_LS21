@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * @author schon
  */
 public class CurrentTime {
-     private static CurrentTime currentTime = null;
+    private static CurrentTime currentTime = null;
     private Date dateTime;
     
     private CurrentTime(){
