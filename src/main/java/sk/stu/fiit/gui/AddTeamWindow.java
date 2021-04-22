@@ -7,26 +7,17 @@ package sk.stu.fiit.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
-import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
-import sk.stu.fiit.league.League;
-import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.team.Team;
-import sk.stu.fiit.user.LeagueOrganizer;
 import sk.stu.fiit.user.Player;
 
 /**
@@ -53,7 +44,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         this.player = player;
         this.lists = lists;
         
-        this.tfInfoList = Arrays.asList(nameTf, gameTf);
+        this.tfInfoList = Arrays.asList(nameTf, mottoTf);
     }
 
     /**
@@ -76,7 +67,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         addIconBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
-        gameTf = new javax.swing.JTextField();
+        mottoTf = new javax.swing.JTextField();
         nameTf = new javax.swing.JTextField();
         l2Lbl = new javax.swing.JLabel();
         l4Lbl = new javax.swing.JLabel();
@@ -150,7 +141,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         controlsPnl.add(createLeagueBtn);
 
         addIconBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addIconBtn.setText("Zvoliť logo ligy");
+        addIconBtn.setText("Zvoliť logo tímu");
         addIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addIconBtnMouseReleased(evt);
@@ -180,14 +171,14 @@ public class AddTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         infoPnl.add(l1Lbl, gridBagConstraints);
 
-        gameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        gameTf.setMinimumSize(new java.awt.Dimension(200, 26));
-        gameTf.setPreferredSize(new java.awt.Dimension(200, 26));
+        mottoTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mottoTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        mottoTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
-        infoPnl.add(gameTf, gridBagConstraints);
+        infoPnl.add(mottoTf, gridBagConstraints);
 
         nameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameTf.setMinimumSize(new java.awt.Dimension(200, 26));
@@ -328,7 +319,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
 
     private void createLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueBtnMouseReleased
         // TODO add your handling code here:
-        createLeagueAction();
+        createTeamAction();
     }//GEN-LAST:event_createLeagueBtnMouseReleased
 
 
@@ -347,7 +338,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JTextField gameTf;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
@@ -357,6 +347,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l4Lbl;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
@@ -388,7 +379,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         imageLbl.setIcon(icon);
     }
     
-    private void createLeagueAction() {
+    private void createTeamAction() {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
@@ -396,14 +387,14 @@ public class AddTeamWindow extends javax.swing.JFrame {
         }
         
         String nameString = nameTf.getText();
-        String mottoString = gameTf.getText();
+        String mottoString = mottoTf.getText();
         
         if (icon == null) {
             errorMessage("Logo tímu nesmie zostať prázdne!");
             return;
         }
         
-        Team team = new Team(nameString, description, mottoString, player);
+        Team team = new Team(nameString, description, mottoString, player, icon);
         
         lists.addTeam(team);
         

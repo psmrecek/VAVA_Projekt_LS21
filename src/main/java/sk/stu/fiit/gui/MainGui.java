@@ -372,7 +372,7 @@ public class MainGui extends javax.swing.JFrame {
 
     private void manageTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageTeamButtonMouseReleased
         // TODO add your handling code here:
-        new ManageTeam((Player) loggedUser, lists).setVisible(true);
+        new ManageTeamWindow((Player) loggedUser, lists).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
 
 
