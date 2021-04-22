@@ -722,7 +722,7 @@ public class LeagueWindow extends javax.swing.JFrame {
     
     private void createLeagueAction() {
         String description = descriptionTa.getText();
-        if (isEmptyField(tfInfoList) || description.isEmpty() || description.isBlank()) {
+        if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
             return;
         }
@@ -768,7 +768,7 @@ public class LeagueWindow extends javax.swing.JFrame {
     private boolean isEmptyField(List<JTextField> list){
         for (int i = 0; i < list.size(); i++) {
             JTextField get = list.get(i);
-            if (get.getText().isEmpty() || get.getText().isBlank()) {
+            if (get.getText().isEmpty()) {
                 return true;
             }
         }
