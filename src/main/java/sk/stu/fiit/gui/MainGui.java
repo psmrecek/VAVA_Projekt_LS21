@@ -361,10 +361,10 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_setTimeButtonMouseReleased
 
     public void checkPlayerButtons(){
-            leaveButton.setVisible(true);
-            createTeamButton.setVisible(true);
-            playerPanel.setVisible(true);
-            manageTeamButton.setVisible(true);
+        leaveButton.setVisible(true);
+        createTeamButton.setVisible(true);
+        playerPanel.setVisible(true);
+        manageTeamButton.setVisible(true);
             Player player = (Player) loggedUser;
             if(Boolean.logicalAnd(player.isAdmin(), player.getTeam() != null))
                 createTeamButton.setVisible(false);
@@ -418,11 +418,13 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     private void createTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTeamButtonMouseReleased
-        new AddTeamWindow((Player) loggedUser, lists).setVisible(true);
+        
+        new AddTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_createTeamButtonMouseReleased
 
     private void manageTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageTeamButtonMouseReleased
-        new ManageTeamWindow((Player) loggedUser, lists).setVisible(true);
+        // TODO add your handling code here:
+        new ManageTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
 
 
