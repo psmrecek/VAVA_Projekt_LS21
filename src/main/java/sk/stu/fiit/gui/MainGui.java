@@ -12,7 +12,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.Lists;
-import sk.stu.fiit.user.User;
+import sk.stu.fiit.user.*;
+
 
 /**
  *
@@ -37,6 +38,9 @@ public class MainGui extends javax.swing.JFrame {
         BasicConfigurator.configure(); 
         tickTock();
         logoutVisibility();
+        
+        lists.addUser("Organizátor ligy", "a@a.a", "a", "a", "a", "aaaaaaaA1", "aaaaaaaA1", null);
+        
     }
     
     
@@ -236,6 +240,11 @@ public class MainGui extends javax.swing.JFrame {
         leagueOrganizerPanel.setLayout(new java.awt.GridBagLayout());
 
         createLeagueButton.setText("Vytvor ligu");
+        createLeagueButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                createLeagueButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -387,6 +396,10 @@ public class MainGui extends javax.swing.JFrame {
         this.loggedUser = null;
         logoutVisibility();
     }//GEN-LAST:event_logoutButtonMouseReleased
+
+    private void createLeagueButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueButtonMouseReleased
+        new LeagueWindow((LeagueOrganizer) loggedUser, lists).setVisible(true);
+    }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     /**
      * @param args the command line arguments
