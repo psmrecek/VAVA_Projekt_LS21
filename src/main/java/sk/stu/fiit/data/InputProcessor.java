@@ -5,9 +5,12 @@
  */
 package sk.stu.fiit.data;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 
 /**
@@ -27,7 +30,7 @@ public final class InputProcessor {
         return dateWihoutTime;
     }
 
-    public static boolean validDateRange(Date currentDateApp, Date accommStartDate, Date accommEndDate) {
+    public static boolean validDateRange(Date currentDateApp, Date startDate, Date endDate) {
         Date currWihoutTime = null;
         try {
             currWihoutTime = dateWithoutTime(currentDateApp);
@@ -35,7 +38,7 @@ public final class InputProcessor {
             logger.error("Unable to convert date");
             return false;
         }
-        return (accommStartDate.after(currWihoutTime) && accommEndDate.after(accommStartDate));
+        return (startDate.after(currWihoutTime) && endDate.after(startDate));
     }
     
     public static Date convertDate(String dateString) throws ParseException{
@@ -67,5 +70,21 @@ public final class InputProcessor {
     
     public static boolean isPositiveInt(int number){
         return number > 0;
+    }
+    
+    public static ImageIcon resize(BufferedImage img, int maxSize) {
+        double vertical = img.getHeight();
+        double horizontal = img.getWidth();
+        double coef;
+        if (vertical > horizontal) {
+            coef = vertical / maxSize;
+        } else {
+            coef = horizontal / maxSize;
+        }
+
+        vertical /= coef;
+        horizontal /= coef;
+
+        return new ImageIcon(img.getScaledInstance((int) horizontal, (int) vertical, Image.SCALE_DEFAULT));
     }
 }
