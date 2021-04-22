@@ -31,7 +31,6 @@ public class Lists {
     
     public String addUser(String type, String email, String name, String surrname, String nickname, String password, String passwordCheck, Date bornAt){
         String errorMessage = "";
-        
         errorMessage += checkEmpty(name, "Meno");
         errorMessage += checkEmpty(surrname, "Priezvisko");
         errorMessage += checkEmpty(nickname, "Nickname");
@@ -48,6 +47,18 @@ public class Lists {
         Pattern passwordPattern = Pattern.compile(passwordRegex);
         if (!(passwordPattern.matcher(password).matches()))
             errorMessage += "Heslo musí obsahovať aspoň 6 znakov z toho aspoň jedno malé písmeno, veľké písmeno a číslicu!\n";
+        
+        for (User user : users){
+            if (user.getEmail().equals(email)){
+                errorMessage += "Tento email už je obsadený!\n";
+                break;
+            }
+            
+            if (user.getNickname().equals(nickname)){
+                errorMessage += "Tento nickname je už obsadený!\n";
+                break;
+            }
+        }
         
         if(errorMessage.isEmpty()){
             if(type.equals("Hráč"))

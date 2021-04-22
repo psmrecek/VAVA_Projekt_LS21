@@ -26,8 +26,6 @@ public class RegistrationWindow extends javax.swing.JFrame {
         initComponents();
         this.lists = lists;
     }
-
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,6 +156,7 @@ public class RegistrationWindow extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri registracii", JOptionPane.WARNING_MESSAGE);
+                logger.error("Wrong input in registration");
             }
             
         } catch (ParseException ex) {
