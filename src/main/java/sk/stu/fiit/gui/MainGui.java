@@ -8,6 +8,7 @@ package sk.stu.fiit.gui;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.Lists;
@@ -26,9 +27,16 @@ public class MainGui extends javax.swing.JFrame {
      */
     public MainGui() {
         initComponents();
-        
+        initApplication();
     }
 
+    
+    private void initApplication(){
+        BasicConfigurator.configure(); 
+        tickTock();
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
