@@ -76,6 +76,11 @@ public class MainGui extends javax.swing.JFrame {
         createLeagueButton = new javax.swing.JButton();
         organizerButton = new javax.swing.JButton();
         newMessageButton = new javax.swing.JButton();
+        playerPanel = new javax.swing.JPanel();
+        createTeamButton = new javax.swing.JButton();
+        playerMessagesButton = new javax.swing.JButton();
+        manageTeamButton = new javax.swing.JButton();
+        leaveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -174,7 +179,7 @@ public class MainGui extends javax.swing.JFrame {
 
         leagueOrganizerPanel.setLayout(new java.awt.GridBagLayout());
 
-        createLeagueButton.setText("Vytvor ligu");
+        createLeagueButton.setText("Vytvoriť ligu");
         createLeagueButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 createLeagueButtonMouseReleased(evt);
@@ -185,10 +190,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         leagueOrganizerPanel.add(createLeagueButton, gridBagConstraints);
 
-        organizerButton.setText("Zverejni výsledky");
+        organizerButton.setText("Zverejniť výsledky");
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
-        newMessageButton.setText("Napíš správu");
+        newMessageButton.setText("Správy");
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -198,6 +203,40 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(leagueOrganizerPanel, gridBagConstraints);
+
+        playerPanel.setLayout(new java.awt.GridBagLayout());
+
+        createTeamButton.setText("Vytvoriť tím");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        playerPanel.add(createTeamButton, gridBagConstraints);
+
+        playerMessagesButton.setText("Správy");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        playerPanel.add(playerMessagesButton, gridBagConstraints);
+
+        manageTeamButton.setText("Spravovať tím");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        playerPanel.add(manageTeamButton, gridBagConstraints);
+
+        leaveButton.setText("Odísť z tímu");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        playerPanel.add(leaveButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(playerPanel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -269,6 +308,7 @@ public class MainGui extends javax.swing.JFrame {
     private void loginVisibility(){
             leagueOrganizerPanel.setVisible(false);
             setTimeButton.setVisible(false);
+            playerPanel.setVisible(false);
             
         if (this.loggedUser == null){  // Admin
             setTimeButton.setVisible(true);
@@ -276,6 +316,18 @@ public class MainGui extends javax.swing.JFrame {
         }
         
         if (this.loggedUser.getClass().getSimpleName().equals("Player")){
+            playerPanel.setVisible(true);
+            Player player = (Player) loggedUser;
+            if(Boolean.logicalAnd(player.isAdmin(), player.getTeam() != null))
+                createTeamButton.setVisible(false);
+            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() != null)){
+                manageTeamButton.setVisible(false);
+                createTeamButton.setVisible(false);
+            }
+            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() == null)){
+                leaveButton.setVisible(false);
+                manageTeamButton.setVisible(false);
+            }
             
         }
         
@@ -307,6 +359,7 @@ public class MainGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
     private javax.swing.JButton createLeagueButton;
+    private javax.swing.JButton createTeamButton;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JButton historyButton;
     private javax.swing.JPanel jPanel1;
@@ -314,9 +367,13 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JButton leagueInfoButton;
     private javax.swing.JPanel leagueOrganizerPanel;
     private javax.swing.JScrollPane leaguesScrollPane;
+    private javax.swing.JButton leaveButton;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton manageTeamButton;
     private javax.swing.JButton newMessageButton;
     private javax.swing.JButton organizerButton;
+    private javax.swing.JButton playerMessagesButton;
+    private javax.swing.JPanel playerPanel;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables

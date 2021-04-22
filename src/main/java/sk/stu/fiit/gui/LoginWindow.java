@@ -31,6 +31,7 @@ public class LoginWindow extends javax.swing.JFrame {
     private void initApplication(){
         BasicConfigurator.configure(); 
         lists.addUser("Organizátor ligy", "a@a.a", "a", "a", "a", "aaaaaaaA1", "aaaaaaaA1", null);
+        lists.addUser("Hráč", "p@p.p", "p", "p", "p", "pppppppP1", "pppppppP1", null);
         
     }
     /**
