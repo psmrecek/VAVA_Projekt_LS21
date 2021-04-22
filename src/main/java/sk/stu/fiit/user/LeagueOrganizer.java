@@ -15,8 +15,8 @@ import sk.stu.fiit.team.TeamApplicationForLeague;
 public class LeagueOrganizer extends User {
 
     private String nickname;
-    private ArrayList<League> leagueList;
-    private ArrayList<TeamApplicationForLeague> teamApplicationList;
+    private ArrayList<League> leagueList = new ArrayList<>();
+    private ArrayList<TeamApplicationForLeague> teamApplicationList = new ArrayList<>();
 
     public LeagueOrganizer(String email, String name, String surrname, String nickname, String password, Date bornAt) {
         super(email, name, surrname, nickname, password, bornAt);
