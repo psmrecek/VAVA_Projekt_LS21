@@ -5,15 +5,25 @@
  */
 package sk.stu.fiit.gui;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
+import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
+import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.user.LeagueOrganizer;
 
@@ -28,20 +38,25 @@ public class LeagueWindow extends javax.swing.JFrame {
      */
     
     private final Logger logger = Logger.getLogger(LeagueWindow.class.getName());
+    final JFileChooser fc = new JFileChooser();
+    
     private LeagueOrganizer leagueOrganizer;
+    private Lists lists;
     private List<JTextField> tfInfoList;
     private List<JTextField> tfPrizeList;
     private ArrayList<Prize> prizeList = new ArrayList<>();
+    private ImageIcon icon;
     
-    public LeagueWindow(LeagueOrganizer leagueOrganizer) {
+    public LeagueWindow(LeagueOrganizer leagueOrganizer, Lists lists) {
         initComponents();
         
         this.leagueOrganizer = leagueOrganizer;
+        this.lists = lists;
         
         this.tfInfoList = Arrays.asList(nameTf, gameTf, genreTf, dateStartTf, dateEndTf, ageRestrictionTf, maxTeamsTf, teamsInMatchTf);
         this.tfPrizeList = Arrays.asList(positionTf, prizeNameTf, prizeDescriptionTf, priceTf);
         
-//        updateAll();
+        updateAll();
         
     }
 
@@ -113,6 +128,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vytvor ligu");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
         mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -164,7 +180,6 @@ public class LeagueWindow extends javax.swing.JFrame {
         imagePnl.setLayout(new java.awt.GridBagLayout());
 
         imageLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        imageLbl.setText("[Obrázok]");
         imageLbl.setMinimumSize(new java.awt.Dimension(280, 280));
         imageLbl.setPreferredSize(new java.awt.Dimension(280, 280));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -704,6 +719,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         
         prizeList.add(new Prize(name, description, position, price));
         updateAll();
+        clearPrizeTf();
     }
     
     private void removePrizeAction() {
@@ -717,15 +733,87 @@ public class LeagueWindow extends javax.swing.JFrame {
     }
     
     private void addIconAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int returnVal = fc.showOpenDialog(this);
+
+        File file = null;
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+        } else {
+            errorMessage("Nie je vybraný žiaden súbor!");
+            return;
+        }
+
+        try {
+            BufferedImage img = ImageIO.read(file);
+            icon = InputProcessor.resize(img, 280);
+        } catch (Exception e) {
+            errorMessage("Vybraný súbor nie je možné použiť ako logo!");
+            logger.warn("Wrong image selected");
+            return;
+        }
+        
+        imageLbl.setIcon(icon);
     }
     
     private void createLeagueAction() {
         String description = descriptionTa.getText();
-        if (isEmptyField(tfInfoList) || description.isEmpty() || description.isBlank()) {
+        if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
             return;
         }
+        
+        String nameString = nameTf.getText();
+        String gameString = gameTf.getText();
+        String genreString = genreTf.getText();
+        String startDateString = dateStartTf.getText();
+        String endDateString = dateEndTf.getText();
+        String minimalAgeString = ageRestrictionTf.getText();
+        String maxTeamsString = maxTeamsTf.getText();
+        String teamsInMatchString = teamsInMatchTf.getText();
+       
+        Date startDate;
+        Date endDate;
+        try {
+            startDate = InputProcessor.convertDate(startDateString);
+            endDate = InputProcessor.convertDate(endDateString);
+        } catch (ParseException ex) {
+            errorMessage("Zadaný nesprávny formát dátumu!");
+            return;
+        }
+        
+        Date current = CurrentTime.CurrentTime().getDateTime();
+        if (!InputProcessor.validDateRange(current, startDate, endDate)) {
+            errorMessage("Zadaný dátum musí byť neskorší ako súčasný dátum a dátum ukončenia musí byť neskorší ako dátum začiatku!");
+            return;
+        }
+        
+        int minimalAge;
+        int maxTeams;
+        int teamsInMatch;
+        
+        try {
+            minimalAge = InputProcessor.positiveIntFromString(minimalAgeString);
+            maxTeams = InputProcessor.positiveIntFromString(maxTeamsString);
+            teamsInMatch = InputProcessor.positiveIntFromString(teamsInMatchString);
+        } catch (Exception e) {
+            errorMessage("V informáciách môžu byť zadané iba celé kladné čísla!");
+            return;
+        }
+        
+        if (prizeList.size() == 0) {
+            errorMessage("Liga musí obsahovať aspoň jednu výhru!");
+            return;
+        }
+        
+        if (icon == null) {
+            errorMessage("Logo ligy nesmie zostať prázdne!");
+            return;
+        }
+        
+        League league = new League(nameString, gameString, genreString, startDate, endDate, minimalAge, maxTeams, teamsInMatch, description, this.leagueOrganizer, prizeList, icon);
+        
+        lists.addLeague(league);
+        this.dispose();
     }
     
     private int getRow(JTable table, String message) {
@@ -768,7 +856,7 @@ public class LeagueWindow extends javax.swing.JFrame {
     private boolean isEmptyField(List<JTextField> list){
         for (int i = 0; i < list.size(); i++) {
             JTextField get = list.get(i);
-            if (get.getText().isEmpty() || get.getText().isBlank()) {
+            if (get.getText().isEmpty()) {
                 return true;
             }
         }
@@ -778,5 +866,11 @@ public class LeagueWindow extends javax.swing.JFrame {
     private void errorMessage(String message){
         JOptionPane.showMessageDialog(rootPane, message,
                 "Chyba!", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void clearPrizeTf(){
+        for (JTextField jTextField : tfPrizeList) {
+            jTextField.setText("");
+        }
     }
 }

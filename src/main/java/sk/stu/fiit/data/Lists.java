@@ -8,6 +8,7 @@ package sk.stu.fiit.data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
+import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.LeagueOrganizer;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.Spectator;
@@ -22,6 +23,7 @@ Class <code>Lists</code> serves as class storing all information given
  */
 public class Lists {
     private final ArrayList<User> users = new ArrayList<>();
+    private final ArrayList<League> leagues = new ArrayList<>();
     
     private String checkEmpty(String field, String type){
         if(field.isEmpty())
@@ -89,5 +91,9 @@ public class Lists {
             if(Boolean.logicalOr(user.getNickname().equals(nick), user.getEmail().equals(nick)))
                 return user;
         return null;
+    }
+    
+    public void addLeague(League league){
+        this.leagues.add(league);
     }
 } 
