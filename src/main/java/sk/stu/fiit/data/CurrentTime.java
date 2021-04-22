@@ -37,7 +37,6 @@ public class CurrentTime {
  
     public void addMinute(){
         dateTime = new Date((dateTime.getTime() + 60000));
-        
     }
     
     public boolean setDateTime(LocalDateTime localDateTime){

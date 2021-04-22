@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
 
 
@@ -22,7 +23,7 @@ import sk.stu.fiit.user.*;
  */
 public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
-    private final Lists lists = new Lists();
+    private final Lists lists;
     private CurrentTime currentTime = CurrentTime.CurrentTime();
     private User loggedUser = null;
     private final LoginWindow loginWindow;
@@ -31,8 +32,10 @@ public class MainGui extends javax.swing.JFrame {
      * Creates new form MainGui
      * @param loginWindow
      * @param loggedUser
+     * @param lists
      */
-    public MainGui(LoginWindow loginWindow, User loggedUser) {
+    public MainGui(LoginWindow loginWindow, User loggedUser, Lists lists) {
+        this.lists = lists;
         initComponents();
         this.loggedUser = loggedUser;
         this.loginWindow = loginWindow;
@@ -40,13 +43,13 @@ public class MainGui extends javax.swing.JFrame {
         initApplication();
     }
     
-        public MainGui(LoginWindow loginWindow, String loggedUser) {
+    public MainGui(LoginWindow loginWindow, String loggedUser, Lists lists) {
+        this.lists = lists;
         initComponents();
         this.loginWindow = loginWindow;
         loginWindow.setVisible(false);
         initApplication();
     }
-
     
     private void initApplication(){
         tickTock();
@@ -55,7 +58,6 @@ public class MainGui extends javax.swing.JFrame {
         setActiveTable();
     }
     
-    
     private void deleteRows(DefaultTableModel model) {
         if (model.getRowCount() > 0) {
             for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -63,6 +65,7 @@ public class MainGui extends javax.swing.JFrame {
             }
         }
     }
+    
     public void setActiveTable(){ //TODO only active leagues
         DefaultTableModel model = (DefaultTableModel) activeLeaguesTable.getModel();
         deleteRows(model);
@@ -70,14 +73,17 @@ public class MainGui extends javax.swing.JFrame {
         int numberOfColumns = activeLeaguesTable.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
 
-        for (int i = 0; i < lists.getLeagues().size(); i++) {
-            
-            rowData[0] = lists.getLeagues().get(i).getName();
-            rowData[1] = lists.getLeagues().get(i).getGame();
-            rowData[2] = lists.getLeagues().get(i).getMaxNumberTeams();
-            rowData[3] = InputProcessor.dateToString(lists.getLeagues().get(i).getStartDate());
-            rowData[4] = InputProcessor.dateToString(lists.getLeagues().get(i).getEndDate());
-            model.addRow(rowData);
+        System.out.println("??");
+        System.out.println(lists.getLeagues().size());
+        for (League league : lists.getLeagues()) {
+            if(Boolean.logicalAnd(league.getStartDate().before(currentTime.getDateTime()), league.getEndDate().after(currentTime.getDateTime()))){
+                rowData[0] = league.getName();
+                rowData[1] = league.getGame();
+                rowData[2] = league.getMaxNumberTeams();
+                rowData[3] = InputProcessor.dateToString(league.getStartDate());
+                rowData[4] = InputProcessor.dateToString(league.getEndDate());
+                model.addRow(rowData);
+            }
         }
     }
     
@@ -322,7 +328,7 @@ public class MainGui extends javax.swing.JFrame {
     
     public void checkStatus(){
         setActiveTable();
-    };
+    }
     
     private void tickTock(){
         int running = 1;
@@ -412,7 +418,7 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     private void createTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTeamButtonMouseReleased
-        // TODO add your handling code here:
+        
         new AddTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_createTeamButtonMouseReleased
 
