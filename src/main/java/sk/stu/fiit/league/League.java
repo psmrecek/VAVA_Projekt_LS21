@@ -50,6 +50,26 @@ public class League {
     private void addToLeagueOrganizer(LeagueOrganizer leagueOrganizer){
         leagueOrganizer.addLeague(this);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public int getMaxNumberTeams() {
+        return maxNumberTeams;
+    }
     
 
 
