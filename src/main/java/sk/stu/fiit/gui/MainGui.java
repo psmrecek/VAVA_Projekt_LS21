@@ -82,7 +82,7 @@ public class MainGui extends javax.swing.JFrame {
         jPanel1.add(setTimeButton, gridBagConstraints);
 
         currentTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        currentTimeLabel.setText("10-4-21 00:00:00");
+        currentTimeLabel.setText("null");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -95,6 +95,11 @@ public class MainGui extends javax.swing.JFrame {
         jPanel1.add(loginButton, gridBagConstraints);
 
         registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
+        registrationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                registrationButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
@@ -130,7 +135,7 @@ public class MainGui extends javax.swing.JFrame {
     
     public void checkStatus(){};
     
-     public void tickTock(){
+    private void tickTock(){
         int running = 1;
         Thread thread1 = new Thread(){
             int time = 0;
@@ -160,6 +165,15 @@ public class MainGui extends javax.swing.JFrame {
         ChangeTime changeTime = new ChangeTime();
         changeTime.setChangeTime(this);
     }//GEN-LAST:event_setTimeButtonMouseReleased
+
+    
+    private void registration(){ 
+        
+    };
+    
+    private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
+        registration();
+    }//GEN-LAST:event_registrationButtonMouseReleased
 
     /**
      * @param args the command line arguments
