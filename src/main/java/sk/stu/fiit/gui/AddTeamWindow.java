@@ -35,14 +35,16 @@ public class AddTeamWindow extends javax.swing.JFrame {
     
     private Player player;
     private Lists lists;
+    private MainGui mainGui;
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public AddTeamWindow(Player player, Lists lists) {
+    public AddTeamWindow(Player player, Lists lists, MainGui mainGui) {
         initComponents();
         
         this.player = player;
         this.lists = lists;
+        this.mainGui = mainGui;
         
         this.tfInfoList = Arrays.asList(nameTf, mottoTf);
     }
@@ -92,8 +94,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
         setTitle("Vytvor tím");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
         titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -127,8 +129,10 @@ public class AddTeamWindow extends javax.swing.JFrame {
         mainPnl.add(imagePnl, gridBagConstraints);
 
         controlsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ovládacie prvky", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        controlsPnl.setMinimumSize(new java.awt.Dimension(30, 57));
-        controlsPnl.setPreferredSize(new java.awt.Dimension(30, 57));
+        controlsPnl.setToolTipText("");
+        controlsPnl.setMaximumSize(new java.awt.Dimension(256, 200));
+        controlsPnl.setMinimumSize(new java.awt.Dimension(22, 80));
+        controlsPnl.setPreferredSize(new java.awt.Dimension(22, 80));
         controlsPnl.setLayout(new javax.swing.BoxLayout(controlsPnl, javax.swing.BoxLayout.LINE_AXIS));
 
         createLeagueBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -153,7 +157,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
         gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         mainPnl.add(controlsPnl, gridBagConstraints);
 
         infoPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informácie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -298,11 +302,15 @@ public class AddTeamWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -397,6 +405,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
         Team team = new Team(nameString, description, mottoString, player, icon);
         
         lists.addTeam(team);
+        
+        mainGui.checkPlayerButtons();
         
         this.dispose();
     }
