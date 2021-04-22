@@ -8,7 +8,6 @@ package sk.stu.fiit.gui;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.Lists;
@@ -23,26 +22,35 @@ public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
     private final Lists lists = new Lists();
     private CurrentTime currentTime = CurrentTime.CurrentTime();
-    private User loggedUser;
+    private User loggedUser = null;
+    private final LoginWindow loginWindow;
     
     /**
      * Creates new form MainGui
+     * @param loginWindow
+     * @param loggedUser
      */
-    public MainGui() {
+    public MainGui(LoginWindow loginWindow, User loggedUser) {
         initComponents();
+        this.loggedUser = loggedUser;
+        this.loginWindow = loginWindow;
+        loginWindow.setVisible(false);
+        initApplication();
+    }
+    
+        public MainGui(LoginWindow loginWindow, String loggedUser) {
+        initComponents();
+        this.loginWindow = loginWindow;
+        loginWindow.setVisible(false);
         initApplication();
     }
 
     
     private void initApplication(){
-        BasicConfigurator.configure(); 
         tickTock();
-        logoutVisibility();
-        
-        lists.addUser("Organizátor ligy", "a@a.a", "a", "a", "a", "aaaaaaaA1", "aaaaaaaA1", null);
-        
+        loginVisibility();
+        this.setVisible(true);
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,14 +67,6 @@ public class MainGui extends javax.swing.JFrame {
         setTimeButton = new javax.swing.JButton();
         currentTimeLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
-        loginPanel = new javax.swing.JPanel();
-        loginButton = new javax.swing.JButton();
-        registrationButton = new javax.swing.JButton();
-        passwordLabel = new javax.swing.JLabel();
-        nicknameLabel = new javax.swing.JLabel();
-        nicknameTextField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
-        appLabel = new javax.swing.JLabel();
         leaguesScrollPane = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         activeLeaguesLabel = new javax.swing.JLabel();
@@ -125,71 +125,6 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 18;
         gridBagConstraints.gridwidth = 9;
         jPanel1.add(logoutButton, gridBagConstraints);
-
-        loginPanel.setLayout(new java.awt.GridBagLayout());
-
-        loginButton.setText(bundle.getString("PRIHLÁSENIE")); // NOI18N
-        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                loginButtonMouseReleased(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 16;
-        loginPanel.add(loginButton, gridBagConstraints);
-
-        registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
-        registrationButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                registrationButtonMouseReleased(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 18;
-        loginPanel.add(registrationButton, gridBagConstraints);
-
-        passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        passwordLabel.setText("Heslo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 12;
-        loginPanel.add(passwordLabel, gridBagConstraints);
-
-        nicknameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nicknameLabel.setText("Nickname / email");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 8;
-        loginPanel.add(nicknameLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        loginPanel.add(nicknameTextField, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        loginPanel.add(passwordField, gridBagConstraints);
-
-        appLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        appLabel.setText("Vstup do aplikácie");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 6;
-        loginPanel.add(appLabel, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 17;
-        gridBagConstraints.gridheight = 13;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel1.add(loginPanel, gridBagConstraints);
 
         leaguesScrollPane.setMaximumSize(new java.awt.Dimension(200, 70));
         leaguesScrollPane.setMinimumSize(new java.awt.Dimension(200, 70));
@@ -330,113 +265,47 @@ public class MainGui extends javax.swing.JFrame {
         registrationWindow.setVisible(true);
     }
 
-    private void logoutVisibility(){
-        loginPanel.setVisible(true);
-        logoutButton.setVisible(false);
-        leaguesScrollPane.setVisible(false);
-        activeLeaguesLabel.setVisible(false);
-        leagueInfoButton.setVisible(false);
-        historyButton.setVisible(false);
-        setTimeButton.setVisible(false);
-        leagueOrganizerPanel.setVisible(false);
-        logger.info("Logout succesfull");
-    }
-    
-    private void loginVisibility(String role){
-        if (role.equals("Admin")){
+
+    private void loginVisibility(){
+            leagueOrganizerPanel.setVisible(false);
+            setTimeButton.setVisible(false);
+            
+        if (this.loggedUser == null){  // Admin
             setTimeButton.setVisible(true);
+            return;
         }
         
-        if (role.equals("Player")){
+        if (this.loggedUser.getClass().getSimpleName().equals("Player")){
             
         }
         
-        if (role.equals("LeagueOrganizer")){
+        if (this.loggedUser.getClass().getSimpleName().equals("LeagueOrganizer")){
             leagueOrganizerPanel.setVisible(true);
         }
         
-        if (role.equals("Spectator")){
+        if (this.loggedUser.getClass().getSimpleName().equals("Spectator")){
             
         }
-        loginPanel.setVisible(false);
-        logoutButton.setVisible(true);
-        leaguesScrollPane.setVisible(true);
-        activeLeaguesLabel.setVisible(true);
-        leagueInfoButton.setVisible(true);
-        historyButton.setVisible(true);
     }
     
-    private void login(){
-        String errorMessage = lists.login(nicknameTextField.getText().trim(), String.valueOf(passwordField.getPassword()).trim());
-        if (errorMessage.equals("Admin")){
-            logger.info("Admin login");
-            loginVisibility("Admin");
-            return;
-        }
-       if (errorMessage.isEmpty()){
-           User user = lists.getUser(nicknameTextField.getText().trim());
-           this.loggedUser = user;
-           loginVisibility(user.getClass().getSimpleName());
-           logger.info("Login succesful");
-       } else {
-           JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri prihlasovaní", JOptionPane.WARNING_MESSAGE);
-           logger.error("Login error");
-       }
-    }
-    
-    private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
-        registration();
-    }//GEN-LAST:event_registrationButtonMouseReleased
-
-    private void loginButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseReleased
-        login();
-    }//GEN-LAST:event_loginButtonMouseReleased
-
-    private void logoutButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseReleased
+   
+    private void logout(){
         this.loggedUser = null;
-        logoutVisibility();
+        this.dispose();
+        this.loginWindow.setVisible(true);
+    }
+    
+    private void logoutButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseReleased
+        logout();
     }//GEN-LAST:event_logoutButtonMouseReleased
 
     private void createLeagueButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueButtonMouseReleased
         new LeagueWindow((LeagueOrganizer) loggedUser, lists).setVisible(true);
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) { //NOI18N
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new MainGui().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
-    private javax.swing.JLabel appLabel;
     private javax.swing.JButton createLeagueButton;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JButton historyButton;
@@ -445,16 +314,9 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JButton leagueInfoButton;
     private javax.swing.JPanel leagueOrganizerPanel;
     private javax.swing.JScrollPane leaguesScrollPane;
-    private javax.swing.JButton loginButton;
-    private javax.swing.JPanel loginPanel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton newMessageButton;
-    private javax.swing.JLabel nicknameLabel;
-    private javax.swing.JTextField nicknameTextField;
     private javax.swing.JButton organizerButton;
-    private javax.swing.JPasswordField passwordField;
-    private javax.swing.JLabel passwordLabel;
-    private javax.swing.JButton registrationButton;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables

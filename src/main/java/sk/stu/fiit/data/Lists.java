@@ -74,7 +74,7 @@ public class Lists {
     }
 
     public String login(String nick, String password){
-        if(Boolean.logicalAnd(nick.equals("kxaQAdminSecret123"), password.equals("rwOvEPeterMartin#@12")))
+        if(Boolean.logicalAnd(nick.equals("123"), password.equals("321")))
             return "Admin";
         
         for(User user : users){

@@ -54,7 +54,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
-                            <mainClass>sk.stu.fiit.gui.MainGui</mainClass>
+                            <mainClass>sk.stu.fiit.gui.LoginWindow</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
