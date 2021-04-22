@@ -44,7 +44,10 @@ public class Template extends javax.swing.JFrame {
         mainPnl = new javax.swing.JPanel();
         tableScroll = new javax.swing.JScrollPane();
         tableTbl = new javax.swing.JTable();
-        buttonsPnl = new javax.swing.JPanel();
+        titleLbl = new javax.swing.JLabel();
+        imagePnl = new javax.swing.JPanel();
+        imageLbl = new javax.swing.JLabel();
+        controlsPnl = new javax.swing.JPanel();
         b1Btn = new javax.swing.JButton();
         b2Btn = new javax.swing.JButton();
         b3Btn = new javax.swing.JButton();
@@ -54,28 +57,26 @@ public class Template extends javax.swing.JFrame {
         b7Btn = new javax.swing.JButton();
         b8Btn = new javax.swing.JButton();
         b9Btn = new javax.swing.JButton();
-        l1Lbl = new javax.swing.JLabel();
-        l2Lbl = new javax.swing.JLabel();
+        infoPnl = new javax.swing.JPanel();
         l3Lbl = new javax.swing.JLabel();
-        l4Lbl = new javax.swing.JLabel();
-        l5Lbl = new javax.swing.JLabel();
         l6Lbl = new javax.swing.JLabel();
+        l4Lbl = new javax.swing.JLabel();
         l7Lbl = new javax.swing.JLabel();
-        l8Lbl = new javax.swing.JLabel();
-        l9Lbl = new javax.swing.JLabel();
-        tf1Tf = new javax.swing.JTextField();
-        tf2Tf = new javax.swing.JTextField();
-        tf3Tf = new javax.swing.JTextField();
-        tf4Tf = new javax.swing.JTextField();
-        tf5Tf = new javax.swing.JTextField();
         tf6Tf = new javax.swing.JTextField();
-        tf7Tf = new javax.swing.JTextField();
-        cb1Cb = new javax.swing.JComboBox<>();
-        titleLbl = new javax.swing.JLabel();
-        rb1Rb = new javax.swing.JRadioButton();
+        l9Lbl = new javax.swing.JLabel();
         rb2Rb = new javax.swing.JRadioButton();
-        imagePnl = new javax.swing.JPanel();
-        imageLbl = new javax.swing.JLabel();
+        l1Lbl = new javax.swing.JLabel();
+        tf7Tf = new javax.swing.JTextField();
+        l8Lbl = new javax.swing.JLabel();
+        tf5Tf = new javax.swing.JTextField();
+        rb1Rb = new javax.swing.JRadioButton();
+        tf2Tf = new javax.swing.JTextField();
+        tf4Tf = new javax.swing.JTextField();
+        tf1Tf = new javax.swing.JTextField();
+        l5Lbl = new javax.swing.JLabel();
+        tf3Tf = new javax.swing.JTextField();
+        l2Lbl = new javax.swing.JLabel();
+        cb1Cb = new javax.swing.JComboBox<>();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -140,283 +141,17 @@ public class Template extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(tableScroll, gridBagConstraints);
 
-        buttonsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ovládacie prvky", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        buttonsPnl.setLayout(new javax.swing.BoxLayout(buttonsPnl, javax.swing.BoxLayout.LINE_AXIS));
-
-        b1Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
-        b1Btn.setText(bundle.getString("PRIDAŤ ZÁKAZNÍKA")); // NOI18N
-        b1Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b1BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b1Btn);
-
-        b2Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b2Btn.setText(bundle.getString("VYTVORIŤ REZERVÁCIU")); // NOI18N
-        b2Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b2BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b2Btn);
-
-        b3Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b3Btn.setText(bundle.getString("ZRUŠIŤ REZERVÁCIU")); // NOI18N
-        b3Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b3BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b3Btn);
-
-        b4Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b4Btn.setText(bundle.getString("VYUŽIŤ SLUŽBU")); // NOI18N
-        b4Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b4BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b4Btn);
-
-        b5Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b5Btn.setText(bundle.getString("ZAZNAMENAŤ PLATBU")); // NOI18N
-        b5Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b5BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b5Btn);
-
-        b6Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b6Btn.setText(bundle.getString("HISTÓRIA ZÁKAZNÍKA")); // NOI18N
-        b6Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b6BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b6Btn);
-
-        b7Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b7Btn.setText(bundle.getString("ZOBRAZOVAČ IZIEB")); // NOI18N
-        b7Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b7BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b7Btn);
-
-        b8Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b8Btn.setText(bundle.getString("PRIDAŤ SLUŽBU, KATEGÓRIU ALEBO IZBU")); // NOI18N
-        b8Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b8BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b8Btn);
-
-        b9Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        b9Btn.setText(bundle.getString("UBYTOVAŤ")); // NOI18N
-        b9Btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                b9BtnMouseReleased(evt);
-            }
-        });
-        buttonsPnl.add(b9Btn);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 26;
-        gridBagConstraints.gridwidth = 7;
-        mainPnl.add(buttonsPnl, gridBagConstraints);
-
-        l1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l1Lbl.setText("[Popis 1]");
-        l1Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l1Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        mainPnl.add(l1Lbl, gridBagConstraints);
-
-        l2Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l2Lbl.setText("[Popis 2]");
-        l2Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l2Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        mainPnl.add(l2Lbl, gridBagConstraints);
-
-        l3Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l3Lbl.setText("[Popis 3]");
-        l3Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l3Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        mainPnl.add(l3Lbl, gridBagConstraints);
-
-        l4Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l4Lbl.setText("[Popis 4]");
-        l4Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l4Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        mainPnl.add(l4Lbl, gridBagConstraints);
-
-        l5Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l5Lbl.setText("[Popis 5]");
-        l5Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l5Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        mainPnl.add(l5Lbl, gridBagConstraints);
-
-        l6Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l6Lbl.setText("[Popis 6]");
-        l6Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l6Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        mainPnl.add(l6Lbl, gridBagConstraints);
-
-        l7Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l7Lbl.setText("[Popis 7]");
-        l7Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
-        mainPnl.add(l7Lbl, gridBagConstraints);
-
-        l8Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l8Lbl.setText("[Popis 8]");
-        l8Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l8Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 16;
-        mainPnl.add(l8Lbl, gridBagConstraints);
-
-        l9Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l9Lbl.setText("[Popis 9]");
-        l9Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l9Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 18;
-        mainPnl.add(l9Lbl, gridBagConstraints);
-
-        tf1Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf1Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf1Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf1Tf, gridBagConstraints);
-
-        tf2Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf2Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf2Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf2Tf, gridBagConstraints);
-
-        tf3Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf3Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf3Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf3Tf, gridBagConstraints);
-
-        tf4Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf4Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf4Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf4Tf, gridBagConstraints);
-
-        tf5Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf5Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf5Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf5Tf, gridBagConstraints);
-
-        tf6Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf6Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf6Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf6Tf, gridBagConstraints);
-
-        tf7Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf7Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf7Tf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(tf7Tf, gridBagConstraints);
-
-        cb1Cb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cb1Cb.setMinimumSize(new java.awt.Dimension(200, 26));
-        cb1Cb.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 3;
-        mainPnl.add(cb1Cb, gridBagConstraints);
-
         titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         titleLbl.setText("[Nadpis]");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        gridBagConstraints.ipady = 20;
         mainPnl.add(titleLbl, gridBagConstraints);
 
-        rb1Rb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rb1Rb.setSelected(true);
-        rb1Rb.setText("[Voľba 1]");
-        rb1Rb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb1RbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 18;
-        mainPnl.add(rb1Rb, gridBagConstraints);
-
-        rb2Rb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rb2Rb.setText("[Voľba 2]");
-        rb2Rb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb2RbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 18;
-        mainPnl.add(rb2Rb, gridBagConstraints);
-
+        imagePnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Obrázok", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         imagePnl.setLayout(new java.awt.GridBagLayout());
 
         imageLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -434,6 +169,287 @@ public class Template extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(imagePnl, gridBagConstraints);
+
+        controlsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ovládacie prvky", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        controlsPnl.setLayout(new javax.swing.BoxLayout(controlsPnl, javax.swing.BoxLayout.LINE_AXIS));
+
+        b1Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b1Btn.setText("[Tlačidlo 1]");
+        b1Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b1BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b1Btn);
+
+        b2Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b2Btn.setText("[Tlačidlo 2]");
+        b2Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b2BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b2Btn);
+
+        b3Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b3Btn.setText("[Tlačidlo 3]");
+        b3Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b3BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b3Btn);
+
+        b4Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b4Btn.setText("[Tlačidlo 4]");
+        b4Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b4BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b4Btn);
+
+        b5Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b5Btn.setText("[Tlačidlo 5]");
+        b5Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b5BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b5Btn);
+
+        b6Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b6Btn.setText("[Tlačidlo 6]");
+        b6Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b6BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b6Btn);
+
+        b7Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b7Btn.setText("[Tlačidlo 7]");
+        b7Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b7BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b7Btn);
+
+        b8Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b8Btn.setText("[Tlačidlo 8]");
+        b8Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b8BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b8Btn);
+
+        b9Btn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        b9Btn.setText("[Tlačidlo 9]");
+        b9Btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                b9BtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(b9Btn);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 26;
+        gridBagConstraints.gridwidth = 7;
+        mainPnl.add(controlsPnl, gridBagConstraints);
+
+        infoPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informácie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        java.awt.GridBagLayout infoPnlLayout = new java.awt.GridBagLayout();
+        infoPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
+        infoPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        infoPnl.setLayout(infoPnlLayout);
+
+        l3Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l3Lbl.setText("[Popis 3]");
+        l3Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l3Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        infoPnl.add(l3Lbl, gridBagConstraints);
+
+        l6Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l6Lbl.setText("[Popis 6]");
+        l6Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l6Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        infoPnl.add(l6Lbl, gridBagConstraints);
+
+        l4Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l4Lbl.setText("[Popis 4]");
+        l4Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l4Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        infoPnl.add(l4Lbl, gridBagConstraints);
+
+        l7Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l7Lbl.setText("[Popis 7]");
+        l7Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        infoPnl.add(l7Lbl, gridBagConstraints);
+
+        tf6Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf6Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf6Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf6Tf, gridBagConstraints);
+
+        l9Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l9Lbl.setText("[Popis 9]");
+        l9Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l9Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        infoPnl.add(l9Lbl, gridBagConstraints);
+
+        rb2Rb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rb2Rb.setText("[Voľba 2]");
+        rb2Rb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb2RbActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 16;
+        infoPnl.add(rb2Rb, gridBagConstraints);
+
+        l1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l1Lbl.setText("[Popis 1]");
+        l1Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l1Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        infoPnl.add(l1Lbl, gridBagConstraints);
+
+        tf7Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf7Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf7Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf7Tf, gridBagConstraints);
+
+        l8Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l8Lbl.setText("[Popis 8]");
+        l8Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l8Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        infoPnl.add(l8Lbl, gridBagConstraints);
+
+        tf5Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf5Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf5Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf5Tf, gridBagConstraints);
+
+        rb1Rb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rb1Rb.setSelected(true);
+        rb1Rb.setText("[Voľba 1]");
+        rb1Rb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb1RbActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 16;
+        infoPnl.add(rb1Rb, gridBagConstraints);
+
+        tf2Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf2Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf2Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf2Tf, gridBagConstraints);
+
+        tf4Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf4Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf4Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf4Tf, gridBagConstraints);
+
+        tf1Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf1Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf1Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf1Tf, gridBagConstraints);
+
+        l5Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l5Lbl.setText("[Popis 5]");
+        l5Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l5Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        infoPnl.add(l5Lbl, gridBagConstraints);
+
+        tf3Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tf3Tf.setMinimumSize(new java.awt.Dimension(200, 26));
+        tf3Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(tf3Tf, gridBagConstraints);
+
+        l2Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l2Lbl.setText("[Popis 2]");
+        l2Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l2Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        infoPnl.add(l2Lbl, gridBagConstraints);
+
+        cb1Cb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cb1Cb.setMinimumSize(new java.awt.Dimension(200, 26));
+        cb1Cb.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 5;
+        infoPnl.add(cb1Cb, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 17;
+        mainPnl.add(infoPnl, gridBagConstraints);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Súbor");
@@ -501,12 +517,12 @@ public class Template extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -516,6 +532,16 @@ public class Template extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void rb1RbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb1RbActionPerformed
+        // TODO add your handling code here:
+        rb1Action();
+    }//GEN-LAST:event_rb1RbActionPerformed
+
+    private void rb2RbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb2RbActionPerformed
+        // TODO add your handling code here:
+        rb2Action();
+    }//GEN-LAST:event_rb2RbActionPerformed
 
     private void b1BtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b1BtnMouseReleased
         // TODO add your handling code here:
@@ -562,16 +588,6 @@ public class Template extends javax.swing.JFrame {
         btn9Action();
     }//GEN-LAST:event_b9BtnMouseReleased
 
-    private void rb1RbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb1RbActionPerformed
-        // TODO add your handling code here:
-        rb1Action();
-    }//GEN-LAST:event_rb1RbActionPerformed
-
-    private void rb2RbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb2RbActionPerformed
-        // TODO add your handling code here:
-        rb2Action();
-    }//GEN-LAST:event_rb2RbActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -585,9 +601,9 @@ public class Template extends javax.swing.JFrame {
     private javax.swing.JButton b8Btn;
     private javax.swing.JButton b9Btn;
     private javax.swing.ButtonGroup bg1Bg;
-    private javax.swing.JPanel buttonsPnl;
     private javax.swing.JComboBox<String> cb1Cb;
     private javax.swing.JMenuItem contentsMenuItem;
+    private javax.swing.JPanel controlsPnl;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
@@ -597,6 +613,7 @@ public class Template extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
+    private javax.swing.JPanel infoPnl;
     private javax.swing.JLabel l1Lbl;
     private javax.swing.JLabel l2Lbl;
     private javax.swing.JLabel l3Lbl;
