@@ -1,8 +1,8 @@
 package sk.stu.fiit.team;
 
-import sk.stu.fiit.user.TeamAdministrator;
 import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -13,12 +13,73 @@ import java.util.ArrayList;
  */
 public class Team {
 
-	private String description;
-	private String name;
-	private ArrayList<TeamAdministrator> adminList;
-	private ArrayList<Player> playersList;
+    private String name;
+    private String description;
+    private String motto;
+    private ImageIcon icon;
+    private ArrayList<Player> adminList = new ArrayList<>();
+    private ArrayList<Player> playersList = new ArrayList<>();
 
-	public Team(){
+    public Team(String name, String description, String motto, Player player, ImageIcon icon) {
+        this.name = name;
+        this.description = description;
+        this.motto = motto;
+        this.adminList.add(player);
+        this.icon = icon;
+        addToPlayer(player);
+    }
 
-	}
-}//end Team
+    private void addToPlayer(Player player){
+        player.setTeam(this);
+        player.setAdmin(true);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
+
+    public ArrayList<Player> getAdminList() {
+        return adminList;
+    }
+
+    public void setAdminList(ArrayList<Player> adminList) {
+        this.adminList = adminList;
+    }
+
+    public ArrayList<Player> getPlayersList() {
+        return playersList;
+    }
+
+    public void setPlayersList(ArrayList<Player> playersList) {
+        this.playersList = playersList;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
+    }
+        
+}

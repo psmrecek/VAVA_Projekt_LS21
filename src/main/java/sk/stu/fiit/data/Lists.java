@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 import sk.stu.fiit.league.League;
+import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.LeagueOrganizer;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.Spectator;
-import sk.stu.fiit.user.User;
+import sk.stu.fiit.user.*;
 
 /**
 Class <code>Lists</code> serves as class storing all information given
@@ -24,6 +25,7 @@ Class <code>Lists</code> serves as class storing all information given
 public class Lists {
     private final ArrayList<User> users = new ArrayList<>();
     private final ArrayList<League> leagues = new ArrayList<>();
+    private final ArrayList<Team> teams = new ArrayList<>();
     
     private String checkEmpty(String field, String type){
         if(field.isEmpty())
@@ -74,7 +76,7 @@ public class Lists {
     }
 
     public String login(String nick, String password){
-        if(Boolean.logicalAnd(nick.equals("kxaQAdminSecret123"), password.equals("rwOvEPeterMartin#@12")))
+        if(Boolean.logicalAnd(nick.equals("123"), password.equals("321")))
             return "Admin";
         
         for(User user : users){
@@ -94,6 +96,14 @@ public class Lists {
     }
     
     public void addLeague(League league){
-        this.leagues.add(league);
+        leagues.add(league);
+    }
+    
+    public void addTeam(Team team){
+        teams.add(team);
+    }
+
+    public ArrayList<League> getLeagues() {
+        return leagues;
     }
 } 

@@ -44,11 +44,34 @@ public class League {
         this.leagueOrganizerList.add(leagueOrganizer);
         this.prizeList = prizeList;
         this.icon = icon;
-        
+        addToLeagueOrganizer(leagueOrganizer);
+    }
+    
+    private void addToLeagueOrganizer(LeagueOrganizer leagueOrganizer){
         leagueOrganizer.addLeague(this);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public int getMaxNumberTeams() {
+        return maxNumberTeams;
     }
     
 
 
         
-}//end League
+}
