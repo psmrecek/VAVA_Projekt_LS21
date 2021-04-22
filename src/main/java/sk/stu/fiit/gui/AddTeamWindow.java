@@ -33,13 +33,13 @@ import sk.stu.fiit.user.TeamAdministrator;
  *
  * @author PeterSmrecek
  */
-public class TeamWindow extends javax.swing.JFrame {
+public class AddTeamWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form Template
      */
     
-    private final Logger logger = Logger.getLogger(TeamWindow.class.getName());
+    private final Logger logger = Logger.getLogger(AddTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
     private TeamAdministrator teamAdministrator;
@@ -47,7 +47,7 @@ public class TeamWindow extends javax.swing.JFrame {
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public TeamWindow(TeamAdministrator teamAdministrator, Lists lists) {
+    public AddTeamWindow(TeamAdministrator teamAdministrator, Lists lists) {
         initComponents();
         
         this.teamAdministrator = teamAdministrator;

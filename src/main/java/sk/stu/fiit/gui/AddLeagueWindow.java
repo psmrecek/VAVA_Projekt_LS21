@@ -31,13 +31,13 @@ import sk.stu.fiit.user.LeagueOrganizer;
  *
  * @author PeterSmrecek
  */
-public class LeagueWindow extends javax.swing.JFrame {
+public class AddLeagueWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form Template
      */
     
-    private final Logger logger = Logger.getLogger(LeagueWindow.class.getName());
+    private final Logger logger = Logger.getLogger(AddLeagueWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
     private LeagueOrganizer leagueOrganizer;
@@ -47,7 +47,7 @@ public class LeagueWindow extends javax.swing.JFrame {
     private ArrayList<Prize> prizeList = new ArrayList<>();
     private ImageIcon icon;
     
-    public LeagueWindow(LeagueOrganizer leagueOrganizer, Lists lists) {
+    public AddLeagueWindow(LeagueOrganizer leagueOrganizer, Lists lists) {
         initComponents();
         
         this.leagueOrganizer = leagueOrganizer;
