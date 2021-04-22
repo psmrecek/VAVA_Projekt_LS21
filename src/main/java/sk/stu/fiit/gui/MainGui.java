@@ -12,6 +12,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.user.User;
 
 /**
  *
@@ -34,6 +35,7 @@ public class MainGui extends javax.swing.JFrame {
     private void initApplication(){
         BasicConfigurator.configure(); 
         tickTock();
+        setTimeButton.setVisible(false);
     }
     
     
@@ -53,6 +55,11 @@ public class MainGui extends javax.swing.JFrame {
         currentTimeLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         registrationButton = new javax.swing.JButton();
+        nicknameTextField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        nicknameLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
+        appLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -60,7 +67,10 @@ public class MainGui extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(937, 590));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
+        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
+        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1.setLayout(jPanel1Layout);
 
         timeInfoLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel1.setForeground(new java.awt.Color(255, 153, 51));
@@ -78,20 +88,25 @@ public class MainGui extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         jPanel1.add(setTimeButton, gridBagConstraints);
 
         currentTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         currentTimeLabel.setText("null");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         jPanel1.add(currentTimeLabel, gridBagConstraints);
 
         loginButton.setText(bundle.getString("PRIHLÁSENIE")); // NOI18N
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loginButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 16;
         jPanel1.add(loginButton, gridBagConstraints);
 
         registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
@@ -101,9 +116,42 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 18;
         jPanel1.add(registrationButton, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(nicknameTextField, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(passwordField, gridBagConstraints);
+
+        nicknameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nicknameLabel.setText("Nickname / email");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 8;
+        jPanel1.add(nicknameLabel, gridBagConstraints);
+
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        passwordLabel.setText("Heslo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 12;
+        jPanel1.add(passwordLabel, gridBagConstraints);
+
+        appLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        appLabel.setText("Vstup do aplikácie");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 6;
+        jPanel1.add(appLabel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -170,11 +218,32 @@ public class MainGui extends javax.swing.JFrame {
     private void registration(){ 
         RegistrationWindow registrationWindow = new RegistrationWindow(this.lists);
         registrationWindow.setVisible(true);
-    };
+    }
+
+    private void login(){
+        String errorMessage = lists.login(nicknameTextField.getText().trim(), String.valueOf(passwordField.getPassword()).trim());
+        if (errorMessage.equals("Admin")){
+            setTimeButton.setVisible(true);
+            logger.info("Admin login");
+            return;
+        }
+       if (errorMessage.isEmpty()){
+           User user = lists.getUser(nicknameTextField.getText().trim());
+           System.out.println(user.getClass().getSimpleName());
+           logger.info("Login succesful");
+       } else {
+           JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri prihlasovaní", JOptionPane.WARNING_MESSAGE);
+           logger.error("Login error");
+       }
+    }
     
     private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
         registration();
     }//GEN-LAST:event_registrationButtonMouseReleased
+
+    private void loginButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseReleased
+        login();
+    }//GEN-LAST:event_loginButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -210,9 +279,14 @@ public class MainGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel appLabel;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel nicknameLabel;
+    private javax.swing.JTextField nicknameTextField;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton registrationButton;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JLabel timeInfoLabel1;
