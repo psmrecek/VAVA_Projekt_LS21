@@ -11,9 +11,18 @@ import java.util.Date;
  * @created 19-apr-2021 18:21:18
  */
 public class Player extends User {
-
+    private boolean isAdmin;
     
     public Player(String email, String name, String surrname, String nickname, String password, Date bornAt) {
         super(email, name, surrname, nickname, password, bornAt);
+        this.isAdmin = false;
+    }
+    
+    public void setAdmin(){
+        this.isAdmin = true;
+    }
+    
+    public boolean isAdmin(){
+        return isAdmin;
     }
 }
