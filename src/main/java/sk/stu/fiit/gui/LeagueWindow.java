@@ -8,10 +8,13 @@ package sk.stu.fiit.gui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
+import sk.stu.fiit.data.InputProcessor;
+import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.user.LeagueOrganizer;
 
 /**
@@ -27,18 +30,19 @@ public class LeagueWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(LeagueWindow.class.getName());
     private LeagueOrganizer leagueOrganizer;
     private List<JTextField> tfInfoList;
+    private List<JTextField> tfPrizeList;
+    private ArrayList<Prize> prizeList = new ArrayList<>();
     
     public LeagueWindow(LeagueOrganizer leagueOrganizer) {
         initComponents();
         
         this.leagueOrganizer = leagueOrganizer;
         
-        this.tfInfoList = Arrays.asList(nameTf, gameTf, genreTf, aboutTf, dateStartTf, dateEndTf, ageRestrictionTf, maxTeamsTf, teamsInMatchTf);
+        this.tfInfoList = Arrays.asList(nameTf, gameTf, genreTf, dateStartTf, dateEndTf, ageRestrictionTf, maxTeamsTf, teamsInMatchTf);
+        this.tfPrizeList = Arrays.asList(positionTf, prizeNameTf, prizeDescriptionTf, priceTf);
         
-        updateAll();
+//        updateAll();
         
-        
-//        atributesCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Java", "C++", "ABAP", "VBA", "Python", "Ruby", "iOS", "Iné" }));
     }
 
     /**
@@ -66,7 +70,6 @@ public class LeagueWindow extends javax.swing.JFrame {
         infoPnl = new javax.swing.JPanel();
         l3Lbl = new javax.swing.JLabel();
         l6Lbl = new javax.swing.JLabel();
-        l4Lbl = new javax.swing.JLabel();
         dateEndTf = new javax.swing.JTextField();
         l9Lbl = new javax.swing.JLabel();
         l1Lbl = new javax.swing.JLabel();
@@ -74,7 +77,6 @@ public class LeagueWindow extends javax.swing.JFrame {
         l8Lbl = new javax.swing.JLabel();
         dateStartTf = new javax.swing.JTextField();
         gameTf = new javax.swing.JTextField();
-        aboutTf = new javax.swing.JTextField();
         nameTf = new javax.swing.JTextField();
         l5Lbl = new javax.swing.JLabel();
         genreTf = new javax.swing.JTextField();
@@ -84,13 +86,17 @@ public class LeagueWindow extends javax.swing.JFrame {
         l7Lbl = new javax.swing.JLabel();
         prizesPnl = new javax.swing.JPanel();
         l1Lbl1 = new javax.swing.JLabel();
-        tf1Tf = new javax.swing.JTextField();
-        tf2Tf = new javax.swing.JTextField();
+        positionTf = new javax.swing.JTextField();
+        prizeNameTf = new javax.swing.JTextField();
         l2Lbl1 = new javax.swing.JLabel();
         l3Lbl1 = new javax.swing.JLabel();
-        tf3Tf = new javax.swing.JTextField();
-        tf4Tf = new javax.swing.JTextField();
+        prizeDescriptionTf = new javax.swing.JTextField();
+        priceTf = new javax.swing.JTextField();
         l4Lbl1 = new javax.swing.JLabel();
+        descriptionPnl = new javax.swing.JPanel();
+        l4Lbl = new javax.swing.JLabel();
+        descriptionSp = new javax.swing.JScrollPane();
+        descriptionTa = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -109,13 +115,12 @@ public class LeagueWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
         tableScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Výhry", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         tableScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableScroll.setPreferredSize(new java.awt.Dimension(462, 100));
 
         tableTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,13 +139,13 @@ public class LeagueWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableTbl.setPreferredSize(new java.awt.Dimension(300, 0));
         tableTbl.getTableHeader().setReorderingAllowed(false);
         tableScroll.setViewportView(tableTbl);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 20;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(tableScroll, gridBagConstraints);
@@ -150,7 +155,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.ipady = 20;
         mainPnl.add(titleLbl, gridBagConstraints);
@@ -160,6 +165,8 @@ public class LeagueWindow extends javax.swing.JFrame {
 
         imageLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imageLbl.setText("[Obrázok]");
+        imageLbl.setMinimumSize(new java.awt.Dimension(280, 280));
+        imageLbl.setPreferredSize(new java.awt.Dimension(280, 280));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -168,7 +175,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         imagePnl.add(imageLbl, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -223,7 +230,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         infoPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informácie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         java.awt.GridBagLayout infoPnlLayout = new java.awt.GridBagLayout();
         infoPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        infoPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        infoPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         infoPnl.setLayout(infoPnlLayout);
 
         l3Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -241,24 +248,15 @@ public class LeagueWindow extends javax.swing.JFrame {
         l6Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         infoPnl.add(l6Lbl, gridBagConstraints);
-
-        l4Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l4Lbl.setText("Popis");
-        l4Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l4Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        infoPnl.add(l4Lbl, gridBagConstraints);
 
         dateEndTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dateEndTf.setMinimumSize(new java.awt.Dimension(200, 26));
         dateEndTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(dateEndTf, gridBagConstraints);
 
@@ -268,7 +266,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         l9Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridy = 14;
         infoPnl.add(l9Lbl, gridBagConstraints);
 
         l1Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -285,7 +283,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         maxTeamsTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(maxTeamsTf, gridBagConstraints);
 
@@ -295,7 +293,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         l8Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 12;
         infoPnl.add(l8Lbl, gridBagConstraints);
 
         dateStartTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -303,7 +301,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         dateStartTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(dateStartTf, gridBagConstraints);
 
@@ -315,15 +313,6 @@ public class LeagueWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(gameTf, gridBagConstraints);
-
-        aboutTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        aboutTf.setMinimumSize(new java.awt.Dimension(200, 26));
-        aboutTf.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 5;
-        infoPnl.add(aboutTf, gridBagConstraints);
 
         nameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameTf.setMinimumSize(new java.awt.Dimension(200, 26));
@@ -340,7 +329,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         l5Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         infoPnl.add(l5Lbl, gridBagConstraints);
 
         genreTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -366,7 +355,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         teamsInMatchTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(teamsInMatchTf, gridBagConstraints);
 
@@ -375,7 +364,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         ageRestrictionTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 5;
         infoPnl.add(ageRestrictionTf, gridBagConstraints);
 
@@ -385,7 +374,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 10;
         infoPnl.add(l7Lbl, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -411,23 +400,23 @@ public class LeagueWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         prizesPnl.add(l1Lbl1, gridBagConstraints);
 
-        tf1Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf1Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf1Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        positionTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        positionTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        positionTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 9;
-        prizesPnl.add(tf1Tf, gridBagConstraints);
+        prizesPnl.add(positionTf, gridBagConstraints);
 
-        tf2Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf2Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf2Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        prizeNameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        prizeNameTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        prizeNameTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 9;
-        prizesPnl.add(tf2Tf, gridBagConstraints);
+        prizesPnl.add(prizeNameTf, gridBagConstraints);
 
         l2Lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         l2Lbl1.setText("Názov výhry");
@@ -447,23 +436,23 @@ public class LeagueWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         prizesPnl.add(l3Lbl1, gridBagConstraints);
 
-        tf3Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf3Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf3Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        prizeDescriptionTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        prizeDescriptionTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        prizeDescriptionTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 9;
-        prizesPnl.add(tf3Tf, gridBagConstraints);
+        prizesPnl.add(prizeDescriptionTf, gridBagConstraints);
 
-        tf4Tf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tf4Tf.setMinimumSize(new java.awt.Dimension(200, 26));
-        tf4Tf.setPreferredSize(new java.awt.Dimension(200, 26));
+        priceTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priceTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        priceTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 9;
-        prizesPnl.add(tf4Tf, gridBagConstraints);
+        prizesPnl.add(priceTf, gridBagConstraints);
 
         l4Lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         l4Lbl1.setText("Finančná hodnota");
@@ -481,6 +470,45 @@ public class LeagueWindow extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(prizesPnl, gridBagConstraints);
+
+        descriptionPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Popis ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        descriptionPnl.setMinimumSize(new java.awt.Dimension(230, 77));
+        java.awt.GridBagLayout descriptionPnlLayout = new java.awt.GridBagLayout();
+        descriptionPnlLayout.columnWidths = new int[] {0};
+        descriptionPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        descriptionPnl.setLayout(descriptionPnlLayout);
+
+        l4Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l4Lbl.setText("Popis");
+        l4Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
+        l4Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        descriptionPnl.add(l4Lbl, gridBagConstraints);
+
+        descriptionSp.setPreferredSize(new java.awt.Dimension(100, 240));
+        descriptionSp.setRequestFocusEnabled(false);
+
+        descriptionTa.setColumns(20);
+        descriptionTa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        descriptionTa.setLineWrap(true);
+        descriptionTa.setRows(5);
+        descriptionSp.setViewportView(descriptionTa);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        descriptionPnl.add(descriptionSp, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        mainPnl.add(descriptionPnl, gridBagConstraints);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Súbor");
@@ -552,7 +580,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
 
         pack();
@@ -585,7 +613,6 @@ public class LeagueWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JTextField aboutTf;
     private javax.swing.JButton addIconBtn;
     private javax.swing.JButton addPrizeBtn;
     private javax.swing.JTextField ageRestrictionTf;
@@ -598,6 +625,9 @@ public class LeagueWindow extends javax.swing.JFrame {
     private javax.swing.JTextField dateEndTf;
     private javax.swing.JTextField dateStartTf;
     private javax.swing.JMenuItem deleteMenuItem;
+    private javax.swing.JPanel descriptionPnl;
+    private javax.swing.JScrollPane descriptionSp;
+    private javax.swing.JTextArea descriptionTa;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -626,6 +656,10 @@ public class LeagueWindow extends javax.swing.JFrame {
     private javax.swing.JTextField nameTf;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JTextField positionTf;
+    private javax.swing.JTextField priceTf;
+    private javax.swing.JTextField prizeDescriptionTf;
+    private javax.swing.JTextField prizeNameTf;
     private javax.swing.JPanel prizesPnl;
     private javax.swing.JButton removePrizeBtn;
     private javax.swing.JMenuItem saveAsMenuItem;
@@ -633,23 +667,53 @@ public class LeagueWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane tableScroll;
     private javax.swing.JTable tableTbl;
     private javax.swing.JTextField teamsInMatchTf;
-    private javax.swing.JTextField tf1Tf;
-    private javax.swing.JTextField tf2Tf;
-    private javax.swing.JTextField tf3Tf;
-    private javax.swing.JTextField tf4Tf;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
     
     private void updateAll(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePrizesTbl();
     }
     
     private void addPrizeAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmptyField(tfPrizeList)) {
+            errorMessage("Žiadne pole Výhier nesmie zostať prázdne!");
+            return;
+        }
+        
+        String name = prizeNameTf.getText();
+        String description = prizeDescriptionTf.getText();
+        String positionString = positionTf.getText();
+        String priceString = priceTf.getText(); 
+        
+        int position;
+        double price;
+        
+        try {
+            price = InputProcessor.priceFromString(priceString);
+        } catch (Exception e) {
+            errorMessage("Nie je zadaná platná finančná hodnota!");
+            return;
+        }
+        
+        try {
+            position = InputProcessor.positiveIntFromString(positionString);
+        } catch (Exception e) {
+            errorMessage("Nie je zadaná platná pozícia!");
+            return;
+        }
+        
+        prizeList.add(new Prize(name, description, position, price));
+        updateAll();
     }
     
     private void removePrizeAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int prizteTableIndex = getRow(tableTbl, "Nie je vybraná žiadna výhra z tabuľky!");
+        if (prizteTableIndex == -1) {
+            return;
+        }
+        
+        prizeList.remove(prizteTableIndex);
+        updateAll();
     }
     
     private void addIconAction() {
@@ -657,27 +721,22 @@ public class LeagueWindow extends javax.swing.JFrame {
     }
     
     private void createLeagueAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String description = descriptionTa.getText();
+        if (isEmptyField(tfInfoList) || description.isEmpty() || description.isBlank()) {
+            errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
+            return;
+        }
     }
     
-    private void btn5Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void btn6Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void btn7Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void btn8Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void btn9Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private int getRow(JTable table, String message) {
+        int index = table.getSelectedRow();
+
+        if (InputProcessor.isPositiveInt(index)) {
+            return index;
+        } else {
+            errorMessage(message);
+        }
+        return -1;
     }
     
     private void deleteRows(DefaultTableModel model) {
@@ -688,34 +747,36 @@ public class LeagueWindow extends javax.swing.JFrame {
         }
     }
 
-    private void populateCustomersTbl(JTable table, ArrayList list) {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
+    private void populatePrizesTbl() {
+        DefaultTableModel model = (DefaultTableModel) tableTbl.getModel();
         deleteRows(model);
 
-        int numberOfColumns = table.getColumnCount();
+        int numberOfColumns = tableTbl.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
 
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < prizeList.size(); i++) {
 
-//            rowData[0] = list.get(i).getCustomer().getName();
-//            rowData[1] = list.get(i).getRoom().getName();
-//            rowData[2] = sdfRoom.format(start);
-//            rowData[3] = sdfRoom.format(end);
-//
-//            if (end.after(compareDate)) {
-//                rowData[4] = false;
-//            } else {
-//                rowData[4] = true;
-//            }
+            rowData[0] = prizeList.get(i).getPosition();
+            rowData[1] = prizeList.get(i).getName();
+            rowData[2] = prizeList.get(i).getDescription();
+            rowData[3] = Double.toString(prizeList.get(i).getPrice());
+
             model.addRow(rowData);
         }
     }
-
-    private void rb1Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private boolean isEmptyField(List<JTextField> list){
+        for (int i = 0; i < list.size(); i++) {
+            JTextField get = list.get(i);
+            if (get.getText().isEmpty() || get.getText().isBlank()) {
+                return true;
+            }
+        }
+        return false;
     }
-
-    private void rb2Action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private void errorMessage(String message){
+        JOptionPane.showMessageDialog(rootPane, message,
+                "Chyba!", JOptionPane.ERROR_MESSAGE);
     }
 }
