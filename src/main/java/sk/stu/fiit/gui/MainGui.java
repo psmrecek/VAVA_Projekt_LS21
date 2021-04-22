@@ -8,8 +8,10 @@ package sk.stu.fiit.gui;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
+import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.user.*;
 
@@ -50,6 +52,33 @@ public class MainGui extends javax.swing.JFrame {
         tickTock();
         loginVisibility();
         this.setVisible(true);
+        setActiveTable();
+    }
+    
+    
+    private void deleteRows(DefaultTableModel model) {
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+    }
+    public void setActiveTable(){ //TODO only active leagues
+        DefaultTableModel model = (DefaultTableModel) activeLeaguesTable.getModel();
+        deleteRows(model);
+
+        int numberOfColumns = activeLeaguesTable.getColumnCount();
+        Object[] rowData = new Object[numberOfColumns];
+
+        for (int i = 0; i < lists.getLeagues().size(); i++) {
+            
+            rowData[0] = lists.getLeagues().get(i).getName();
+            rowData[1] = lists.getLeagues().get(i).getGame();
+            rowData[2] = lists.getLeagues().get(i).getMaxNumberTeams();
+            rowData[3] = InputProcessor.dateToString(lists.getLeagues().get(i).getStartDate());
+            rowData[4] = InputProcessor.dateToString(lists.getLeagues().get(i).getEndDate());
+            model.addRow(rowData);
+        }
     }
     
     /**
@@ -68,7 +97,7 @@ public class MainGui extends javax.swing.JFrame {
         currentTimeLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         leaguesScrollPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        activeLeaguesTable = new javax.swing.JTable();
         activeLeaguesLabel = new javax.swing.JLabel();
         leagueInfoButton = new javax.swing.JButton();
         historyButton = new javax.swing.JButton();
@@ -135,18 +164,33 @@ public class MainGui extends javax.swing.JFrame {
         leaguesScrollPane.setMinimumSize(new java.awt.Dimension(200, 70));
         leaguesScrollPane.setPreferredSize(new java.awt.Dimension(200, 70));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        activeLeaguesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Meno", "Hra", "Počet tímov", "Od", "Do"
             }
-        ));
-        leaguesScrollPane.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        leaguesScrollPane.setViewportView(activeLeaguesTable);
+        if (activeLeaguesTable.getColumnModel().getColumnCount() > 0) {
+            activeLeaguesTable.getColumnModel().getColumn(0).setResizable(false);
+            activeLeaguesTable.getColumnModel().getColumn(1).setResizable(false);
+            activeLeaguesTable.getColumnModel().getColumn(2).setResizable(false);
+            activeLeaguesTable.getColumnModel().getColumn(3).setResizable(false);
+            activeLeaguesTable.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -266,7 +310,9 @@ public class MainGui extends javax.swing.JFrame {
         return true;
     }
     
-    public void checkStatus(){};
+    public void checkStatus(){
+        setActiveTable();
+    };
     
     private void tickTock(){
         int running = 1;
@@ -285,7 +331,6 @@ public class MainGui extends javax.swing.JFrame {
                         this.sleep(60000);
                         currentTime.addMinute();
                     } catch (InterruptedException ex) {
-                   
                         logger.error("tickTock problem"); //NOI18N
                     }
                 }         
@@ -298,12 +343,22 @@ public class MainGui extends javax.swing.JFrame {
         ChangeTime changeTime = new ChangeTime();
         changeTime.setChangeTime(this);
     }//GEN-LAST:event_setTimeButtonMouseReleased
-    
-    private void registration(){ 
-        RegistrationWindow registrationWindow = new RegistrationWindow(this.lists);
-        registrationWindow.setVisible(true);
-    }
 
+    private void checkPlayerButtons(){
+        playerPanel.setVisible(true);
+            Player player = (Player) loggedUser;
+            if(Boolean.logicalAnd(player.isAdmin(), player.getTeam() != null))
+                createTeamButton.setVisible(false);
+            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() != null)){
+                manageTeamButton.setVisible(false);
+                createTeamButton.setVisible(false);
+            }
+            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() == null)){
+                leaveButton.setVisible(false);
+                manageTeamButton.setVisible(false);
+            }
+    }
+    
 
     private void loginVisibility(){
             leagueOrganizerPanel.setVisible(false);
@@ -316,19 +371,7 @@ public class MainGui extends javax.swing.JFrame {
         }
         
         if (this.loggedUser.getClass().getSimpleName().equals("Player")){
-            playerPanel.setVisible(true);
-            Player player = (Player) loggedUser;
-            if(Boolean.logicalAnd(player.isAdmin(), player.getTeam() != null))
-                createTeamButton.setVisible(false);
-            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() != null)){
-                manageTeamButton.setVisible(false);
-                createTeamButton.setVisible(false);
-            }
-            if(Boolean.logicalAnd(!player.isAdmin(), player.getTeam() == null)){
-                leaveButton.setVisible(false);
-                manageTeamButton.setVisible(false);
-            }
-            
+            checkPlayerButtons();
         }
         
         if (this.loggedUser.getClass().getSimpleName().equals("LeagueOrganizer")){
@@ -358,12 +401,12 @@ public class MainGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
+    private javax.swing.JTable activeLeaguesTable;
     private javax.swing.JButton createLeagueButton;
     private javax.swing.JButton createTeamButton;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JButton historyButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton leagueInfoButton;
     private javax.swing.JPanel leagueOrganizerPanel;
     private javax.swing.JScrollPane leaguesScrollPane;
