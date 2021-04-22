@@ -7,6 +7,7 @@ package sk.stu.fiit.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,11 +41,11 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(AddLeagueWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private LeagueOrganizer leagueOrganizer;
-    private Lists lists;
-    private List<JTextField> tfInfoList;
-    private List<JTextField> tfPrizeList;
-    private ArrayList<Prize> prizeList = new ArrayList<>();
+    private final LeagueOrganizer leagueOrganizer;
+    private final Lists lists;
+    private final List<JTextField> tfInfoList;
+    private final List<JTextField> tfPrizeList;
+    private final ArrayList<Prize> prizeList = new ArrayList<>();
     private ImageIcon icon;
     
     public AddLeagueWindow(LeagueOrganizer leagueOrganizer, Lists lists) {
@@ -606,22 +607,18 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void addPrizeBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPrizeBtnMouseReleased
-        // TODO add your handling code here:
         addPrizeAction();
     }//GEN-LAST:event_addPrizeBtnMouseReleased
 
     private void removePrizeBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removePrizeBtnMouseReleased
-        // TODO add your handling code here:
         removePrizeAction();
     }//GEN-LAST:event_removePrizeBtnMouseReleased
 
     private void addIconBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIconBtnMouseReleased
-        // TODO add your handling code here:
         addIconAction();
     }//GEN-LAST:event_addIconBtnMouseReleased
 
     private void createLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueBtnMouseReleased
-        // TODO add your handling code here:
         createLeagueAction();
     }//GEN-LAST:event_createLeagueBtnMouseReleased
 
@@ -735,7 +732,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     private void addIconAction() {
         int returnVal = fc.showOpenDialog(this);
 
-        File file = null;
+        File file;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = fc.getSelectedFile();
         } else {
@@ -746,7 +743,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
         try {
             BufferedImage img = ImageIO.read(file);
             icon = InputProcessor.resize(img, 280);
-        } catch (Exception e) {
+        } catch (IOException e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
             logger.warn("Wrong image selected");
             return;
@@ -800,7 +797,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             return;
         }
         
-        if (prizeList.size() == 0) {
+        if (prizeList.isEmpty()) {
             errorMessage("Liga musí obsahovať aspoň jednu výhru!");
             return;
         }
@@ -869,8 +866,8 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     }
     
     private void clearPrizeTf(){
-        for (JTextField jTextField : tfPrizeList) {
+        tfPrizeList.forEach(jTextField -> {
             jTextField.setText("");
-        }
+        });
     }
 }

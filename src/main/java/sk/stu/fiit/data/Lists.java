@@ -102,4 +102,8 @@ public class Lists {
     public void addTeam(Team team){
         teams.add(team);
     }
+
+    public ArrayList<League> getLeagues() {
+        return leagues;
+    }
 } 
