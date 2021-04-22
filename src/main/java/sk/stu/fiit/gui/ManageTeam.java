@@ -7,53 +7,55 @@ package sk.stu.fiit.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
-import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
-import sk.stu.fiit.league.League;
-import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.team.Team;
-import sk.stu.fiit.user.LeagueOrganizer;
 import sk.stu.fiit.user.Player;
 
 /**
  *
  * @author PeterSmrecek
  */
-public class AddTeamWindow extends javax.swing.JFrame {
+public class ManageTeam extends javax.swing.JFrame {
 
     /**
      * Creates new form Template
      */
     
-    private final Logger logger = Logger.getLogger(AddTeamWindow.class.getName());
+    private final Logger logger = Logger.getLogger(ManageTeam.class.getName());
     final JFileChooser fc = new JFileChooser();
     
     private Player player;
+    private Team team;
     private Lists lists;
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public AddTeamWindow(Player player, Lists lists) {
+    public ManageTeam(Player player, Team team, Lists lists) {
         initComponents();
         
         this.player = player;
         this.lists = lists;
+        this.team = team;
         
         this.tfInfoList = Arrays.asList(nameTf, gameTf);
+        
+        // Posielat pozvanky hracom
+        // Vyhadzovat hracov
+        // Urobit z hraca administratora
+        // Rozpustit tim
+        // Poslat ziadost do ligy
+        // Zmenit motto
+        // Zmenit nazov
+        // Zmenit logo
     }
 
     /**
@@ -98,7 +100,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Vytvor tím");
+        setTitle("Spravuj tím");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
         mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
