@@ -179,7 +179,6 @@ public class LeagueWindow extends javax.swing.JFrame {
         imagePnl.setLayout(new java.awt.GridBagLayout());
 
         imageLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        imageLbl.setText("[Obrázok]");
         imageLbl.setMinimumSize(new java.awt.Dimension(280, 280));
         imageLbl.setPreferredSize(new java.awt.Dimension(280, 280));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -745,12 +744,14 @@ public class LeagueWindow extends javax.swing.JFrame {
 
         try {
             BufferedImage img = ImageIO.read(file);
-            icon = InputProcessor.resize(img, 200);
+            icon = InputProcessor.resize(img, 280);
         } catch (Exception e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
             logger.warn("Wrong image selected");
             return;
         }
+        
+        imageLbl.setIcon(icon);
     }
     
     private void createLeagueAction() {
