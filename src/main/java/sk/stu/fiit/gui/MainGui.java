@@ -19,7 +19,7 @@ import sk.stu.fiit.data.Lists;
  */
 public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
-    private Lists lists;
+    private final Lists lists = new Lists();
     private CurrentTime currentTime = CurrentTime.CurrentTime();
     
     /**
@@ -62,7 +62,7 @@ public class MainGui extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        timeInfoLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        timeInfoLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel1.setForeground(new java.awt.Color(255, 153, 51));
         timeInfoLabel1.setText(bundle.getString("AKTUÁLNY ČAS:")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -81,7 +81,7 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(setTimeButton, gridBagConstraints);
 
-        currentTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        currentTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         currentTimeLabel.setText("null");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -168,7 +168,8 @@ public class MainGui extends javax.swing.JFrame {
 
     
     private void registration(){ 
-        
+        RegistrationWindow registrationWindow = new RegistrationWindow(this.lists);
+        registrationWindow.setVisible(true);
     };
     
     private void registrationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrationButtonMouseReleased
