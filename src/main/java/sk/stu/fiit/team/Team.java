@@ -1,6 +1,5 @@
 package sk.stu.fiit.team;
 
-import sk.stu.fiit.user.TeamAdministrator;
 import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 
@@ -24,10 +23,11 @@ public class Team {
         this.description = description;
         this.motto = motto;
         this.adminList.add(player);
-        
-        player.setTeam(this);
+        addToPlayer(player);
     }
 
-    
+    private void addToPlayer(Player player){
+        player.setTeam(this);
+    }
         
-}//end Team
+}
