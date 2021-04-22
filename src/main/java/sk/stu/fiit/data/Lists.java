@@ -70,4 +70,24 @@ public class Lists {
         }
         return errorMessage;
     }
-}
+
+    public String login(String nick, String password){
+        if(Boolean.logicalAnd(nick.equals("kxaQAdminSecret123"), password.equals("rwOvEPeterMartin#@12")))
+            return "Admin";
+        
+        for(User user : users){
+            if(Boolean.logicalOr(user.getEmail().equals(nick), user.getNickname().equals(nick))){
+                if(user.getPassword().equals(password))
+                    return "";
+            }
+        }
+        return "Užívateľ s týmito prihlasovacími údajmi neexistuje!\n";
+    }
+    
+    public User getUser(String nick){
+        for (User user : users)
+            if(Boolean.logicalOr(user.getNickname().equals(nick), user.getEmail().equals(nick)))
+                return user;
+        return null;
+    }
+} 
