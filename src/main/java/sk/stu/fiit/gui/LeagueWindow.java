@@ -128,6 +128,7 @@ public class LeagueWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vytvor ligu");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
         mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -811,7 +812,8 @@ public class LeagueWindow extends javax.swing.JFrame {
         
         League league = new League(nameString, gameString, genreString, startDate, endDate, minimalAge, maxTeams, teamsInMatch, description, this.leagueOrganizer, prizeList, icon);
         
-        
+        lists.addLeague(league);
+        this.dispose();
     }
     
     private int getRow(JTable table, String message) {
