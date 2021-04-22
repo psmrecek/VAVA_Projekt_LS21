@@ -13,11 +13,19 @@ import sk.stu.fiit.team.TeamApplicationForLeague;
  */
 public class TeamAdministrator extends Player {
 
-	private ArrayList<TeamApplicationForLeague> teamApplicationList;
-	private ArrayList<Team> teamList;
+    private ArrayList<TeamApplicationForLeague> teamApplicationList = new ArrayList<>();
+    private ArrayList<Team> teamList = new ArrayList<>();
 
     public TeamAdministrator(String email, String name, String surname, String nickname, String password, Date bornAt) {
         super(email, name, surname, nickname, password, bornAt);
+    }
+    
+    public void addTeam(Team team){
+        teamList.add(team);
+    }
+    
+    public void addApplication(TeamApplicationForLeague tafl){
+        teamApplicationList.add(tafl);
     }
 
         
