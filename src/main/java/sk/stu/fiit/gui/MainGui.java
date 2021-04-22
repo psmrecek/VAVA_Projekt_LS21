@@ -5,19 +5,38 @@
  */
 package sk.stu.fiit.gui;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import sk.stu.fiit.data.CurrentTime;
+import sk.stu.fiit.data.Lists;
+
 /**
  *
  * @author schon
  */
 public class MainGui extends javax.swing.JFrame {
-
+    private final Logger logger = Logger.getLogger(MainGui.class.getName());
+    private Lists lists;
+    private CurrentTime currentTime = CurrentTime.CurrentTime();
+    
     /**
      * Creates new form MainGui
      */
     public MainGui() {
         initComponents();
+        initApplication();
     }
 
+    
+    private void initApplication(){
+        BasicConfigurator.configure(); 
+        tickTock();
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,22 +45,121 @@ public class MainGui extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jPanel1 = new javax.swing.JPanel();
+        timeInfoLabel1 = new javax.swing.JLabel();
+        setTimeButton = new javax.swing.JButton();
+        currentTimeLabel = new javax.swing.JLabel();
+        loginButton = new javax.swing.JButton();
+        registrationButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
+        setTitle(bundle.getString("Esport ligy")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(937, 590));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        timeInfoLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        timeInfoLabel1.setForeground(new java.awt.Color(255, 153, 51));
+        timeInfoLabel1.setText(bundle.getString("AKTUÁLNY ČAS:")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(timeInfoLabel1, gridBagConstraints);
+
+        setTimeButton.setText(bundle.getString("NASTAV ČAS")); // NOI18N
+        setTimeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                setTimeButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(setTimeButton, gridBagConstraints);
+
+        currentTimeLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        currentTimeLabel.setText("10-4-21 00:00:00");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel1.add(currentTimeLabel, gridBagConstraints);
+
+        loginButton.setText(bundle.getString("PRIHLÁSENIE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(loginButton, gridBagConstraints);
+
+        registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(registrationButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.gridheight = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    public void setCurrentTime(CurrentTime currentTime) {
+        this.currentTime = currentTime;
+        currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
+    }
+    
+    public boolean setCurrentTime(LocalDateTime dateTime){
+        if (this.currentTime.setDateTime(dateTime))
+            currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
+        else{
+            JOptionPane.showMessageDialog(rootPane, java.util.ResourceBundle.getBundle("Bundle").getString("NASTAVENÝ ČAS NEMÔŽE BYŤ V MINULOSTI") , java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA PRI NASTAVOVANÍ ČASU") , JOptionPane.WARNING_MESSAGE);
+            logger.error("Trying to pick time in the past");   //NOI18N
+            return false;
+        }
+        return true;
+    }
+    
+    public void checkStatus(){};
+    
+     public void tickTock(){
+        int running = 1;
+        Thread thread1 = new Thread(){
+            int time = 0;
+            @Override
+            @SuppressWarnings("static-access")
+            public void run(){
+                while (running == 1){
+                    String date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime()); //NOI18N
+                    currentTimeLabel.setText(date);
+                    time += 1;
+                    if(time % 15 == 0)
+                        checkStatus();
+                    try {
+                        this.sleep(60000);
+                        currentTime.addMinute();
+                    } catch (InterruptedException ex) {
+                   
+                        logger.error("tickTock problem"); //NOI18N
+                    }
+                }         
+            }
+        };
+        thread1.start();
+     } 
+    
+    private void setTimeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setTimeButtonMouseReleased
+        ChangeTime changeTime = new ChangeTime();
+        changeTime.setChangeTime(this);
+    }//GEN-LAST:event_setTimeButtonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -54,7 +172,7 @@ public class MainGui extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) { //NOI18N
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -71,13 +189,17 @@ public class MainGui extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainGui().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainGui().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel currentTimeLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JButton registrationButton;
+    private javax.swing.JButton setTimeButton;
+    private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables
 }

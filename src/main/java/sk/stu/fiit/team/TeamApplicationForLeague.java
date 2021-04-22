@@ -1,4 +1,7 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.team;
+
+import sk.stu.fiit.user.TeamAdministrator;
+
 /**
  * �iados�, ktor� pod�va Administr�tor t�mu ktor� schva�uje Organiz�tor ligy. Jej
  * schv�lenie je podmienkou pre ��as� t�mu v lige.

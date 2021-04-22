@@ -1,4 +1,4 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.league;
 /**
  * @author PeterSmrecek
  * @version 1.0

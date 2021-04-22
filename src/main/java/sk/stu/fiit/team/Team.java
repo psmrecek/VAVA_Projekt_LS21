@@ -1,5 +1,7 @@
-package sk.stu.fiit.eaGeneration;
+package sk.stu.fiit.team;
 
+import sk.stu.fiit.user.TeamAdministrator;
+import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 
 
