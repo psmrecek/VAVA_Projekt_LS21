@@ -398,7 +398,7 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutButtonMouseReleased
 
     private void createLeagueButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueButtonMouseReleased
-        new LeagueWindow((LeagueOrganizer) loggedUser, lists).setVisible(true);
+        new AddLeagueWindow((LeagueOrganizer) loggedUser, lists).setVisible(true);
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     /**
