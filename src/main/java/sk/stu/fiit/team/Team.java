@@ -13,12 +13,21 @@ import java.util.ArrayList;
  */
 public class Team {
 
-	private String description;
-	private String name;
-	private ArrayList<TeamAdministrator> adminList;
-	private ArrayList<Player> playersList;
+    private String name;
+    private String description;
+    private String motto;
+    private ArrayList<TeamAdministrator> adminList = new ArrayList<>();
+    private ArrayList<Player> playersList = new ArrayList<>();
 
-	public Team(){
+    public Team(String name, String description, String motto, TeamAdministrator teamAdministrator) {
+        this.name = name;
+        this.description = description;
+        this.motto = motto;
+        this.adminList.add(teamAdministrator);
+        
+        teamAdministrator.addTeam(this);
+    }
 
-	}
+    
+        
 }//end Team
