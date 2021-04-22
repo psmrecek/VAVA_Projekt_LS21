@@ -3,7 +3,8 @@ Github reporzitár, ktorý slúži na účely predmetu VAVA, projekt esport liga
 akademického roku 2020/2021.
 
 ## Využité systémy
-Kód bol napísaný v jazyku Java verzie 1.8. 
+Kód bol napísaný v jazyku Java verzie 1.8. \
+V kóde využívame LGoodDatePicker. Credits: https://github.com/LGoodDatePicker/LGoodDatePicker
 
 ## Autori
 Meno a Priezvisko: Peter Smreček\

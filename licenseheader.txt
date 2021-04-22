@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}VAVA project
+${licensePrefix}Esport League by Martin Schön and Peter Smreček
+${licensePrefix}FIIT STU, 2021
+<#if licenseLast??>
+${licenseLast}
+</#if>
