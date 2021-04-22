@@ -87,4 +87,9 @@ public final class InputProcessor {
 
         return new ImageIcon(img.getScaledInstance((int) horizontal, (int) vertical, Image.SCALE_DEFAULT));
     }
+
+    public static String dateToString(Date date){
+        return sdfBasic.format(date);
+    }
+
 }
