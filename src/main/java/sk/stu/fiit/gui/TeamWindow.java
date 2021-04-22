@@ -101,7 +101,7 @@ public class TeamWindow extends javax.swing.JFrame {
         setTitle("Vytvor tím");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
         mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
@@ -223,7 +223,7 @@ public class TeamWindow extends javax.swing.JFrame {
         descriptionTa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         descriptionTa.setLineWrap(true);
         descriptionTa.setRows(5);
-        descriptionTa.setPreferredSize(new java.awt.Dimension(200, 104));
+        descriptionTa.setPreferredSize(new java.awt.Dimension(190, 104));
         descriptionSp.setViewportView(descriptionTa);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -307,11 +307,11 @@ public class TeamWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
