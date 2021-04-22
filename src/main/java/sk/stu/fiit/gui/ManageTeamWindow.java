@@ -19,18 +19,19 @@ import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
+import sk.stu.fiit.user.User;
 
 /**
  *
  * @author PeterSmrecek
  */
-public class ManageTeam extends javax.swing.JFrame {
+public class ManageTeamWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form Template
      */
     
-    private final Logger logger = Logger.getLogger(ManageTeam.class.getName());
+    private final Logger logger = Logger.getLogger(ManageTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
     private Player player;
@@ -39,14 +40,16 @@ public class ManageTeam extends javax.swing.JFrame {
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public ManageTeam(Player player, Team team, Lists lists) {
+    public ManageTeamWindow(Player player, Lists lists) {
         initComponents();
         
         this.player = player;
         this.lists = lists;
-        this.team = team;
+        this.team = player.getTeam();
         
-        this.tfInfoList = Arrays.asList(nameTf, gameTf);
+        this.tfInfoList = Arrays.asList(nameTf, mottoTf);
+        
+        updateAll();
         
         // Posielat pozvanky hracom
         // Vyhadzovat hracov
@@ -75,15 +78,16 @@ public class ManageTeam extends javax.swing.JFrame {
         imageLbl = new javax.swing.JLabel();
         controlsPnl = new javax.swing.JPanel();
         createLeagueBtn = new javax.swing.JButton();
-        addIconBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
-        gameTf = new javax.swing.JTextField();
+        mottoTf = new javax.swing.JTextField();
         nameTf = new javax.swing.JTextField();
         l2Lbl = new javax.swing.JLabel();
-        l4Lbl = new javax.swing.JLabel();
         descriptionSp = new javax.swing.JScrollPane();
         descriptionTa = new javax.swing.JTextArea();
+        l4Lbl1 = new javax.swing.JLabel();
+        enableEdit = new javax.swing.JCheckBox();
+        addIconBtn = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -143,22 +147,13 @@ public class ManageTeam extends javax.swing.JFrame {
         controlsPnl.setLayout(new javax.swing.BoxLayout(controlsPnl, javax.swing.BoxLayout.LINE_AXIS));
 
         createLeagueBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createLeagueBtn.setText("Vytvoriť tím");
+        createLeagueBtn.setText("Upraviť tím");
         createLeagueBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 createLeagueBtnMouseReleased(evt);
             }
         });
         controlsPnl.add(createLeagueBtn);
-
-        addIconBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addIconBtn.setText("Zvoliť logo ligy");
-        addIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                addIconBtnMouseReleased(evt);
-            }
-        });
-        controlsPnl.add(addIconBtn);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -182,14 +177,14 @@ public class ManageTeam extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         infoPnl.add(l1Lbl, gridBagConstraints);
 
-        gameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        gameTf.setMinimumSize(new java.awt.Dimension(200, 26));
-        gameTf.setPreferredSize(new java.awt.Dimension(200, 26));
+        mottoTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mottoTf.setMinimumSize(new java.awt.Dimension(200, 26));
+        mottoTf.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
-        infoPnl.add(gameTf, gridBagConstraints);
+        infoPnl.add(mottoTf, gridBagConstraints);
 
         nameTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nameTf.setMinimumSize(new java.awt.Dimension(200, 26));
@@ -209,15 +204,6 @@ public class ManageTeam extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         infoPnl.add(l2Lbl, gridBagConstraints);
 
-        l4Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l4Lbl.setText("Popis");
-        l4Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
-        l4Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        infoPnl.add(l4Lbl, gridBagConstraints);
-
         descriptionSp.setPreferredSize(new java.awt.Dimension(200, 240));
         descriptionSp.setRequestFocusEnabled(false);
 
@@ -234,6 +220,41 @@ public class ManageTeam extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 11;
         infoPnl.add(descriptionSp, gridBagConstraints);
+
+        l4Lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        l4Lbl1.setText("Popis");
+        l4Lbl1.setMinimumSize(new java.awt.Dimension(200, 26));
+        l4Lbl1.setPreferredSize(new java.awt.Dimension(200, 26));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        infoPnl.add(l4Lbl1, gridBagConstraints);
+
+        enableEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enableEdit.setText("Povoliť úpravy");
+        enableEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enableEditActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        infoPnl.add(enableEdit, gridBagConstraints);
+
+        addIconBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addIconBtn.setText("Zmeniť logo tímu");
+        addIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addIconBtnMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        infoPnl.add(addIconBtn, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -309,7 +330,7 @@ public class ManageTeam extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,8 +351,13 @@ public class ManageTeam extends javax.swing.JFrame {
 
     private void createLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueBtnMouseReleased
         // TODO add your handling code here:
-        createLeagueAction();
+        editTeamAction();
     }//GEN-LAST:event_createLeagueBtnMouseReleased
+
+    private void enableEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableEditActionPerformed
+        // TODO add your handling code here:
+        setEditableInfo(enableEdit.isSelected());
+    }//GEN-LAST:event_enableEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -347,18 +373,19 @@ public class ManageTeam extends javax.swing.JFrame {
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JCheckBox enableEdit;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JTextField gameTf;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
     private javax.swing.JPanel infoPnl;
     private javax.swing.JLabel l1Lbl;
     private javax.swing.JLabel l2Lbl;
-    private javax.swing.JLabel l4Lbl;
+    private javax.swing.JLabel l4Lbl1;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
@@ -390,7 +417,7 @@ public class ManageTeam extends javax.swing.JFrame {
         imageLbl.setIcon(icon);
     }
     
-    private void createLeagueAction() {
+    private void editTeamAction() {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
@@ -398,18 +425,19 @@ public class ManageTeam extends javax.swing.JFrame {
         }
         
         String nameString = nameTf.getText();
-        String mottoString = gameTf.getText();
+        String mottoString = mottoTf.getText();
         
         if (icon == null) {
             errorMessage("Logo tímu nesmie zostať prázdne!");
             return;
         }
         
-        Team team = new Team(nameString, description, mottoString, player);
+        team.setName(nameString);
+        team.setMotto(mottoString);
+        team.setDescription(description);
+        team.setIcon(icon);
         
-        lists.addTeam(team);
-        
-        this.dispose();
+        updateAll();
     }
     
     private boolean isEmptyField(List<JTextField> list){
@@ -425,5 +453,24 @@ public class ManageTeam extends javax.swing.JFrame {
     private void errorMessage(String message){
         JOptionPane.showMessageDialog(rootPane, message,
                 "Chyba!", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void setEditableInfo(boolean bool){
+        for (JTextField jTextField : tfInfoList) {
+            jTextField.setEditable(bool);
+        }
+        
+        descriptionTa.setEditable(bool);
+        addIconBtn.setVisible(bool);
+    }
+
+    private void updateAll() {
+        enableEdit.setSelected(false);
+        
+        nameTf.setText(team.getName());
+        mottoTf.setText(team.getMotto());
+        descriptionTa.setText(team.getDescription());
+        icon = team.getIcon();
+        imageLbl.setIcon(icon);
     }
 }

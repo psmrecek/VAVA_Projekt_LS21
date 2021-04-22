@@ -44,7 +44,10 @@ public class League {
         this.leagueOrganizerList.add(leagueOrganizer);
         this.prizeList = prizeList;
         this.icon = icon;
-        
+        addToLeagueOrganizer(leagueOrganizer);
+    }
+    
+    private void addToLeagueOrganizer(LeagueOrganizer leagueOrganizer){
         leagueOrganizer.addLeague(this);
     }
     

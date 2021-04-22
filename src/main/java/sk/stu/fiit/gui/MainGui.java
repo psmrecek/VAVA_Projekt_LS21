@@ -207,6 +207,11 @@ public class MainGui extends javax.swing.JFrame {
         playerPanel.setLayout(new java.awt.GridBagLayout());
 
         createTeamButton.setText("Vytvoriť tím");
+        createTeamButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                createTeamButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -219,6 +224,11 @@ public class MainGui extends javax.swing.JFrame {
         playerPanel.add(playerMessagesButton, gridBagConstraints);
 
         manageTeamButton.setText("Spravovať tím");
+        manageTeamButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                manageTeamButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -354,6 +364,16 @@ public class MainGui extends javax.swing.JFrame {
     private void createLeagueButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueButtonMouseReleased
         new AddLeagueWindow((LeagueOrganizer) loggedUser, lists).setVisible(true);
     }//GEN-LAST:event_createLeagueButtonMouseReleased
+
+    private void createTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTeamButtonMouseReleased
+        // TODO add your handling code here:
+        new AddTeamWindow((Player) loggedUser, lists).setVisible(true);
+    }//GEN-LAST:event_createTeamButtonMouseReleased
+
+    private void manageTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageTeamButtonMouseReleased
+        // TODO add your handling code here:
+        new ManageTeamWindow((Player) loggedUser, lists).setVisible(true);
+    }//GEN-LAST:event_manageTeamButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
