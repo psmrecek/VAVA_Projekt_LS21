@@ -71,7 +71,9 @@ public class League {
         return maxNumberTeams;
     }
     
-
+    public void addTeam(Team team){
+        teamList.add(team);
+    }
 
         
 }//end League
