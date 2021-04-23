@@ -13,7 +13,6 @@ sk\stu\fiit\gui\Template$3.class
 sk\stu\fiit\data\Lists.class
 sk\stu\fiit\user\User.class
 sk\stu\fiit\league\Prize.class
-sk\stu\fiit\gui\AddTeamWindow$1.class
 sk\stu\fiit\gui\Template$6.class
 sk\stu\fiit\data\CurrentTime.class
 sk\stu\fiit\data\InputProcessor.class
@@ -21,7 +20,6 @@ sk\stu\fiit\gui\AddLeagueWindow.class
 sk\stu\fiit\gui\Template$13.class
 sk\stu\fiit\gui\ChangeTime$1.class
 sk\stu\fiit\gui\Template$9.class
-sk\stu\fiit\gui\AddLeagueWindow$3.class
 sk\stu\fiit\gui\Template$2.class
 sk\stu\fiit\gui\ManageTeamWindow$3.class
 sk\stu\fiit\gui\Template.class
@@ -30,10 +28,6 @@ sk\stu\fiit\gui\MainGui$1.class
 sk\stu\fiit\gui\RegistrationWindow.class
 sk\stu\fiit\user\LeagueOrganizer.class
 sk\stu\fiit\gui\Template$5.class
-sk\stu\fiit\gui\ManageTeamWindow$2.class
-sk\stu\fiit\gui\AddTeamWindow$2.class
-sk\stu\fiit\data\TestInputs.class
-sk\stu\fiit\gui\ManageTeamWindow.class
 sk\stu\fiit\user\Spectator.class
 sk\stu\fiit\gui\AddLeagueWindow$1.class
 sk\stu\fiit\gui\Template$8.class
@@ -50,7 +44,6 @@ sk\stu\fiit\gui\ManageTeamWindow$1.class
 sk\stu\fiit\gui\Template$4.class
 sk\stu\fiit\gui\AddTeamWindow$3.class
 sk\stu\fiit\gui\LoginWindow$1.class
-sk\stu\fiit\gui\AddLeagueWindow$5.class
 sk\stu\fiit\league\Match.class
 sk\stu\fiit\gui\MainGui$3.class
 sk\stu\fiit\gui\MainGui.class
