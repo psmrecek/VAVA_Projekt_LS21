@@ -78,7 +78,7 @@ public final class TestInputs {
         User player12 = lists.getUser("z");
         
         ArrayList<ImageIcon> icons = new ArrayList<>();
-        int size = 200; 
+        int size = 280; 
         
         try {
 
@@ -166,10 +166,5 @@ public final class TestInputs {
         
         return lists;
     }
-    
-    
-    
-    public static void main(String[] args) {
-        Lists lists = createInputs();
-    }
+
 }
