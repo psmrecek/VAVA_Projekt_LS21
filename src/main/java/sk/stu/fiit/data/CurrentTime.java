@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.data;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +18,8 @@ import org.apache.log4j.Logger;
  *
  * @author schon
  */
-public class CurrentTime {
+public class CurrentTime implements Serializable{
+    private static final long serialVersionUID = 0;
     private static CurrentTime currentTime = null;
     private Date dateTime;
     

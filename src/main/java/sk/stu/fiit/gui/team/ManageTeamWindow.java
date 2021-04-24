@@ -3,7 +3,7 @@
  * Esport League by Martin Schön and Peter Smreček
  * FIIT STU, 2021
  */
-package sk.stu.fiit.gui;
+package sk.stu.fiit.gui.team;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.gui.MainGui;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;

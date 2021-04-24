@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -22,7 +23,8 @@ Class <code>Lists</code> serves as class storing all information given
  * 
  * @see User
  */
-public class Lists {
+public class Lists implements Serializable{
+    private static final long serialVersionUID = 0;
     private final ArrayList<User> users = new ArrayList<>();
     private final ArrayList<League> leagues = new ArrayList<>();
     private final ArrayList<Team> teams = new ArrayList<>();
@@ -106,4 +108,17 @@ public class Lists {
     public ArrayList<League> getLeagues() {
         return leagues;
     }
+
+    public League getActiveLeague(int selectedRow) {
+        int current = 0;
+        for (League league : leagues){
+            if (league.isActive()){
+                if(current == selectedRow)
+                    return league;
+                current += 1;
+            }
+        }
+        return leagues.get(0);
+    }
+    
 } 

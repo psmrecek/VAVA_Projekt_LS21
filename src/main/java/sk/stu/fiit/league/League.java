@@ -1,9 +1,11 @@
 package sk.stu.fiit.league;
 
+import java.io.Serializable;
 import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.team.Team;
 
 
@@ -13,8 +15,9 @@ import sk.stu.fiit.team.Team;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class League {
-        
+public class League implements Serializable{
+
+    private static final long serialVersionUID = 0;
     private String name;
     private String game;
     private String genre;
@@ -73,6 +76,47 @@ public class League {
     
     public void addTeam(Team team){
         teamList.add(team);
+    }
+    
+    public boolean isActive(){
+        CurrentTime currentTime = CurrentTime.CurrentTime();
+        return Boolean.logicalAnd(this.getStartDate().before(currentTime.getDateTime()), this.getEndDate().after(currentTime.getDateTime()));
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public int getMinimalAge() {
+        return minimalAge;
+    }
+
+    public int getNumberOfTeamsInMatch() {
+        return numberOfTeamsInMatch;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<Prize> getPrizeList() {
+        return prizeList;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
+    public ArrayList<LeagueOrganizer> getLeagueOrganizerList() {
+        return leagueOrganizerList;
+    }
+
+    public ArrayList<Team> getTeamList() {
+        return teamList;
+    }
+
+    public ArrayList<Match> getMatchList() {
+        return matchList;
     }
 
         

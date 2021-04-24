@@ -1,5 +1,6 @@
 package sk.stu.fiit.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import sk.stu.fiit.league.Information;
@@ -12,7 +13,8 @@ import sk.stu.fiit.league.Match;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class Spectator extends User{
+public class Spectator extends User implements Serializable{
+        private static final long serialVersionUID = 0;
 	private String name;
 	private ArrayList<League> leagueList;
 	private ArrayList<Match> matchList;
