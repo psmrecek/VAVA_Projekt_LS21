@@ -3,7 +3,7 @@
  * Esport League by Martin Schön and Peter Smreček
  * FIIT STU, 2021
  */
-package sk.stu.fiit.gui;
+package sk.stu.fiit.gui.league;
 
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.league.Match;
