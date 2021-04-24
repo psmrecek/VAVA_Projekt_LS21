@@ -78,6 +78,7 @@ public class Team implements Serializable{
     
     public void addPlayer(Player player){
         playersList.add(player);
+        player.setTeam(this);
     }
     
     public ArrayList<Player> getListAdmins(){

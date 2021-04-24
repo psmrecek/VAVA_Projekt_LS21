@@ -34,7 +34,7 @@ public class MessageWindow extends javax.swing.JFrame {
     private void updateAll(){
         String[] messages = new String[this.loggedUser.getMessages().size()];
         
-        for(int item = this.loggedUser.getMessages().size()-1; item >= 0; item--){
+        for(int item = 0; item < this.loggedUser.getMessages().size(); item++){
             Message message = this.loggedUser.getMessages().get(item);
             messages[item] = message.getSender().getNickname()+" zo dňa "+
                     InputProcessor.dateToString(message.getSendingTime())+
