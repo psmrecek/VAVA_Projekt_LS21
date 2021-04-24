@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.gui;
 
+import java.awt.Window;
 import sk.stu.fiit.gui.team.AddTeamWindow;
 import sk.stu.fiit.gui.team.ManageTeamWindow;
 import sk.stu.fiit.gui.league.LeagueInfoWindow;
@@ -522,8 +523,12 @@ public class MainGui extends javax.swing.JFrame {
     }
    
     private void logout(){
+        System.gc();
+        for (Window window : Window.getWindows())
+            window.dispose();
+        
         this.loggedUser = null;
-        this.dispose();
+        //this.dispose();
         this.loginWindow.setVisible(true);
     }
     
