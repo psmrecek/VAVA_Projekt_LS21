@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.gui;
 
+import java.awt.Window;
 import sk.stu.fiit.gui.team.AddTeamWindow;
 import sk.stu.fiit.gui.team.ManageTeamWindow;
 import sk.stu.fiit.gui.league.LeagueInfoWindow;
@@ -20,6 +21,7 @@ import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.Save;
 import sk.stu.fiit.gui.user.ProfileWindow;
+import sk.stu.fiit.gui.user.message.MessageWindow;
 import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
@@ -69,6 +71,7 @@ public class MainGui extends javax.swing.JFrame {
     
     public void setLists(Lists lists) {
         this.lists = lists;
+        this.loginWindow.setLists(this.lists);
         checkStatus();
     }
     
@@ -285,6 +288,11 @@ public class MainGui extends javax.swing.JFrame {
         newMessageButton.setText("Správy");
         newMessageButton.setMinimumSize(new java.awt.Dimension(150, 30));
         newMessageButton.setPreferredSize(new java.awt.Dimension(150, 30));
+        newMessageButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                newMessageButtonMouseReleased(evt);
+            }
+        });
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -315,6 +323,11 @@ public class MainGui extends javax.swing.JFrame {
         playerMessagesButton.setText("Správy");
         playerMessagesButton.setMinimumSize(new java.awt.Dimension(150, 30));
         playerMessagesButton.setPreferredSize(new java.awt.Dimension(150, 30));
+        playerMessagesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                playerMessagesButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -581,8 +594,12 @@ public class MainGui extends javax.swing.JFrame {
     }
    
     private void logout(){
+        System.gc();
+        for (Window window : Window.getWindows())
+            window.dispose();
+        
         this.loggedUser = null;
-        this.dispose();
+        //this.dispose();
         this.loginWindow.setVisible(true);
     }
     
@@ -671,6 +688,18 @@ public class MainGui extends javax.swing.JFrame {
     private void profilButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilButtonMouseReleased
         profileChanges();
     }//GEN-LAST:event_profilButtonMouseReleased
+
+    private void messages(){
+        MessageWindow messageWindow = new MessageWindow(this.loggedUser, this.lists);
+    }
+    
+    private void playerMessagesButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerMessagesButtonMouseReleased
+        messages();
+    }//GEN-LAST:event_playerMessagesButtonMouseReleased
+
+    private void newMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newMessageButtonMouseReleased
+        messages();
+    }//GEN-LAST:event_newMessageButtonMouseReleased
 
     private void organizerButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_organizerButtonMouseReleased
         new MatchWindow(this, lists, (LeagueOrganizer) loggedUser).setVisible(true);
