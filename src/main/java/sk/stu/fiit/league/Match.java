@@ -29,6 +29,10 @@ public class Match implements Serializable{
         this.winner = "---";
         this.result = "---";
     }
+
+    public String getActiveLink() {
+        return activeLink;
+    }
             
 
     public String getWinner() {
