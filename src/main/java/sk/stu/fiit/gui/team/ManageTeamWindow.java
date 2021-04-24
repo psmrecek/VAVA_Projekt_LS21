@@ -39,20 +39,20 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(ManageTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private Player player;
+    private Player admin;
     private Team team;
     private MainGui mainGui;
     private Lists lists;
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
     
-    public ManageTeamWindow(Player player, Lists lists, MainGui mainGui) {
+    public ManageTeamWindow(Player admin, Lists lists, MainGui mainGui) {
         initComponents();
         
-        this.player = player;
+        this.admin = admin;
         this.lists = lists;
         this.mainGui = mainGui;
-        this.team = player.getTeam();
+        this.team = admin.getTeam();
         
         this.tfInfoList = Arrays.asList(nameTf, mottoTf);
         
@@ -88,6 +88,12 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         imagePnl = new javax.swing.JPanel();
         imageLbl = new javax.swing.JLabel();
         controlsPnl = new javax.swing.JPanel();
+        addAdminBtn = new javax.swing.JButton();
+        removeAdminBtn = new javax.swing.JButton();
+        removePlayerBtn = new javax.swing.JButton();
+        deleteTeamBtn = new javax.swing.JButton();
+        newPlayersBtn = new javax.swing.JButton();
+        leagueBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
         mottoTf = new javax.swing.JTextField();
@@ -159,10 +165,65 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         controlsPnl.setMinimumSize(new java.awt.Dimension(22, 80));
         controlsPnl.setPreferredSize(new java.awt.Dimension(22, 80));
         controlsPnl.setLayout(new javax.swing.BoxLayout(controlsPnl, javax.swing.BoxLayout.LINE_AXIS));
+
+        addAdminBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addAdminBtn.setText("Urobiť administrátorom");
+        addAdminBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addAdminBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(addAdminBtn);
+
+        removeAdminBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removeAdminBtn.setText("Odobrať administrátorské práva");
+        removeAdminBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removeAdminBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(removeAdminBtn);
+
+        removePlayerBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        removePlayerBtn.setText("Odobrať hráča z tímu");
+        removePlayerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removePlayerBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(removePlayerBtn);
+
+        deleteTeamBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        deleteTeamBtn.setText("Rozpustiť tím");
+        deleteTeamBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                deleteTeamBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(deleteTeamBtn);
+
+        newPlayersBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        newPlayersBtn.setText("Nábor hráčov");
+        newPlayersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                newPlayersBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(newPlayersBtn);
+
+        leagueBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        leagueBtn.setText("Prihlásiť do ligy");
+        leagueBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                leagueBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(leagueBtn);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         mainPnl.add(controlsPnl, gridBagConstraints);
 
@@ -291,12 +352,19 @@ public class ManageTeamWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Číslo", "Meno"
+                "Číslo", "Administrátor", "Meno"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -306,6 +374,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         tableScroll.setViewportView(tableTbl);
         if (tableTbl.getColumnModel().getColumnCount() > 0) {
             tableTbl.getColumnModel().getColumn(0).setMaxWidth(100);
+            tableTbl.getColumnModel().getColumn(1).setMaxWidth(100);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -412,9 +481,40 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         setEditableInfo(enableEdit.isSelected());
     }//GEN-LAST:event_enableEditActionPerformed
 
+    private void addAdminBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAdminBtnMouseReleased
+        // TODO add your handling code here:
+        addAdminAction();
+    }//GEN-LAST:event_addAdminBtnMouseReleased
+
+    private void removeAdminBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeAdminBtnMouseReleased
+        // TODO add your handling code here:
+        removeAdminAction();
+    }//GEN-LAST:event_removeAdminBtnMouseReleased
+
+    private void removePlayerBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removePlayerBtnMouseReleased
+        // TODO add your handling code here:
+        removePlayerAction();
+    }//GEN-LAST:event_removePlayerBtnMouseReleased
+
+    private void deleteTeamBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteTeamBtnMouseReleased
+        // TODO add your handling code here:
+        deleteTeamAction();
+    }//GEN-LAST:event_deleteTeamBtnMouseReleased
+
+    private void newPlayersBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newPlayersBtnMouseReleased
+        // TODO add your handling code here:
+        newPlayersAction();
+    }//GEN-LAST:event_newPlayersBtnMouseReleased
+
+    private void leagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leagueBtnMouseReleased
+        // TODO add your handling code here:
+        leagueAction();
+    }//GEN-LAST:event_leagueBtnMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JButton addAdminBtn;
     private javax.swing.JButton addIconBtn;
     private javax.swing.ButtonGroup bg1Bg;
     private javax.swing.JMenuItem contentsMenuItem;
@@ -422,6 +522,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
+    private javax.swing.JButton deleteTeamBtn;
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
     private javax.swing.JMenu editMenu;
@@ -435,12 +536,16 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l1Lbl;
     private javax.swing.JLabel l2Lbl;
     private javax.swing.JLabel l4Lbl1;
+    private javax.swing.JButton leagueBtn;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
+    private javax.swing.JButton newPlayersBtn;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JButton removeAdminBtn;
+    private javax.swing.JButton removePlayerBtn;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JScrollPane tableScroll;
@@ -538,7 +643,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private int getRow(JTable table, String message) {
         int index = table.getSelectedRow();
 
-        if (InputProcessor.isPositiveInt(index)) {
+        if (index >= 0) {
             return index;
         } else {
             errorMessage(message);
@@ -565,8 +670,71 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
 
             rowData[0] = i + 1;
-            rowData[1] = list.get(i).getNickname();
+            rowData[1] = list.get(i).isAdmin();
+            rowData[2] = list.get(i).getNickname();
             model.addRow(rowData);
         }
+    }
+    
+    private Player getSelectedPlayer(){
+        int playerTableIndex = getRow(tableTbl, "Nie je vybraný žiaden hráč z tabuľky!");
+        if (playerTableIndex == -1) {
+            return null;
+        }
+        
+        return team.getPlayersList().get(playerTableIndex);
+    }
+
+    private void addAdminAction() {
+        Player player = getSelectedPlayer();
+        if (player != null) {
+            player.setAdmin(true);
+            updateAll();
+        }
+    }
+
+    private void removeAdminAction() {
+        Player player = getSelectedPlayer();
+        if (player != null) {
+            ArrayList<Player> adminList = team.getListAdmins();
+            if (adminList.contains(player)) {
+                if (adminList.size() > 1) {
+                    player.setAdmin(false);
+                } else{
+                    errorMessage("V tíme musí zostať aspoň jeden administrátor!");
+                }
+            } else{
+                errorMessage("Zvolený hráč nie je administrátor!");
+            }
+            updateAll();
+        }
+    }
+
+    private void removePlayerAction() {
+        Player player = getSelectedPlayer();
+        if (player != null) {
+            if (team.removePlayer(player)) {
+                updateAll();
+            } else{
+                errorMessage("Z tímu nie je možné odobrať administrátora.\nNajskôr hráčovi odoberte práva administrátora a potom ho odoberte z tímu!");
+            }
+        }
+    }
+
+    private void deleteTeamAction() {
+        int option = JOptionPane.showConfirmDialog(rootPane, "Naozaj si prajete rozpustiť tím?", "Potvrdenie rozpustenia tímu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if (option == JOptionPane.OK_OPTION) {
+            System.out.println("Teraz");
+        }
+        
+    }
+
+    private void newPlayersAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void leagueAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
