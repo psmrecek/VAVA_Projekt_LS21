@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
+import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Match;
@@ -107,6 +108,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         imageLbl = new javax.swing.JLabel();
         controlsPnl = new javax.swing.JPanel();
         matchInfoLeagueBtn = new javax.swing.JButton();
+        linkButton = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l3Lbl = new javax.swing.JLabel();
         l6Lbl = new javax.swing.JLabel();
@@ -229,6 +231,15 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
             }
         });
         controlsPnl.add(matchInfoLeagueBtn);
+
+        linkButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        linkButton.setText("Získaj link na zápas");
+        linkButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                linkButtonMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(linkButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -585,6 +596,15 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         MatchInfoWindow matchInfoWindow = new MatchInfoWindow(this.league.getMatchList().get(matchesTable.getSelectedRow()));
     }//GEN-LAST:event_matchInfoLeagueBtnMouseReleased
 
+    private void linkButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkButtonMouseReleased
+        if (matchesTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Vyber zápas z tabuľky zápasov", "Problém s výberom", JOptionPane.WARNING_MESSAGE);
+            logger.error("Trying to see match link without selected row");
+            return;
+        }
+        JOptionPane.showMessageDialog(rootPane, "Link:"+this.league.getMatchList().get(matchesTable.getSelectedRow()).getActiveLink(), "Link na livestream", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_linkButtonMouseReleased
+
     private void deleteRows(DefaultTableModel model) {
         if (model.getRowCount() > 0) {
             for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -625,6 +645,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l7Lbl;
     private javax.swing.JLabel l8Lbl;
     private javax.swing.JLabel l9Lbl;
+    private javax.swing.JButton linkButton;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JButton matchInfoLeagueBtn;
     private javax.swing.JPanel matchesPnl;

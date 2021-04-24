@@ -19,11 +19,13 @@ public class Match implements Serializable{
 	private String type;
 	private ArrayList<Team> teamList;
         private String winner;
+        private String activeLink;
 
-    public Match(Date date, String type, ArrayList<Team> teamList) {
+    public Match(Date date, String type, ArrayList<Team> teamList, String activeLink) {
         this.date = date;
         this.type = type;
         this.teamList = teamList;
+        this.activeLink = activeLink;
         this.winner = "---";
         this.result = "---";
     }
