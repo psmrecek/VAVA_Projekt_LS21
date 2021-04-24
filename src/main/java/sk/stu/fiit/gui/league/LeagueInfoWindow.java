@@ -441,7 +441,6 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(matchesScroll, gridBagConstraints);
-        matchesScroll.getAccessibleContext().setAccessibleName("Zápasy");
 
         descriptionPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Popis ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         descriptionPnl.setMinimumSize(new java.awt.Dimension(230, 77));
@@ -554,7 +553,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
         );
 
         pack();

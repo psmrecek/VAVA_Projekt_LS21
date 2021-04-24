@@ -121,17 +121,17 @@ public class Lists implements Serializable{
         return leagues.get(0);
     }
     
-    public ArrayList<League> getPlannedLeagues(){
+    public ArrayList<League> getPlannedLeaguesWithoutTeam(Team team){
         ArrayList<League> plannedLeagues = new ArrayList<>();
         for (League league : leagues) {
-            if (league.isPlanned()) {
+            if (league.isFuture() && !league.isTeamInLeague(team)) {
                 plannedLeagues.add(league);
             }
         }
         return plannedLeagues;
     }
     
-    public ArrayList<League> teamsLeagues(Team team){
+    public ArrayList<League> getTeamsLeagues(Team team){
         ArrayList<League> teamsLeaguesList = new ArrayList<>();
         for (League league : leagues) {
             if (league.isTeamInLeague(team)) {
