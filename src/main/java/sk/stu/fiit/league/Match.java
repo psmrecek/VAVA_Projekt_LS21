@@ -18,8 +18,42 @@ public class Match implements Serializable{
 	private String result;
 	private String type;
 	private ArrayList<Team> teamList;
+        private String winner;
 
-	public Match(){
+    public Match(Date date, String type, ArrayList<Team> teamList) {
+        this.date = date;
+        this.type = type;
+        this.teamList = teamList;
+        this.winner = "---";
+        this.result = "---";
+    }
+            
 
-	}
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public ArrayList<Team> getTeamList() {
+        return teamList;
+    }
+    
+        
+        
+        
 }//end Match

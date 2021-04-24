@@ -108,4 +108,17 @@ public class Lists implements Serializable{
     public ArrayList<League> getLeagues() {
         return leagues;
     }
+
+    public League getActiveLeague(int selectedRow) {
+        int current = 0;
+        for (League league : leagues){
+            if (league.isActive()){
+                if(current == selectedRow)
+                    return league;
+                current += 1;
+            }
+        }
+        return leagues.get(0);
+    }
+    
 } 

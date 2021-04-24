@@ -57,7 +57,7 @@ public class MainGui extends javax.swing.JFrame {
         tickTock();
         loginVisibility();
         this.setVisible(true);
-        setActiveTable();
+        checkStatus();
     }
     
     public void setLists(Lists lists) {
@@ -81,7 +81,7 @@ public class MainGui extends javax.swing.JFrame {
         Object[] rowData = new Object[numberOfColumns];
         
         for (League league : lists.getLeagues()) {
-            if(Boolean.logicalAnd(league.getStartDate().before(currentTime.getDateTime()), league.getEndDate().after(currentTime.getDateTime()))){
+            if(league.isActive()){
                 rowData[0] = league.getName();
                 rowData[1] = league.getGame();
                 rowData[2] = league.getMaxNumberTeams();
@@ -198,12 +198,9 @@ public class MainGui extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        activeLeaguesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         leaguesScrollPane.setViewportView(activeLeaguesTable);
         if (activeLeaguesTable.getColumnModel().getColumnCount() > 0) {
-            activeLeaguesTable.getColumnModel().getColumn(0).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(1).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(2).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(3).setResizable(false);
             activeLeaguesTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
@@ -225,6 +222,11 @@ public class MainGui extends javax.swing.JFrame {
         jPanel1.add(activeLeaguesLabel, gridBagConstraints);
 
         leagueInfoButton.setText("Viac informácií");
+        leagueInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                leagueInfoButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 26;
@@ -457,6 +459,15 @@ public class MainGui extends javax.swing.JFrame {
         this.loginWindow.setVisible(true);
     }
     
+    private void leagueInfo(){
+        if (activeLeaguesTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Vyber ligu z tabuľky líg", "Problém s výberom", JOptionPane.WARNING_MESSAGE);
+            logger.error("Trying to see more info without selected row");
+            return;
+        }
+        LeagueInfoWindow leagueInfoWindow = new LeagueInfoWindow(lists.getActiveLeague(activeLeaguesTable.getSelectedRow()));
+    }
+    
     private void logoutButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseReleased
         logout();
     }//GEN-LAST:event_logoutButtonMouseReleased
@@ -466,12 +477,10 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     private void createTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTeamButtonMouseReleased
-        
         new AddTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_createTeamButtonMouseReleased
 
     private void manageTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageTeamButtonMouseReleased
-        // TODO add your handling code here:
         new ManageTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
 
@@ -490,6 +499,10 @@ public class MainGui extends javax.swing.JFrame {
             this.logger.error("Problem when trying to serialize! Error "+ex);
         }
     }//GEN-LAST:event_saveButtonMouseReleased
+
+    private void leagueInfoButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leagueInfoButtonMouseReleased
+        leagueInfo();
+    }//GEN-LAST:event_leagueInfoButtonMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
