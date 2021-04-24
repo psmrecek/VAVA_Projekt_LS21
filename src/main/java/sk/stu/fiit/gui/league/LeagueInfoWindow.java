@@ -402,7 +402,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
 
-        matchesScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zápsy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        matchesScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zápasy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         matchesScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         matchesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -431,6 +431,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(matchesScroll, gridBagConstraints);
+        matchesScroll.getAccessibleContext().setAccessibleName("Zápasy");
 
         descriptionPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Popis ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         descriptionPnl.setMinimumSize(new java.awt.Dimension(230, 77));

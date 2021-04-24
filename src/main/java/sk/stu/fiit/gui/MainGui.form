@@ -223,7 +223,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="organizerButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Zverejni&#x165; v&#xfd;sledky"/>
+                <Property name="text" type="java.lang.String" value="Mana&#x17e;uj z&#xe1;pasy"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
