@@ -29,7 +29,7 @@ public class MatchInfoWindow extends javax.swing.JFrame {
         winnerLabel.setText(match.getWinner());
         resultLabel.setText(match.getResult());
         typeLabel.setText(match.getType());
-        timeLabel.setText(InputProcessor.dateToStringTime(match.getDate()));
+        timeLabel.setText(InputProcessor.dateToString(match.getDate()));
         
         teamsList.setListData(getTeams());
         
@@ -97,7 +97,7 @@ public class MatchInfoWindow extends javax.swing.JFrame {
 
         timeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeInfoLabel.setText("Čas a dátum konania");
+        timeInfoLabel.setText("Dátum konania");
         jPanel1.add(timeInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 180, 250, -1));
         timeInfoLabel.getAccessibleContext().setAccessibleName("");
 
