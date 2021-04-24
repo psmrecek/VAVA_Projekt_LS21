@@ -19,6 +19,7 @@ import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.Save;
+import sk.stu.fiit.gui.user.ProfileWindow;
 import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
@@ -562,6 +563,7 @@ public class MainGui extends javax.swing.JFrame {
         if (this.loggedUser == null){  // Admin
             setTimeButton.setVisible(true);
             adminPanel.setVisible(true);
+            profilButton.setVisible(false);
             return;
         }
         
@@ -663,7 +665,7 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_historyButtonMouseReleased
 
     private void profileChanges(){
-        
+        ProfileWindow profileWindow = new ProfileWindow(this.loggedUser, lists);
     }
     
     private void profilButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilButtonMouseReleased

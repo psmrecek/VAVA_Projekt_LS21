@@ -24,4 +24,4 @@ public class Spectator extends User implements Serializable{
     public Spectator(String email, String name, String surrname, String nickname, String password, Date bornAt) {
         super(email, name, surrname, nickname, password, bornAt);
     }
-}//end Spectator
+}
