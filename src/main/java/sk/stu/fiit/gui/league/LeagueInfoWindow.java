@@ -82,7 +82,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         for(Match match : matchesList){
             rowData[0] = match.getWinner();
             rowData[1] = match.getResult();
-            rowData[2] = InputProcessor.dateToStringTime(match.getDate());
+            rowData[2] = InputProcessor.dateToString(match.getDate());
             rowData[3] = match.getType();
             model.addRow(rowData);
         
