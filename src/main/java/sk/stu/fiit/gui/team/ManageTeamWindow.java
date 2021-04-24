@@ -105,8 +105,8 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         enableEdit = new javax.swing.JCheckBox();
         addIconBtn = new javax.swing.JButton();
         updateTeamBtn = new javax.swing.JButton();
-        tableScroll = new javax.swing.JScrollPane();
-        tableTbl = new javax.swing.JTable();
+        playersScroll = new javax.swing.JScrollPane();
+        playersTbl = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -126,7 +126,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         setTitle("Manažovanie tímu");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
@@ -154,7 +154,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         imagePnl.add(imageLbl, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -223,13 +223,15 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         mainPnl.add(controlsPnl, gridBagConstraints);
 
         infoPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informácie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        infoPnl.setMinimumSize(new java.awt.Dimension(420, 320));
+        infoPnl.setPreferredSize(new java.awt.Dimension(430, 300));
         java.awt.GridBagLayout infoPnlLayout = new java.awt.GridBagLayout();
-        infoPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        infoPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
         infoPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         infoPnl.setLayout(infoPnlLayout);
 
@@ -269,6 +271,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         infoPnl.add(l2Lbl, gridBagConstraints);
 
+        descriptionSp.setMinimumSize(new java.awt.Dimension(200, 240));
         descriptionSp.setPreferredSize(new java.awt.Dimension(200, 240));
         descriptionSp.setRequestFocusEnabled(false);
 
@@ -276,7 +279,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         descriptionTa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         descriptionTa.setLineWrap(true);
         descriptionTa.setRows(5);
-        descriptionTa.setPreferredSize(new java.awt.Dimension(190, 104));
         descriptionSp.setViewportView(descriptionTa);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -284,6 +286,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         infoPnl.add(descriptionSp, gridBagConstraints);
 
         l4Lbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -337,17 +340,17 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
 
-        tableScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hráči", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        tableScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableScroll.setPreferredSize(new java.awt.Dimension(350, 428));
+        playersScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hráči", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        playersScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        playersScroll.setPreferredSize(new java.awt.Dimension(350, 428));
 
-        tableTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableTbl.setModel(new javax.swing.table.DefaultTableModel(
+        playersTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        playersTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -370,19 +373,19 @@ public class ManageTeamWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableTbl.getTableHeader().setReorderingAllowed(false);
-        tableScroll.setViewportView(tableTbl);
-        if (tableTbl.getColumnModel().getColumnCount() > 0) {
-            tableTbl.getColumnModel().getColumn(0).setMaxWidth(100);
-            tableTbl.getColumnModel().getColumn(1).setMaxWidth(100);
+        playersTbl.getTableHeader().setReorderingAllowed(false);
+        playersScroll.setViewportView(playersTbl);
+        if (playersTbl.getColumnModel().getColumnCount() > 0) {
+            playersTbl.getColumnModel().getColumn(0).setMaxWidth(100);
+            playersTbl.getColumnModel().getColumn(1).setMaxWidth(100);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mainPnl.add(tableScroll, gridBagConstraints);
+        mainPnl.add(playersScroll, gridBagConstraints);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Súbor");
@@ -455,7 +458,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -544,12 +547,12 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JButton newPlayersBtn;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JScrollPane playersScroll;
+    private javax.swing.JTable playersTbl;
     private javax.swing.JButton removeAdminBtn;
     private javax.swing.JButton removePlayerBtn;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
-    private javax.swing.JScrollPane tableScroll;
-    private javax.swing.JTable tableTbl;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JButton updateTeamBtn;
     // End of variables declaration//GEN-END:variables
@@ -660,10 +663,10 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     }
 
     private void populatePlayersTbl() {
-        DefaultTableModel model = (DefaultTableModel) tableTbl.getModel();
+        DefaultTableModel model = (DefaultTableModel) playersTbl.getModel();
         deleteRows(model);
 
-        int numberOfColumns = tableTbl.getColumnCount();
+        int numberOfColumns = playersTbl.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
         ArrayList<Player> list = team.getPlayersList();
         
@@ -677,7 +680,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     }
     
     private Player getSelectedPlayer(){
-        int playerTableIndex = getRow(tableTbl, "Nie je vybraný žiaden hráč z tabuľky!");
+        int playerTableIndex = getRow(playersTbl, "Nie je vybraný žiaden hráč z tabuľky!");
         if (playerTableIndex == -1) {
             return null;
         }
