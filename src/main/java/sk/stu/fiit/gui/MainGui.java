@@ -255,7 +255,7 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         leagueOrganizerPanel.add(createLeagueButton, gridBagConstraints);
 
-        organizerButton.setText("Zverejniť výsledky");
+        organizerButton.setText("Manažuj zápasy");
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
         newMessageButton.setText("Správy");
