@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import sk.stu.fiit.data.CurrentTime;
+import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.team.Team;
 
 
@@ -69,23 +70,35 @@ public class League implements Serializable{
     public Date getEndDate() {
         return endDate;
     }
+    
+    public String getStartDateString() {
+        return InputProcessor.dateToString(startDate);
+    }
+
+    public String getEndDateString() {
+        return InputProcessor.dateToString(endDate);
+    }
 
     public int getMaxNumberTeams() {
         return maxNumberTeams;
     }
     
-    public void addTeam(Team team){
-        teamList.add(team);
+    public boolean addTeam(Team team){
+        if (teamList.size() < maxNumberTeams) {
+            teamList.add(team);
+            return true;
+        } else{
+            return false;
+        }
+    }
+    
+    public int getCurrentTeamsInLeague(){
+        return teamList.size();
     }
     
     public boolean isActive(){
         CurrentTime currentTime = CurrentTime.CurrentTime();
         return Boolean.logicalAnd(this.getStartDate().before(currentTime.getDateTime()), this.getEndDate().after(currentTime.getDateTime()));
-    }
-    
-    public boolean isPlanned(){
-        CurrentTime currentTime = CurrentTime.CurrentTime();
-        return this.getStartDate().after(currentTime.getDateTime());
     }
 
     public boolean isPast(){
