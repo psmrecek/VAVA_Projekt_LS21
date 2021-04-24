@@ -4,6 +4,7 @@ import java.io.Serializable;
 import sk.stu.fiit.team.Team;
 import java.util.ArrayList;
 import java.util.Date;
+import sk.stu.fiit.data.InputProcessor;
 
 /**
  * S��a�n� tretnutie t�mov, ktor� vy�sti v rozdelenie bodov pod�a poradia.
@@ -30,6 +31,10 @@ public class Match implements Serializable{
         this.result = "---";
     }
 
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     public String getActiveLink() {
         return activeLink;
     }
@@ -46,6 +51,10 @@ public class Match implements Serializable{
     public Date getDate() {
         return date;
     }
+    
+    public String getDateString() {
+        return InputProcessor.dateToString(date);
+    }
 
     public String getResult() {
         return result;
@@ -58,8 +67,15 @@ public class Match implements Serializable{
     public ArrayList<Team> getTeamList() {
         return teamList;
     }
+
+    public String getTeamsListString() {
+        ArrayList<String> names = new ArrayList<>();
+        
+        for (Team team : teamList) {
+            names.add(team.getName());
+        }
+        
+        return String.join(", ", names);
+    }
     
-        
-        
-        
 }//end Match

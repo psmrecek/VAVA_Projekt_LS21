@@ -121,17 +121,17 @@ public class Lists implements Serializable{
         return leagues.get(0);
     }
     
-    public ArrayList<League> getPlannedLeagues(){
+    public ArrayList<League> getPlannedLeaguesWithoutTeam(Team team){
         ArrayList<League> plannedLeagues = new ArrayList<>();
         for (League league : leagues) {
-            if (league.isPlanned()) {
+            if (league.isFuture() && !league.isTeamInLeague(team)) {
                 plannedLeagues.add(league);
             }
         }
         return plannedLeagues;
     }
     
-    public ArrayList<League> teamsLeagues(Team team){
+    public ArrayList<League> getTeamsLeagues(Team team){
         ArrayList<League> teamsLeaguesList = new ArrayList<>();
         for (League league : leagues) {
             if (league.isTeamInLeague(team)) {
@@ -174,4 +174,46 @@ public class Lists implements Serializable{
         return teams;
     }
     
+    public String changeUser(User user, String name, String surrname, String email, String nickname, boolean changedMail, boolean changedNick){
+        String errorMessage = "";
+        errorMessage += checkEmpty(name, "Meno");
+        errorMessage += checkEmpty(surrname, "Priezvisko");
+        errorMessage += checkEmpty(nickname, "Nickname");
+
+        String emailRegex = "^(.+)@(.+)$";
+        Pattern emailPattern = Pattern.compile(emailRegex);
+        if (!(emailPattern.matcher(email).matches()))
+            errorMessage += "Email musí byť v tvare 'example@mail.com' !\n";
+        
+        
+        if(changedMail){
+            for (User controlUser : users){
+                if (controlUser.getEmail().equals(email)){
+                    errorMessage += "Tento email už je obsadený!\n";
+                    break;
+                }
+            }
+        }
+        
+        if(changedNick){
+            for (User controlUser : users){
+                if (controlUser.getNickname().equals(nickname)){
+                    errorMessage += "Tento nickname je už obsadený!\n";
+                    break;
+                }
+            }
+        }
+        
+        if(errorMessage.isEmpty()){
+            user.setName(name);
+            user.setSurrname(surrname);
+            user.setEmail(email);
+            user.setNickname(nickname);
+        }
+
+
+        
+           
+        return errorMessage;
+    }
 } 
