@@ -174,4 +174,46 @@ public class Lists implements Serializable{
         return teams;
     }
     
+    public String changeUser(User user, String name, String surrname, String email, String nickname, boolean changedMail, boolean changedNick){
+        String errorMessage = "";
+        errorMessage += checkEmpty(name, "Meno");
+        errorMessage += checkEmpty(surrname, "Priezvisko");
+        errorMessage += checkEmpty(nickname, "Nickname");
+
+        String emailRegex = "^(.+)@(.+)$";
+        Pattern emailPattern = Pattern.compile(emailRegex);
+        if (!(emailPattern.matcher(email).matches()))
+            errorMessage += "Email musí byť v tvare 'example@mail.com' !\n";
+        
+        
+        if(changedMail){
+            for (User controlUser : users){
+                if (controlUser.getEmail().equals(email)){
+                    errorMessage += "Tento email už je obsadený!\n";
+                    break;
+                }
+            }
+        }
+        
+        if(changedNick){
+            for (User controlUser : users){
+                if (controlUser.getNickname().equals(nickname)){
+                    errorMessage += "Tento nickname je už obsadený!\n";
+                    break;
+                }
+            }
+        }
+        
+        if(errorMessage.isEmpty()){
+            user.setName(name);
+            user.setSurrname(surrname);
+            user.setEmail(email);
+            user.setNickname(nickname);
+        }
+
+
+        
+           
+        return errorMessage;
+    }
 } 
