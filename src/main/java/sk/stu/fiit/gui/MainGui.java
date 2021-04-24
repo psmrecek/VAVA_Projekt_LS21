@@ -156,7 +156,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel1.add(timeInfoLabel1, gridBagConstraints);
 
+        setTimeButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         setTimeButton.setText(bundle.getString("NASTAV ČAS")); // NOI18N
+        setTimeButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        setTimeButton.setPreferredSize(new java.awt.Dimension(150, 30));
         setTimeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 setTimeButtonMouseReleased(evt);
@@ -174,7 +177,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(currentTimeLabel, gridBagConstraints);
 
+        logoutButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         logoutButton.setText("Odhlásenie");
+        logoutButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        logoutButton.setPreferredSize(new java.awt.Dimension(150, 30));
         logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 logoutButtonMouseReleased(evt);
@@ -233,7 +239,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 8;
         jPanel1.add(leaguesLabel, gridBagConstraints);
 
+        leagueInfoButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         leagueInfoButton.setText("Viac informácií");
+        leagueInfoButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        leagueInfoButton.setPreferredSize(new java.awt.Dimension(150, 30));
         leagueInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 leagueInfoButtonMouseReleased(evt);
@@ -246,7 +255,10 @@ public class MainGui extends javax.swing.JFrame {
 
         leagueOrganizerPanel.setLayout(new java.awt.GridBagLayout());
 
+        createLeagueButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         createLeagueButton.setText("Vytvoriť ligu");
+        createLeagueButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        createLeagueButton.setPreferredSize(new java.awt.Dimension(150, 30));
         createLeagueButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 createLeagueButtonMouseReleased(evt);
@@ -257,7 +269,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         leagueOrganizerPanel.add(createLeagueButton, gridBagConstraints);
 
+        organizerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         organizerButton.setText("Manažuj zápasy");
+        organizerButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        organizerButton.setPreferredSize(new java.awt.Dimension(150, 30));
         organizerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 organizerButtonMouseReleased(evt);
@@ -265,7 +280,10 @@ public class MainGui extends javax.swing.JFrame {
         });
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
+        newMessageButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         newMessageButton.setText("Správy");
+        newMessageButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        newMessageButton.setPreferredSize(new java.awt.Dimension(150, 30));
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -278,7 +296,10 @@ public class MainGui extends javax.swing.JFrame {
 
         playerPanel.setLayout(new java.awt.GridBagLayout());
 
+        createTeamButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         createTeamButton.setText("Vytvoriť tím");
+        createTeamButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        createTeamButton.setPreferredSize(new java.awt.Dimension(150, 30));
         createTeamButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 createTeamButtonMouseReleased(evt);
@@ -289,13 +310,19 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         playerPanel.add(createTeamButton, gridBagConstraints);
 
+        playerMessagesButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         playerMessagesButton.setText("Správy");
+        playerMessagesButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        playerMessagesButton.setPreferredSize(new java.awt.Dimension(150, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         playerPanel.add(playerMessagesButton, gridBagConstraints);
 
+        manageTeamButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageTeamButton.setText("Spravovať tím");
+        manageTeamButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        manageTeamButton.setPreferredSize(new java.awt.Dimension(150, 30));
         manageTeamButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 manageTeamButtonMouseReleased(evt);
@@ -306,7 +333,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         playerPanel.add(manageTeamButton, gridBagConstraints);
 
+        leaveButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         leaveButton.setText("Odísť z tímu");
+        leaveButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        leaveButton.setPreferredSize(new java.awt.Dimension(150, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -322,8 +352,11 @@ public class MainGui extends javax.swing.JFrame {
 
         adminPanel.setLayout(new java.awt.GridBagLayout());
 
+        saveButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saveButton.setText("Uložiť");
         saveButton.setToolTipText("Uložiť aktuálny stav aplikácie do súboru");
+        saveButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        saveButton.setPreferredSize(new java.awt.Dimension(150, 30));
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 saveButtonMouseReleased(evt);
@@ -334,8 +367,11 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         adminPanel.add(saveButton, gridBagConstraints);
 
+        loadButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loadButton.setText("Načítať");
         loadButton.setToolTipText("Načítať posledne uložený stav aplikácie zo súboru");
+        loadButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        loadButton.setPreferredSize(new java.awt.Dimension(150, 30));
         loadButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 loadButtonMouseReleased(evt);
@@ -362,7 +398,10 @@ public class MainGui extends javax.swing.JFrame {
 
         showPanel.setLayout(new java.awt.GridBagLayout());
 
+        activeButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         activeButton.setText("Aktívne");
+        activeButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        activeButton.setPreferredSize(new java.awt.Dimension(150, 30));
         activeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 activeButtonMouseReleased(evt);
@@ -373,7 +412,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         showPanel.add(activeButton, gridBagConstraints);
 
+        historyButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         historyButton.setText("Odohrané");
+        historyButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        historyButton.setPreferredSize(new java.awt.Dimension(150, 30));
         historyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 historyButtonMouseReleased(evt);
@@ -391,7 +433,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         showPanel.add(jLabel2, gridBagConstraints);
 
+        futureButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         futureButton.setText("Naplánované");
+        futureButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        futureButton.setPreferredSize(new java.awt.Dimension(150, 30));
         futureButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 futureButtonMouseReleased(evt);
@@ -409,7 +454,10 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(showPanel, gridBagConstraints);
 
+        profilButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         profilButton.setText("Profil");
+        profilButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        profilButton.setPreferredSize(new java.awt.Dimension(150, 30));
         profilButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 profilButtonMouseReleased(evt);
@@ -426,11 +474,11 @@ public class MainGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
         );
 
         pack();
