@@ -131,6 +131,17 @@ public class Lists implements Serializable{
         return plannedLeagues;
     }
     
+    public ArrayList<League> teamsLeagues(Team team){
+        ArrayList<League> teamsLeaguesList = new ArrayList<>();
+        for (League league : leagues) {
+            if (league.isTeamInLeague(team)) {
+                teamsLeaguesList.add(league);
+            }
+        }
+        
+        return teamsLeaguesList;
+    }
+    
     public void removeTeam(Team team) {
         teams.remove(team);
     }
