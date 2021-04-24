@@ -1,5 +1,6 @@
 package sk.stu.fiit.user;
 
+import java.io.Serializable;
 import java.util.Date;
 import sk.stu.fiit.team.Team;
 
@@ -11,7 +12,8 @@ import sk.stu.fiit.team.Team;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class Player extends User {
+public class Player extends User implements Serializable{
+    private static final long serialVersionUID = 0;
     private boolean Admin;
     private Team team;
     

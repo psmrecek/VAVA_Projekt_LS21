@@ -1,11 +1,15 @@
 package sk.stu.fiit.league;
+
+import java.io.Serializable;
+
 /**
  * @author PeterSmrecek
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class Prize {
+public class Prize implements Serializable{
         
+    private static final long serialVersionUID = 0;
     private String name;
     private String description;
     private int position;

@@ -5,13 +5,15 @@
  */
 package sk.stu.fiit.user;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Abstract class for storing information about all users.
  * @author schon
  */
-public abstract class User {
+public abstract class User implements Serializable{
+    private static final long serialVersionUID = 0;
     private final String email, name, surrname, nickname, password;
     private final Date bornAt;
 

@@ -1,5 +1,6 @@
 package sk.stu.fiit.league;
 
+import java.io.Serializable;
 import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +14,9 @@ import sk.stu.fiit.team.Team;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class League {
-        
+public class League implements Serializable{
+
+    private static final long serialVersionUID = 0;
     private String name;
     private String game;
     private String genre;

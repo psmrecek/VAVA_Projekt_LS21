@@ -28,7 +28,7 @@ private static final long serialVersionUID = 0;
     public void save(Lists lists, CurrentTime currentTime) throws IOException, FileNotFoundException{
         this.lists = lists;
         this.currentTime = currentTime;
-        try (ObjectOutputStream ser = new ObjectOutputStream(new FileOutputStream("bookingsave.out"))) {
+        try (ObjectOutputStream ser = new ObjectOutputStream(new FileOutputStream("leaguesaves.out"))) {
             ser.writeObject(this);
             logger.info("Serialized objects");
             ser.close();
@@ -37,7 +37,7 @@ private static final long serialVersionUID = 0;
     
     public void load(MainGui mainGui) throws FileNotFoundException, IOException, ClassNotFoundException{
         Save lastSave;
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingsave.out"))) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("leaguesaves.out"))) {
             lastSave = (Save) in.readObject();
             logger.info("Loading was succesful");
             in.close();

@@ -5,16 +5,10 @@
  */
 package sk.stu.fiit.data;
 
-import static java.awt.Frame.NORMAL;
 import java.awt.image.BufferedImage;
-import static java.awt.image.ImageObserver.PROPERTIES;
 import java.io.File;
-import java.io.FileInputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import sk.stu.fiit.league.League;
