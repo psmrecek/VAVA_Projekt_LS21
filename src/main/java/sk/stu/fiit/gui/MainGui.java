@@ -19,6 +19,7 @@ import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.Save;
+import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
 
@@ -141,11 +142,10 @@ public class MainGui extends javax.swing.JFrame {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
         setTitle(bundle.getString("Esport ligy")); // NOI18N
         setMinimumSize(new java.awt.Dimension(937, 590));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
+        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
 
         timeInfoLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -181,8 +181,10 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 18;
-        gridBagConstraints.gridy = 18;
+        gridBagConstraints.gridx = 16;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(logoutButton, gridBagConstraints);
 
         leaguesScrollPane.setMaximumSize(new java.awt.Dimension(200, 70));
@@ -216,7 +218,7 @@ public class MainGui extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 24;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 19;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 200;
@@ -228,7 +230,7 @@ public class MainGui extends javax.swing.JFrame {
         leaguesLabel.setText("Aktívne ligy");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 22;
+        gridBagConstraints.gridy = 8;
         jPanel1.add(leaguesLabel, gridBagConstraints);
 
         leagueInfoButton.setText("Viac informácií");
@@ -239,7 +241,7 @@ public class MainGui extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 26;
+        gridBagConstraints.gridy = 12;
         jPanel1.add(leagueInfoButton, gridBagConstraints);
 
         leagueOrganizerPanel.setLayout(new java.awt.GridBagLayout());
@@ -256,16 +258,21 @@ public class MainGui extends javax.swing.JFrame {
         leagueOrganizerPanel.add(createLeagueButton, gridBagConstraints);
 
         organizerButton.setText("Manažuj zápasy");
+        organizerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                organizerButtonMouseReleased(evt);
+            }
+        });
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
         newMessageButton.setText("Správy");
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(leagueOrganizerPanel, gridBagConstraints);
 
@@ -306,10 +313,10 @@ public class MainGui extends javax.swing.JFrame {
         playerPanel.add(leaveButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(playerPanel, gridBagConstraints);
 
@@ -347,10 +354,10 @@ public class MainGui extends javax.swing.JFrame {
         adminPanel.add(jLabel1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
-        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
         jPanel1.add(adminPanel, gridBagConstraints);
 
         showPanel.setLayout(new java.awt.GridBagLayout());
@@ -396,8 +403,8 @@ public class MainGui extends javax.swing.JFrame {
         showPanel.add(futureButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
-        gridBagConstraints.gridy = 26;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(showPanel, gridBagConstraints);
@@ -410,17 +417,21 @@ public class MainGui extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 16;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(profilButton, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 13;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -610,6 +621,10 @@ public class MainGui extends javax.swing.JFrame {
     private void profilButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilButtonMouseReleased
         profileChanges();
     }//GEN-LAST:event_profilButtonMouseReleased
+
+    private void organizerButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_organizerButtonMouseReleased
+        new MatchWindow(this, lists, (LeagueOrganizer) loggedUser).setVisible(true);
+    }//GEN-LAST:event_organizerButtonMouseReleased
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
