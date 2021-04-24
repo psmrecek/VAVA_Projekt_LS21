@@ -146,4 +146,32 @@ public class Lists implements Serializable{
         teams.remove(team);
     }
     
+    public League getPastLeague(int selectedRow){
+        int current = 0;
+        for (League league : leagues){
+            if(league.isPast()){
+                if(current == selectedRow)
+                    return league;
+                current += 1;
+            }
+        }
+        return leagues.get(0);
+    }
+    
+    public League getFutureLeague(int selectedRow){
+        int current = 0;
+        for (League league : leagues){
+            if(league.isFuture()){
+                if(current == selectedRow)
+                    return league;
+                current += 1;
+            }
+        }
+        return leagues.get(0);
+    }
+
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
+    
 } 

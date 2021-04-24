@@ -97,7 +97,7 @@ public class MatchInfoWindow extends javax.swing.JFrame {
 
         timeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeInfoLabel.setText("Dátum a čas konania");
+        timeInfoLabel.setText("Čas a dátum konania");
         jPanel1.add(timeInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 180, 250, -1));
         timeInfoLabel.getAccessibleContext().setAccessibleName("");
 
