@@ -31,6 +31,10 @@ public class Match implements Serializable{
         this.result = "---";
     }
 
+    public void setResult(String result) {
+        this.result = result;
+    }
+
     public String getActiveLink() {
         return activeLink;
     }
