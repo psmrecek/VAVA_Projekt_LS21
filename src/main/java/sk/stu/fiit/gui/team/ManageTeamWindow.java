@@ -45,6 +45,8 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private Lists lists;
     private List<JTextField> tfInfoList;
     private ImageIcon icon;
+    private ArrayList<League> plannedLeagues;
+    private ArrayList<League> teamsLeaguesList;
     
     public ManageTeamWindow(Player admin, Lists lists, MainGui mainGui) {
         initComponents();
@@ -92,8 +94,8 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         removeAdminBtn = new javax.swing.JButton();
         removePlayerBtn = new javax.swing.JButton();
         deleteTeamBtn = new javax.swing.JButton();
-        newPlayersBtn = new javax.swing.JButton();
         leagueBtn = new javax.swing.JButton();
+        newPlayersBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
         mottoTf = new javax.swing.JTextField();
@@ -107,6 +109,11 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         updateTeamBtn = new javax.swing.JButton();
         playersScroll = new javax.swing.JScrollPane();
         playersTbl = new javax.swing.JTable();
+        leaguesPnl = new javax.swing.JPanel();
+        plannedScroll = new javax.swing.JScrollPane();
+        plannedTbl = new javax.swing.JTable();
+        teamLeaguesScroll = new javax.swing.JScrollPane();
+        teamLeaguesTbl = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -126,7 +133,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         setTitle("Manažovanie tímu");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
@@ -156,6 +163,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(imagePnl, gridBagConstraints);
@@ -202,15 +210,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         });
         controlsPnl.add(deleteTeamBtn);
 
-        newPlayersBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        newPlayersBtn.setText("Nábor hráčov");
-        newPlayersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                newPlayersBtnMouseReleased(evt);
-            }
-        });
-        controlsPnl.add(newPlayersBtn);
-
         leagueBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         leagueBtn.setText("Prihlásiť do ligy");
         leagueBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -220,10 +219,19 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         });
         controlsPnl.add(leagueBtn);
 
+        newPlayersBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        newPlayersBtn.setText("Nábor hráčov");
+        newPlayersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                newPlayersBtnMouseReleased(evt);
+            }
+        });
+        controlsPnl.add(newPlayersBtn);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridy = 26;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         mainPnl.add(controlsPnl, gridBagConstraints);
 
@@ -381,11 +389,87 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(playersScroll, gridBagConstraints);
+
+        leaguesPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        java.awt.GridBagLayout leaguesPnlLayout = new java.awt.GridBagLayout();
+        leaguesPnlLayout.columnWidths = new int[] {0, 5, 0};
+        leaguesPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0};
+        leaguesPnl.setLayout(leaguesPnlLayout);
+
+        plannedScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Naplánované ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        plannedScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        plannedScroll.setPreferredSize(new java.awt.Dimension(520, 200));
+
+        plannedTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        plannedTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Názov", "Hra", "Od", "Do", "Max. tímov", "Akt. tímov"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        plannedTbl.getTableHeader().setReorderingAllowed(false);
+        plannedScroll.setViewportView(plannedTbl);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        leaguesPnl.add(plannedScroll, gridBagConstraints);
+
+        teamLeaguesScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Účasť tímu v ligách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        teamLeaguesScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        teamLeaguesScroll.setPreferredSize(new java.awt.Dimension(520, 200));
+
+        teamLeaguesTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        teamLeaguesTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Názov", "Hra", "Od", "Do", "Max. tímov", "Akt. tímov"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        teamLeaguesTbl.getTableHeader().setReorderingAllowed(false);
+        teamLeaguesScroll.setViewportView(teamLeaguesTbl);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        leaguesPnl.add(teamLeaguesScroll, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 20;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        mainPnl.add(leaguesPnl, gridBagConstraints);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Súbor");
@@ -453,12 +537,12 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1203, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1156, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 954, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -540,6 +624,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l2Lbl;
     private javax.swing.JLabel l4Lbl1;
     private javax.swing.JButton leagueBtn;
+    private javax.swing.JPanel leaguesPnl;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField mottoTf;
@@ -547,12 +632,16 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JButton newPlayersBtn;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JScrollPane plannedScroll;
+    private javax.swing.JTable plannedTbl;
     private javax.swing.JScrollPane playersScroll;
     private javax.swing.JTable playersTbl;
     private javax.swing.JButton removeAdminBtn;
     private javax.swing.JButton removePlayerBtn;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JScrollPane teamLeaguesScroll;
+    private javax.swing.JTable teamLeaguesTbl;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JButton updateTeamBtn;
     // End of variables declaration//GEN-END:variables
@@ -641,6 +730,12 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         imageLbl.setIcon(icon);
         
         populatePlayersTbl();
+        
+        plannedLeagues = lists.getPlannedLeaguesWithoutTeam(team);
+        teamsLeaguesList = lists.getTeamsLeagues(team);
+        
+        populateTableLeagues(plannedLeagues, plannedTbl);
+        populateTableLeagues(teamsLeaguesList, teamLeaguesTbl);
     }
     
     private int getRow(JTable table, String message) {
@@ -728,9 +823,30 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         int option = JOptionPane.showConfirmDialog(rootPane, "Naozaj si prajete rozpustiť tím?", "Potvrdenie rozpustenia tímu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         
         if (option == JOptionPane.OK_OPTION) {
-            System.out.println("Teraz");
+            team.deleteTeam(lists);
+            mainGui.checkPlayerButtons();
+            this.dispose();
         }
         
+    }
+    
+    private void populateTableLeagues(ArrayList<League> leagueList, JTable table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        deleteRows(model);
+
+        int numberOfColumns = table.getColumnCount();
+        Object[] rowData = new Object[numberOfColumns];
+        
+        for (League league : leagueList) {
+            rowData[0] = league.getName();
+            rowData[1] = league.getGame();
+            rowData[2] = league.getStartDateString();
+            rowData[3] = league.getEndDateString();
+            rowData[4] = league.getMaxNumberTeams();
+            rowData[5] = league.getCurrentTeamsInLeague();
+            
+            model.addRow(rowData);
+        }
     }
 
     private void newPlayersAction() {
@@ -738,6 +854,16 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     }
 
     private void leagueAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int leagueTableIndex = getRow(plannedTbl, "Nie je vybraná žiadna naplánovaná liga z tabuľky!");
+        if (leagueTableIndex == -1) {
+            return;
+        }
+        
+        League league = plannedLeagues.get(leagueTableIndex);
+        if (!league.addTeam(team)) {
+            errorMessage("Do zvlenej ligy nie je možné prihlásiť tím.\nLiga je plná!");
+        }
+        
+        updateAll();
     }
 }
