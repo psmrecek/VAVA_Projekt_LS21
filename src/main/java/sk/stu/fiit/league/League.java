@@ -83,6 +83,16 @@ public class League implements Serializable{
         return Boolean.logicalAnd(this.getStartDate().before(currentTime.getDateTime()), this.getEndDate().after(currentTime.getDateTime()));
     }
 
+    public boolean isPast(){
+        CurrentTime currentTime = CurrentTime.CurrentTime();
+        return this.getEndDate().before(currentTime.getDateTime());
+    }
+    
+    public boolean isFuture(){
+         CurrentTime currentTime = CurrentTime.CurrentTime();
+         return this.getStartDate().after(currentTime.getDateTime());
+    }
+    
     public String getGenre() {
         return genre;
     }
@@ -117,6 +127,10 @@ public class League implements Serializable{
 
     public ArrayList<Match> getMatchList() {
         return matchList;
+    }
+    
+    public void addMatch(Match match){
+        this.matchList.add(match);
     }
 
         
