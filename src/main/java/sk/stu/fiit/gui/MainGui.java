@@ -21,6 +21,7 @@ import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.Save;
 import sk.stu.fiit.gui.user.ProfileWindow;
+import sk.stu.fiit.gui.user.message.MessageWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
 
@@ -261,6 +262,11 @@ public class MainGui extends javax.swing.JFrame {
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
         newMessageButton.setText("Správy");
+        newMessageButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                newMessageButtonMouseReleased(evt);
+            }
+        });
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -285,6 +291,11 @@ public class MainGui extends javax.swing.JFrame {
         playerPanel.add(createTeamButton, gridBagConstraints);
 
         playerMessagesButton.setText("Správy");
+        playerMessagesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                playerMessagesButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -617,6 +628,18 @@ public class MainGui extends javax.swing.JFrame {
     private void profilButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilButtonMouseReleased
         profileChanges();
     }//GEN-LAST:event_profilButtonMouseReleased
+
+    private void messages(){
+        MessageWindow messageWindow = new MessageWindow(this.loggedUser, this.lists);
+    }
+    
+    private void playerMessagesButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerMessagesButtonMouseReleased
+        messages();
+    }//GEN-LAST:event_playerMessagesButtonMouseReleased
+
+    private void newMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newMessageButtonMouseReleased
+        messages();
+    }//GEN-LAST:event_newMessageButtonMouseReleased
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

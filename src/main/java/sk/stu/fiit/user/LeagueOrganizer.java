@@ -23,5 +23,10 @@ public class LeagueOrganizer extends User implements Serializable{
     public void addLeague(League league){
         leagueList.add(league);
     }
-	
+
+
+    public ArrayList<League> getLeagueList() {
+        return leagueList;
+    }
+    
 }
