@@ -125,7 +125,6 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         teamsInMatchTf = new javax.swing.JTextField();
         ageRestrictionTf = new javax.swing.JTextField();
         l7Lbl = new javax.swing.JLabel();
-        matchesPnl = new javax.swing.JPanel();
         matchesScroll = new javax.swing.JScrollPane();
         matchesTable = new javax.swing.JTable();
         descriptionPnl = new javax.swing.JPanel();
@@ -137,8 +136,8 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         setTitle("Informácie o lige");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
         tableScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Výhry", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
@@ -228,7 +227,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 30;
+        gridBagConstraints.gridy = 28;
         gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(controlsPnl, gridBagConstraints);
@@ -399,6 +398,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
 
+
         matchesPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zápasy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         java.awt.GridBagLayout prizesPnlLayout = new java.awt.GridBagLayout();
         prizesPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -438,20 +438,11 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 13;
-        gridBagConstraints.gridheight = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        matchesPnl.add(matchesScroll, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        mainPnl.add(matchesPnl, gridBagConstraints);
-        matchesPnl.getAccessibleContext().setAccessibleName("");
+        mainPnl.add(matchesScroll, gridBagConstraints);
 
         descriptionPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Popis ligy", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         descriptionPnl.setMinimumSize(new java.awt.Dimension(230, 77));
@@ -561,7 +552,6 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
     private javax.swing.JButton linkButton;
     private javax.swing.JPanel mainPnl;
     private javax.swing.JButton matchInfoLeagueBtn;
-    private javax.swing.JPanel matchesPnl;
     private javax.swing.JScrollPane matchesScroll;
     private javax.swing.JTable matchesTable;
     private javax.swing.JTextField maxTeamsTf;

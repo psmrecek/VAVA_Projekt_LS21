@@ -4,6 +4,7 @@ import java.io.Serializable;
 import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import sk.stu.fiit.data.Lists;
 
 
 /**
@@ -19,14 +20,13 @@ public class Team implements Serializable{
     private String description;
     private String motto;
     private ImageIcon icon;
-    private ArrayList<Player> adminList = new ArrayList<>();
     private ArrayList<Player> playersList = new ArrayList<>();
 
     public Team(String name, String description, String motto, Player player, ImageIcon icon) {
         this.name = name;
         this.description = description;
         this.motto = motto;
-        this.adminList.add(player);
+        this.playersList.add(player);
         this.icon = icon;
         addToPlayer(player);
     }
@@ -60,14 +60,6 @@ public class Team implements Serializable{
         this.motto = motto;
     }
 
-    public ArrayList<Player> getAdminList() {
-        return adminList;
-    }
-
-    public void setAdminList(ArrayList<Player> adminList) {
-        this.adminList = adminList;
-    }
-
     public ArrayList<Player> getPlayersList() {
         return playersList;
     }
@@ -87,5 +79,37 @@ public class Team implements Serializable{
     public void addPlayer(Player player){
         playersList.add(player);
     }
+    
+    public ArrayList<Player> getListAdmins(){
+        ArrayList<Player> adminList = new ArrayList<>();
         
+        for (Player player : playersList) {
+            if (player.isAdmin()) {
+                adminList.add(player);
+            }
+        }
+        
+        return adminList;
+    }
+        
+    public boolean removePlayer(Player player){
+        if (player.isAdmin()) {
+            return false;
+        } else{
+            playersList.remove(player);
+            player.setTeam(null);
+            player.setAdmin(false);
+            return true;
+        }
+    }
+    
+    public void deleteTeam(Lists lists){
+        for (Player player : playersList) {
+            player.setTeam(null);
+            player.setAdmin(false);
+        }
+        playersList.clear();
+        
+        lists.removeTeam(this);
+    }
 }

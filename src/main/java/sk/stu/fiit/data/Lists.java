@@ -120,6 +120,10 @@ public class Lists implements Serializable{
         }
         return leagues.get(0);
     }
+
+    public void removeTeam(Team team) {
+        teams.remove(team);
+    }
     
     public League getPastLeague(int selectedRow){
         int current = 0;
