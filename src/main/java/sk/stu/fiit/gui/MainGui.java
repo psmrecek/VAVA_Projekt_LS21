@@ -72,9 +72,7 @@ public class MainGui extends javax.swing.JFrame {
 
         int numberOfColumns = activeLeaguesTable.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
-
-        System.out.println("??");
-        System.out.println(lists.getLeagues().size());
+        
         for (League league : lists.getLeagues()) {
             if(Boolean.logicalAnd(league.getStartDate().before(currentTime.getDateTime()), league.getEndDate().after(currentTime.getDateTime()))){
                 rowData[0] = league.getName();
@@ -309,7 +307,6 @@ public class MainGui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public void setCurrentTime(CurrentTime currentTime) {
         this.currentTime = currentTime;
         currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
@@ -378,7 +375,6 @@ public class MainGui extends javax.swing.JFrame {
             }
     }
     
-
     private void loginVisibility(){
             leagueOrganizerPanel.setVisible(false);
             setTimeButton.setVisible(false);
@@ -401,7 +397,6 @@ public class MainGui extends javax.swing.JFrame {
             
         }
     }
-    
    
     private void logout(){
         this.loggedUser = null;
@@ -426,7 +421,6 @@ public class MainGui extends javax.swing.JFrame {
         // TODO add your handling code here:
         new ManageTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
