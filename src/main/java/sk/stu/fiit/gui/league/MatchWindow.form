@@ -425,7 +425,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
                     <Column editable="false" title="Meno t&#xed;mu" type="java.lang.Object"/>
-                    <Column editable="false" title="V&#xfd;ber" type="java.lang.Boolean"/>
+                    <Column editable="true" title="V&#xfd;ber" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
