@@ -59,19 +59,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         this.tfInfoList = Arrays.asList(nameTf, mottoTf);
         
         updateAll();
-        
-        // Hotovo
-        // Zmenit motto
-        // Zmenit nazov
-        // Zmenit logo
-        
-        // Urobit
-        // Posielat pozvanky hracom
-        // Vyhadzovat hracov
-        // Urobit z hraca administratora
-        // Rozpustit tim
-        // Poslat ziadost do ligy
-
     }
 
     /**
