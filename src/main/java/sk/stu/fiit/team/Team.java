@@ -81,5 +81,9 @@ public class Team {
     public void setIcon(ImageIcon icon) {
         this.icon = icon;
     }
+    
+    public void addPlayer(Player player){
+        playersList.add(player);
+    }
         
 }

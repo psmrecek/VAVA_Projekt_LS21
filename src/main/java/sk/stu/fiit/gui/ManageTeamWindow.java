@@ -7,16 +7,20 @@ package sk.stu.fiit.gui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
@@ -83,7 +87,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         imagePnl = new javax.swing.JPanel();
         imageLbl = new javax.swing.JLabel();
         controlsPnl = new javax.swing.JPanel();
-        createLeagueBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
         mottoTf = new javax.swing.JTextField();
@@ -94,6 +97,9 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         l4Lbl1 = new javax.swing.JLabel();
         enableEdit = new javax.swing.JCheckBox();
         addIconBtn = new javax.swing.JButton();
+        updateTeamBtn = new javax.swing.JButton();
+        tableScroll = new javax.swing.JScrollPane();
+        tableTbl = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -110,19 +116,19 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Spravuj tím");
+        setTitle("Manažovanie tímu");
 
         java.awt.GridBagLayout mainPnlLayout = new java.awt.GridBagLayout();
-        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        mainPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         mainPnl.setLayout(mainPnlLayout);
 
         titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        titleLbl.setText("Vytvorenie tímu");
+        titleLbl.setText("Manažovanie tímu");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.ipady = 20;
         mainPnl.add(titleLbl, gridBagConstraints);
@@ -152,16 +158,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         controlsPnl.setMinimumSize(new java.awt.Dimension(22, 80));
         controlsPnl.setPreferredSize(new java.awt.Dimension(22, 80));
         controlsPnl.setLayout(new javax.swing.BoxLayout(controlsPnl, javax.swing.BoxLayout.LINE_AXIS));
-
-        createLeagueBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        createLeagueBtn.setText("Uložiť úpravy tímu");
-        createLeagueBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                createLeagueBtnMouseReleased(evt);
-            }
-        });
-        controlsPnl.add(createLeagueBtn);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
@@ -263,6 +259,19 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         infoPnl.add(addIconBtn, gridBagConstraints);
 
+        updateTeamBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        updateTeamBtn.setText("Uložiť úpravy tímu");
+        updateTeamBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                updateTeamBtnMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        infoPnl.add(updateTeamBtn, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -270,6 +279,40 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 17;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
+
+        tableScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hráči", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        tableScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableScroll.setPreferredSize(new java.awt.Dimension(350, 428));
+
+        tableTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Číslo", "Meno"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableTbl.getTableHeader().setReorderingAllowed(false);
+        tableScroll.setViewportView(tableTbl);
+        if (tableTbl.getColumnModel().getColumnCount() > 0) {
+            tableTbl.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        mainPnl.add(tableScroll, gridBagConstraints);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Súbor");
@@ -337,11 +380,13 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1203, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,10 +401,10 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         addIconAction();
     }//GEN-LAST:event_addIconBtnMouseReleased
 
-    private void createLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createLeagueBtnMouseReleased
+    private void updateTeamBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateTeamBtnMouseReleased
         // TODO add your handling code here:
         editTeamAction();
-    }//GEN-LAST:event_createLeagueBtnMouseReleased
+    }//GEN-LAST:event_updateTeamBtnMouseReleased
 
     private void enableEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableEditActionPerformed
         // TODO add your handling code here:
@@ -374,7 +419,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
     private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JButton createLeagueBtn;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JScrollPane descriptionSp;
@@ -398,7 +442,10 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JTable tableTbl;
     private javax.swing.JLabel titleLbl;
+    private javax.swing.JButton updateTeamBtn;
     // End of variables declaration//GEN-END:variables
 
     private void addIconAction() {
@@ -470,6 +517,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         
         descriptionTa.setEditable(bool);
         addIconBtn.setVisible(bool);
+        updateTeamBtn.setVisible(bool);
     }
 
     private void updateAll() {
@@ -482,5 +530,42 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         descriptionTa.setText(team.getDescription());
         icon = team.getIcon();
         imageLbl.setIcon(icon);
+        
+        populatePlayersTbl();
+    }
+    
+    private int getRow(JTable table, String message) {
+        int index = table.getSelectedRow();
+
+        if (InputProcessor.isPositiveInt(index)) {
+            return index;
+        } else {
+            errorMessage(message);
+        }
+        return -1;
+    }
+
+    private void deleteRows(DefaultTableModel model) {
+        if (model.getRowCount() > 0) {
+            for (int i = model.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+    }
+
+    private void populatePlayersTbl() {
+        DefaultTableModel model = (DefaultTableModel) tableTbl.getModel();
+        deleteRows(model);
+
+        int numberOfColumns = tableTbl.getColumnCount();
+        Object[] rowData = new Object[numberOfColumns];
+        ArrayList<Player> list = team.getPlayersList();
+        
+        for (int i = 0; i < list.size(); i++) {
+
+            rowData[0] = i + 1;
+            rowData[1] = list.get(i).getNickname();
+            model.addRow(rowData);
+        }
     }
 }
