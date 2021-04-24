@@ -1,5 +1,6 @@
 package sk.stu.fiit.team;
 
+import java.io.Serializable;
 import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -11,8 +12,9 @@ import javax.swing.ImageIcon;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class Team {
+public class Team implements Serializable{
 
+    private static final long serialVersionUID = 0;
     private String name;
     private String description;
     private String motto;
@@ -80,6 +82,10 @@ public class Team {
 
     public void setIcon(ImageIcon icon) {
         this.icon = icon;
+    }
+    
+    public void addPlayer(Player player){
+        playersList.add(player);
     }
         
 }

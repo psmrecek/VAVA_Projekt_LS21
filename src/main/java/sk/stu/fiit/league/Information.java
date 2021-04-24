@@ -1,7 +1,6 @@
 package sk.stu.fiit.league;
 
-import sk.stu.fiit.league.Match;
-import sk.stu.fiit.league.League;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -11,8 +10,9 @@ import java.util.ArrayList;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class Information {
+public class Information implements Serializable{
 
+        private static final long serialVersionUID = 0;
 	private ArrayList<League> leagueList;
 	private ArrayList<Match> matchList;
 

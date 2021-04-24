@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.data.TestInputs;
 import sk.stu.fiit.user.*;
 
 
@@ -18,7 +19,7 @@ import sk.stu.fiit.user.*;
  */
 public class LoginWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(LoginWindow.class.getName());
-    private final Lists lists = new Lists();
+    private Lists lists = new Lists();
     
     /**
      * Creates new form MainGui
@@ -30,8 +31,7 @@ public class LoginWindow extends javax.swing.JFrame {
     
     private void initApplication(){
         BasicConfigurator.configure(); 
-        lists.addUser("Organizátor ligy", "a@a.a", "a", "a", "a", "aaaaaaaA1", "aaaaaaaA1", null);
-        lists.addUser("Hráč", "p@p.p", "p", "p", "p", "pppppppP1", "pppppppP1", null);
+        lists = TestInputs.createInputs();
         
     }
     /**

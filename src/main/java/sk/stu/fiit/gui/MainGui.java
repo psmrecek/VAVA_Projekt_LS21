@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.gui;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.data.Save;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.user.*;
 
@@ -23,7 +25,7 @@ import sk.stu.fiit.user.*;
  */
 public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
-    private final Lists lists;
+    private Lists lists;
     private CurrentTime currentTime = CurrentTime.CurrentTime();
     private User loggedUser = null;
     private final LoginWindow loginWindow;
@@ -58,6 +60,11 @@ public class MainGui extends javax.swing.JFrame {
         setActiveTable();
     }
     
+    public void setLists(Lists lists) {
+        this.lists = lists;
+        checkStatus();
+    }
+    
     private void deleteRows(DefaultTableModel model) {
         if (model.getRowCount() > 0) {
             for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -72,9 +79,7 @@ public class MainGui extends javax.swing.JFrame {
 
         int numberOfColumns = activeLeaguesTable.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
-
-        System.out.println("??");
-        System.out.println(lists.getLeagues().size());
+        
         for (League league : lists.getLeagues()) {
             if(Boolean.logicalAnd(league.getStartDate().before(currentTime.getDateTime()), league.getEndDate().after(currentTime.getDateTime()))){
                 rowData[0] = league.getName();
@@ -116,6 +121,10 @@ public class MainGui extends javax.swing.JFrame {
         playerMessagesButton = new javax.swing.JButton();
         manageTeamButton = new javax.swing.JButton();
         leaveButton = new javax.swing.JButton();
+        adminPanel = new javax.swing.JPanel();
+        saveButton = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -298,6 +307,46 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(playerPanel, gridBagConstraints);
 
+        adminPanel.setLayout(new java.awt.GridBagLayout());
+
+        saveButton.setText("Uložiť");
+        saveButton.setToolTipText("Uložiť aktuálny stav aplikácie do súboru");
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                saveButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        adminPanel.add(saveButton, gridBagConstraints);
+
+        loadButton.setText("Načítať");
+        loadButton.setToolTipText("Načítať posledne uložený stav aplikácie zo súboru");
+        loadButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                loadButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        adminPanel.add(loadButton, gridBagConstraints);
+
+        jLabel1.setText("Možnosti aplikácie");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        adminPanel.add(jLabel1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridheight = 7;
+        jPanel1.add(adminPanel, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -309,7 +358,6 @@ public class MainGui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public void setCurrentTime(CurrentTime currentTime) {
         this.currentTime = currentTime;
         currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime())); //NOI18N
@@ -378,14 +426,15 @@ public class MainGui extends javax.swing.JFrame {
             }
     }
     
-
     private void loginVisibility(){
+            adminPanel.setVisible(false);
             leagueOrganizerPanel.setVisible(false);
             setTimeButton.setVisible(false);
             playerPanel.setVisible(false);
             
         if (this.loggedUser == null){  // Admin
             setTimeButton.setVisible(true);
+            adminPanel.setVisible(true);
             return;
         }
         
@@ -401,7 +450,6 @@ public class MainGui extends javax.swing.JFrame {
             
         }
     }
-    
    
     private void logout(){
         this.loggedUser = null;
@@ -427,25 +475,44 @@ public class MainGui extends javax.swing.JFrame {
         new ManageTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
 
+    private void loadButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadButtonMouseReleased
+        try {
+            (new Save()).load(this);
+        } catch (IOException | ClassNotFoundException ex) {
+            this.logger.error("Problem with loading from file! Error "+ex);
+        }
+    }//GEN-LAST:event_loadButtonMouseReleased
+
+    private void saveButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseReleased
+        try {
+            (new Save()).save(lists, currentTime);
+        } catch (IOException ex) {
+            this.logger.error("Problem when trying to serialize! Error "+ex);
+        }
+    }//GEN-LAST:event_saveButtonMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel activeLeaguesLabel;
     private javax.swing.JTable activeLeaguesTable;
+    private javax.swing.JPanel adminPanel;
     private javax.swing.JButton createLeagueButton;
     private javax.swing.JButton createTeamButton;
     private javax.swing.JLabel currentTimeLabel;
     private javax.swing.JButton historyButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton leagueInfoButton;
     private javax.swing.JPanel leagueOrganizerPanel;
     private javax.swing.JScrollPane leaguesScrollPane;
     private javax.swing.JButton leaveButton;
+    private javax.swing.JButton loadButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton manageTeamButton;
     private javax.swing.JButton newMessageButton;
     private javax.swing.JButton organizerButton;
     private javax.swing.JButton playerMessagesButton;
     private javax.swing.JPanel playerPanel;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables

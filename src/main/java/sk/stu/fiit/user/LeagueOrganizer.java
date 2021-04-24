@@ -1,5 +1,6 @@
 package sk.stu.fiit.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import sk.stu.fiit.league.League;
@@ -12,9 +13,8 @@ import sk.stu.fiit.team.TeamApplicationForLeague;
  * @version 1.0
  * @created 19-apr-2021 18:21:18
  */
-public class LeagueOrganizer extends User {
-
-    private String nickname;
+public class LeagueOrganizer extends User implements Serializable{
+    private static final long serialVersionUID = 0;
     private ArrayList<League> leagueList = new ArrayList<>();
     private ArrayList<TeamApplicationForLeague> teamApplicationList = new ArrayList<>();
 
