@@ -70,6 +70,7 @@ public class MainGui extends javax.swing.JFrame {
     
     public void setLists(Lists lists) {
         this.lists = lists;
+        this.loginWindow.setLists(this.lists);
         checkStatus();
     }
     

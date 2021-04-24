@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.apache.log4j.Logger;
+import sk.stu.fiit.gui.LoginWindow;
 import sk.stu.fiit.gui.MainGui;
 
 /**
