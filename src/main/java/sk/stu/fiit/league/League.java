@@ -154,5 +154,15 @@ public class League implements Serializable{
     public void addMatch(Match match){
         this.matchList.add(match);
     }
+    
+    public boolean isBetween(Date date){
+        if (date.after(startDate) && date.before(endDate)){
+            return true;
+        } else if (date.equals(startDate) || date.equals(endDate)) {
+            return true;
+        }
+        
+        return false;
+    }
         
 }
