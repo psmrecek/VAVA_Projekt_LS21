@@ -135,6 +135,7 @@ public class MainGui extends javax.swing.JFrame {
         historyButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         futureButton = new javax.swing.JButton();
+        profilButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -143,7 +144,7 @@ public class MainGui extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
+        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
         jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
 
@@ -180,9 +181,8 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 18;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 9;
         jPanel1.add(logoutButton, gridBagConstraints);
 
         leaguesScrollPane.setMaximumSize(new java.awt.Dimension(200, 70));
@@ -255,7 +255,7 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         leagueOrganizerPanel.add(createLeagueButton, gridBagConstraints);
 
-        organizerButton.setText("Zverejniť výsledky");
+        organizerButton.setText("Manažuj zápasy");
         leagueOrganizerPanel.add(organizerButton, new java.awt.GridBagConstraints());
 
         newMessageButton.setText("Správy");
@@ -401,6 +401,18 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(showPanel, gridBagConstraints);
+
+        profilButton.setText("Profil");
+        profilButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                profilButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 16;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 3;
+        jPanel1.add(profilButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -591,6 +603,14 @@ public class MainGui extends javax.swing.JFrame {
         setTable();
     }//GEN-LAST:event_historyButtonMouseReleased
 
+    private void profileChanges(){
+        
+    }
+    
+    private void profilButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilButtonMouseReleased
+        profileChanges();
+    }//GEN-LAST:event_profilButtonMouseReleased
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton activeButton;
@@ -616,6 +636,7 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JButton organizerButton;
     private javax.swing.JButton playerMessagesButton;
     private javax.swing.JPanel playerPanel;
+    private javax.swing.JButton profilButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton setTimeButton;
     private javax.swing.JPanel showPanel;
