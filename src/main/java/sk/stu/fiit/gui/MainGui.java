@@ -5,6 +5,10 @@
  */
 package sk.stu.fiit.gui;
 
+import sk.stu.fiit.gui.team.AddTeamWindow;
+import sk.stu.fiit.gui.team.ManageTeamWindow;
+import sk.stu.fiit.gui.league.LeagueInfoWindow;
+import sk.stu.fiit.gui.league.AddLeagueWindow;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,6 +33,7 @@ public class MainGui extends javax.swing.JFrame {
     private CurrentTime currentTime = CurrentTime.CurrentTime();
     private User loggedUser = null;
     private final LoginWindow loginWindow;
+    private short mode = 0;
     
     /**
      * Creates new form MainGui
@@ -57,7 +62,7 @@ public class MainGui extends javax.swing.JFrame {
         tickTock();
         loginVisibility();
         this.setVisible(true);
-        setActiveTable();
+        checkStatus();
     }
     
     public void setLists(Lists lists) {
@@ -73,15 +78,16 @@ public class MainGui extends javax.swing.JFrame {
         }
     }
     
-    public void setActiveTable(){ //TODO only active leagues
-        DefaultTableModel model = (DefaultTableModel) activeLeaguesTable.getModel();
+    public void setTable(){ //TODO only active leagues
+        DefaultTableModel model = (DefaultTableModel) leaguesTable.getModel();
         deleteRows(model);
-
-        int numberOfColumns = activeLeaguesTable.getColumnCount();
+        int numberOfColumns = leaguesTable.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
-        
+
         for (League league : lists.getLeagues()) {
-            if(Boolean.logicalAnd(league.getStartDate().before(currentTime.getDateTime()), league.getEndDate().after(currentTime.getDateTime()))){
+            if(Boolean.logicalOr(Boolean.logicalAnd(league.isPast(), this.mode == 2), 
+                    Boolean.logicalOr(Boolean.logicalAnd(league.isFuture(), this.mode == 1), 
+                            Boolean.logicalAnd(league.isActive(), this.mode == 0)))){
                 rowData[0] = league.getName();
                 rowData[1] = league.getGame();
                 rowData[2] = league.getMaxNumberTeams();
@@ -108,10 +114,9 @@ public class MainGui extends javax.swing.JFrame {
         currentTimeLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         leaguesScrollPane = new javax.swing.JScrollPane();
-        activeLeaguesTable = new javax.swing.JTable();
-        activeLeaguesLabel = new javax.swing.JLabel();
+        leaguesTable = new javax.swing.JTable();
+        leaguesLabel = new javax.swing.JLabel();
         leagueInfoButton = new javax.swing.JButton();
-        historyButton = new javax.swing.JButton();
         leagueOrganizerPanel = new javax.swing.JPanel();
         createLeagueButton = new javax.swing.JButton();
         organizerButton = new javax.swing.JButton();
@@ -125,6 +130,11 @@ public class MainGui extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         loadButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        showPanel = new javax.swing.JPanel();
+        activeButton = new javax.swing.JButton();
+        historyButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        futureButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -134,7 +144,7 @@ public class MainGui extends javax.swing.JFrame {
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
         jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
 
         timeInfoLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -170,7 +180,7 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 18;
         gridBagConstraints.gridwidth = 9;
         jPanel1.add(logoutButton, gridBagConstraints);
@@ -179,7 +189,7 @@ public class MainGui extends javax.swing.JFrame {
         leaguesScrollPane.setMinimumSize(new java.awt.Dimension(200, 70));
         leaguesScrollPane.setPreferredSize(new java.awt.Dimension(200, 70));
 
-        activeLeaguesTable.setModel(new javax.swing.table.DefaultTableModel(
+        leaguesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -198,13 +208,10 @@ public class MainGui extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        leaguesScrollPane.setViewportView(activeLeaguesTable);
-        if (activeLeaguesTable.getColumnModel().getColumnCount() > 0) {
-            activeLeaguesTable.getColumnModel().getColumn(0).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(1).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(2).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(3).setResizable(false);
-            activeLeaguesTable.getColumnModel().getColumn(4).setResizable(false);
+        leaguesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        leaguesScrollPane.setViewportView(leaguesTable);
+        if (leaguesTable.getColumnModel().getColumnCount() > 0) {
+            leaguesTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -216,25 +223,24 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.ipady = 50;
         jPanel1.add(leaguesScrollPane, gridBagConstraints);
 
-        activeLeaguesLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        activeLeaguesLabel.setForeground(new java.awt.Color(0, 153, 153));
-        activeLeaguesLabel.setText("Aktívne ligy");
+        leaguesLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        leaguesLabel.setForeground(new java.awt.Color(0, 153, 153));
+        leaguesLabel.setText("Aktívne ligy");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 22;
-        jPanel1.add(activeLeaguesLabel, gridBagConstraints);
+        jPanel1.add(leaguesLabel, gridBagConstraints);
 
         leagueInfoButton.setText("Viac informácií");
+        leagueInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                leagueInfoButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 26;
         jPanel1.add(leagueInfoButton, gridBagConstraints);
-
-        historyButton.setText("História");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 18;
-        gridBagConstraints.gridy = 26;
-        jPanel1.add(historyButton, gridBagConstraints);
 
         leagueOrganizerPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -256,7 +262,7 @@ public class MainGui extends javax.swing.JFrame {
         leagueOrganizerPanel.add(newMessageButton, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 7;
@@ -300,7 +306,7 @@ public class MainGui extends javax.swing.JFrame {
         playerPanel.add(leaveButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 7;
@@ -341,11 +347,60 @@ public class MainGui extends javax.swing.JFrame {
         adminPanel.add(jLabel1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 7;
         jPanel1.add(adminPanel, gridBagConstraints);
+
+        showPanel.setLayout(new java.awt.GridBagLayout());
+
+        activeButton.setText("Aktívne");
+        activeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                activeButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        showPanel.add(activeButton, gridBagConstraints);
+
+        historyButton.setText("Odohrané");
+        historyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                historyButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        showPanel.add(historyButton, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Zobrazenie:  ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        showPanel.add(jLabel2, gridBagConstraints);
+
+        futureButton.setText("Naplánované");
+        futureButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                futureButtonMouseReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        showPanel.add(futureButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridy = 26;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(showPanel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -375,7 +430,7 @@ public class MainGui extends javax.swing.JFrame {
     }
     
     public void checkStatus(){
-        setActiveTable();
+        setTable();
     }
     
     private void tickTock(){
@@ -431,6 +486,7 @@ public class MainGui extends javax.swing.JFrame {
             leagueOrganizerPanel.setVisible(false);
             setTimeButton.setVisible(false);
             playerPanel.setVisible(false);
+            activeButton.setVisible(false);
             
         if (this.loggedUser == null){  // Admin
             setTimeButton.setVisible(true);
@@ -457,6 +513,21 @@ public class MainGui extends javax.swing.JFrame {
         this.loginWindow.setVisible(true);
     }
     
+    private void leagueInfo(){
+        if (leaguesTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Vyber ligu z tabuľky líg", "Problém s výberom", JOptionPane.WARNING_MESSAGE);
+            logger.error("Trying to see more info without selected row");
+            return;
+        }
+        LeagueInfoWindow leagueInfoWindow;
+        if(this.mode == 0)
+            leagueInfoWindow = new LeagueInfoWindow(lists.getActiveLeague(leaguesTable.getSelectedRow()));
+        if(this.mode == 1)
+            leagueInfoWindow = new LeagueInfoWindow(lists.getFutureLeague(leaguesTable.getSelectedRow()));
+        if(this.mode == 2)
+            leagueInfoWindow = new LeagueInfoWindow(lists.getPastLeague(leaguesTable.getSelectedRow()));
+    }
+    
     private void logoutButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseReleased
         logout();
     }//GEN-LAST:event_logoutButtonMouseReleased
@@ -466,12 +537,10 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_createLeagueButtonMouseReleased
 
     private void createTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createTeamButtonMouseReleased
-        
         new AddTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_createTeamButtonMouseReleased
 
     private void manageTeamButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageTeamButtonMouseReleased
-        // TODO add your handling code here:
         new ManageTeamWindow((Player) loggedUser, lists, this).setVisible(true);
     }//GEN-LAST:event_manageTeamButtonMouseReleased
 
@@ -491,19 +560,54 @@ public class MainGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveButtonMouseReleased
 
+    private void leagueInfoButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leagueInfoButtonMouseReleased
+        leagueInfo();
+    }//GEN-LAST:event_leagueInfoButtonMouseReleased
+
+    private void activeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_activeButtonMouseReleased
+        this.mode = 0;
+        activeButton.setVisible(false);
+        historyButton.setVisible(true);
+        futureButton.setVisible(true);
+        leaguesLabel.setText("Aktívne ligy");
+        setTable();
+    }//GEN-LAST:event_activeButtonMouseReleased
+
+    private void futureButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_futureButtonMouseReleased
+        this.mode = 1;
+        activeButton.setVisible(true);
+        historyButton.setVisible(true);
+        futureButton.setVisible(false);
+        leaguesLabel.setText("Naplánované ligy");
+        setTable();
+    }//GEN-LAST:event_futureButtonMouseReleased
+
+    private void historyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyButtonMouseReleased
+        this.mode = 2;
+        activeButton.setVisible(true);
+        historyButton.setVisible(false);
+        futureButton.setVisible(true);
+        leaguesLabel.setText("Odohrané ligy");
+        setTable();
+    }//GEN-LAST:event_historyButtonMouseReleased
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel activeLeaguesLabel;
-    private javax.swing.JTable activeLeaguesTable;
+    private javax.swing.JButton activeButton;
     private javax.swing.JPanel adminPanel;
     private javax.swing.JButton createLeagueButton;
     private javax.swing.JButton createTeamButton;
     private javax.swing.JLabel currentTimeLabel;
+    private javax.swing.JButton futureButton;
     private javax.swing.JButton historyButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton leagueInfoButton;
     private javax.swing.JPanel leagueOrganizerPanel;
+    private javax.swing.JLabel leaguesLabel;
     private javax.swing.JScrollPane leaguesScrollPane;
+    private javax.swing.JTable leaguesTable;
     private javax.swing.JButton leaveButton;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton logoutButton;
@@ -514,6 +618,7 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JPanel playerPanel;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton setTimeButton;
+    private javax.swing.JPanel showPanel;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import sk.stu.fiit.league.League;
+import sk.stu.fiit.league.Match;
 import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.LeagueOrganizer;
@@ -157,6 +158,8 @@ public final class TestInputs {
         league1.addTeam(team2);
         league2.addTeam(team3);
         league2.addTeam(team4);
+        
+        league1.addMatch(new Match(CurrentTime.CurrentTime().getDateTime(), "Superko", lists.getTeams(), "www.google.com"));
         
         return lists;
     }

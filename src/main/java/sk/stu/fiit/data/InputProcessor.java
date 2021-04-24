@@ -21,7 +21,7 @@ public final class InputProcessor {
     
     private static final Logger logger = Logger.getLogger(InputProcessor.class.getName());
     private static SimpleDateFormat sdfBasic = new SimpleDateFormat("dd.MM.yyyy");
-    
+    private static SimpleDateFormat sdfBasicWithTime = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
     public static Date dateWithoutTime(Date date) throws ParseException {
         
         String dateString = sdfBasic.format(date);
@@ -91,5 +91,10 @@ public final class InputProcessor {
     public static String dateToString(Date date){
         return sdfBasic.format(date);
     }
+    
+    public static String dateToStringTime(Date date){
+        return sdfBasicWithTime.format(date);
+    }
+    
 
 }
