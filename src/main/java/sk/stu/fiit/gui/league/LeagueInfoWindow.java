@@ -15,8 +15,13 @@ import sk.stu.fiit.league.Match;
 import sk.stu.fiit.league.Prize;
 
 /**
- *
- * @author PeterSmrecek
+ * A window containing information about the {@link League}, its description 
+ * and logo, a list of {@link Prize}s and {@link Match}es. It is possible to 
+ * select a match and view its detail, or a link to the match stream.
+ * 
+ * @see League
+ * @see Prize
+ * @see Match
  */
 public class LeagueInfoWindow extends javax.swing.JFrame {
     /**
@@ -39,7 +44,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         genreTf.setText(this.league.getGenre());
         dateStartTf.setText(InputProcessor.dateToString(this.league.getStartDate()));
         dateEndTf.setText(InputProcessor.dateToString(this.league.getEndDate()));
-        ageRestrictionTf.setText(String.valueOf(this.league.getMinimalAge()));
+        ageRestrictionTf.setText(String.valueOf(this.league.getRecommendedAge()));
         maxTeamsTf.setText(String.valueOf(this.league.getMaxNumberTeams()));
         teamsInMatchTf.setText(String.valueOf(this.league.getNumberOfTeamsInMatch()));
         descriptionTa.setText(this.league.getDescription());
@@ -382,7 +387,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         infoPnl.add(ageRestrictionTf, gridBagConstraints);
 
         l7Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l7Lbl.setText("Vekové obmedzenie");
+        l7Lbl.setText("Odporúčaný minimálny vek");
         l7Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
         l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -26,23 +26,26 @@ import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
 
 /**
- *
- * @author PeterSmrecek
+ * A window allowing a {@link Player} who is a team administrator to manage a 
+ * {@link Team}. The team administrator can change team information, see 
+ * the player list, add or remove administrator rights, and remove a player 
+ * from the team. Team administrator can register a team in the {@link League} 
+ * if the league is not full. Administrator can also cancel the entire team.
+ * 
+ * @see Player
+ * @see Team
+ * @see League
  */
 public class ManageTeamWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Template
-     */
-    
     private final Logger logger = Logger.getLogger(ManageTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private Player admin;
-    private Team team;
-    private MainGui mainGui;
-    private Lists lists;
-    private List<JTextField> tfInfoList;
+    private final Player admin;
+    private final Team team;
+    private final MainGui mainGui;
+    private final Lists lists;
+    private final List<JTextField> tfInfoList;
     private ImageIcon icon;
     private ArrayList<League> plannedLeagues;
     private ArrayList<League> teamsLeaguesList;
@@ -530,6 +533,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
             file = fc.getSelectedFile();
         } else {
             errorMessage("Nie je vybraný žiaden súbor!");
+            logger.error("No file selected");
             return;
         }
 
@@ -538,7 +542,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
             icon = InputProcessor.resize(img, 280);
         } catch (Exception e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
-            logger.warn("Wrong image selected");
+            logger.error("Not image selected");
             return;
         }
         
@@ -549,6 +553,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
+            logger.error("Empty field");
             return;
         }
         
@@ -557,6 +562,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         
         if (icon == null) {
             errorMessage("Logo tímu nesmie zostať prázdne!");
+            logger.error("Empty logo");
             return;
         }
         
@@ -565,6 +571,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         team.setDescription(description);
         team.setIcon(icon);
         
+        logger.info("Team " + team.getName() + "information updated");
         updateAll();
         mainGui.checkPlayerButtons();
     }
@@ -653,6 +660,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private Player getSelectedPlayer(){
         int playerTableIndex = getRow(playersTbl, "Nie je vybraný žiaden hráč z tabuľky!");
         if (playerTableIndex == -1) {
+            logger.error("No player from table selected");
             return null;
         }
         
@@ -663,6 +671,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         Player player = getSelectedPlayer();
         if (player != null) {
             player.setAdmin(true);
+            logger.info(player.getName() + " set admininistrator");
             updateAll();
         }
     }
@@ -674,11 +683,14 @@ public class ManageTeamWindow extends javax.swing.JFrame {
             if (adminList.contains(player)) {
                 if (adminList.size() > 1) {
                     player.setAdmin(false);
+                    logger.info(player.getName() + " is no longer administrator");
                 } else{
                     errorMessage("V tíme musí zostať aspoň jeden administrátor!");
+                    logger.error("Team must have at least one administrator");
                 }
             } else{
                 errorMessage("Zvolený hráč nie je administrátor!");
+                logger.error("Selected player is not administrator");
             }
             updateAll();
         }
@@ -688,9 +700,11 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         Player player = getSelectedPlayer();
         if (player != null) {
             if (team.removePlayer(player)) {
+                logger.info(player.getName() + " removed from the team " + team.getName());
                 updateAll();
             } else{
                 errorMessage("Z tímu nie je možné odobrať administrátora.\nNajskôr hráčovi odoberte práva administrátora a potom ho odoberte z tímu!");
+                logger.error("Unable to remove player from the team - player is still administrator");
             }
         }
     }
@@ -700,6 +714,7 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         
         if (option == JOptionPane.OK_OPTION) {
             team.deleteTeam(lists);
+            logger.info(team.getName() + " cancelled");
             mainGui.checkPlayerButtons();
             this.dispose();
         }
@@ -728,12 +743,16 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private void leagueAction() {
         int leagueTableIndex = getRow(plannedTbl, "Nie je vybraná žiadna naplánovaná liga z tabuľky!");
         if (leagueTableIndex == -1) {
+            logger.error("No league selected from table of leagues");
             return;
         }
         
         League league = plannedLeagues.get(leagueTableIndex);
         if (!league.addTeam(team)) {
             errorMessage("Do zvlenej ligy nie je možné prihlásiť tím.\nLiga je plná!");
+            logger.error("Unable to add team to league, because league is full");
+        } else{
+            logger.info(team.getName() + " added to league");
         }
         
         updateAll();

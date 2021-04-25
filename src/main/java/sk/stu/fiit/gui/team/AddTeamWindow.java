@@ -22,22 +22,22 @@ import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
 
 /**
- *
- * @author PeterSmrecek
+ * A window allowing the {@link Player} to create a new {@link Team}. The player
+ * chooses the team name, motto, description and logo. The player becomes the
+ * administrator of the new team. 
+ * 
+ * @see Player
+ * @see Team
  */
 public class AddTeamWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Template
-     */
-    
     private final Logger logger = Logger.getLogger(AddTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private Player player;
-    private Lists lists;
-    private MainGui mainGui;
-    private List<JTextField> tfInfoList;
+    private final Player player;
+    private final Lists lists;
+    private final MainGui mainGui;
+    private final List<JTextField> tfInfoList;
     private ImageIcon icon;
     
     public AddTeamWindow(Player player, Lists lists, MainGui mainGui) {
@@ -279,6 +279,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
             file = fc.getSelectedFile();
         } else {
             errorMessage("Nie je vybraný žiaden súbor!");
+            logger.error("No file selected");
             return;
         }
 
@@ -287,7 +288,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
             icon = InputProcessor.resize(img, 280);
         } catch (Exception e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
-            logger.warn("Wrong image selected");
+            logger.error("Not image selected");
             return;
         }
         
@@ -298,6 +299,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
+            logger.error("Empty field");
             return;
         }
         
@@ -306,6 +308,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         
         if (icon == null) {
             errorMessage("Logo tímu nesmie zostať prázdne!");
+            logger.error("Empty logo");
             return;
         }
         
@@ -314,6 +317,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
         lists.addTeam(team);
         
         mainGui.checkPlayerButtons();
+        
+        logger.info("New team " + team.getName() + " created.");
         
         this.dispose();
     }
