@@ -14,8 +14,12 @@ import sk.stu.fiit.user.message.Message;
 import sk.stu.fiit.user.message.TeamInvitation;
 
 /**
- *
- * @author schon
+ * In <code>SeeMessageWindow</code> {@link User} can see full received {@link Message} 
+ * or {@link TeamInvitation}. It allows them to delete messages and accept TeamInvitations.
+ * 
+ * @see User
+ * @see Message
+ * @see TeamInvitation
  */
 public class SeeMessageWindow extends javax.swing.JFrame {
     private final Message message;
@@ -24,13 +28,6 @@ public class SeeMessageWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private final MainGui mainGui;
     
-    /**
-     * Creates new form SeeMessageWindow
-     * @param user
-     * @param message
-     * @param messageWindow
-     * @param mainGui
-     */
     public SeeMessageWindow(User user, Message message, MessageWindow messageWindow, MainGui mainGui) {
         initComponents();
         this.user = user;
@@ -39,7 +36,6 @@ public class SeeMessageWindow extends javax.swing.JFrame {
         this.mainGui = mainGui;
         updateAll();
     }
-
     
     private void updateAll(){
         invitationAcceptButton.setVisible(false);

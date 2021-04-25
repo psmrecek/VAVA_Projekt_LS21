@@ -1,3 +1,8 @@
+/*
+ * VAVA project
+ * Esport League by Martin Schön and Peter Smreček
+ * FIIT STU, 2021
+ */
 package sk.stu.fiit.team;
 
 import java.io.Serializable;
@@ -9,7 +14,7 @@ import sk.stu.fiit.data.Lists;
 
 
 /**
- * Class <code>Team</code> represents a group of players participating 
+ * Class <code>Team</code> represents a group of players participating
  * in a league. Each team has its own name, description, motto and logo.
  * The founding member, {@link Player} of the team is the administrator. An 
  * administrator can promote players to administrators. The administrator 

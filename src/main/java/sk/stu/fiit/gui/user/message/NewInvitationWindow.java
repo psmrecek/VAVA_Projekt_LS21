@@ -11,23 +11,23 @@ import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
-import sk.stu.fiit.user.message.Message;
 import sk.stu.fiit.user.message.TeamInvitation;
 
 /**
- *
- * @author schon
+ * For team invitations  in app uses class <code>NewInvitationWindow</code>. 
+ * It allows admin {@link Player} to invite other players into theirs {@link Team}
+ * via {@link TeamInvitation}.
+ * 
+ * 
+ * @see Player
+ * @see Team
+ * @see TeamInvitation
  */
 public class NewInvitationWindow extends javax.swing.JFrame {
     private ArrayList<User> contacts = new ArrayList<>();
     private final User user;
     private final Lists lists;
     
-    /**
-     * Creates new form NewMessage
-     * @param user
-     * @param lists
-     */
     public NewInvitationWindow(User user, Lists lists){
         initComponents();
         this.user = user;
@@ -179,6 +179,7 @@ public class NewInvitationWindow extends javax.swing.JFrame {
                 contacts.get(index).addMessage(invitation);
                 Logger.getLogger(this.getClass().getName()).info("Invite succesfully sent to "+contacts.get(index).getNickname());
                 JOptionPane.showMessageDialog(rootPane, "Pozvánka úspešne odoslaná");
+                Logger.getLogger(this.getClass().getName()).info("TeamInvitation sending was succesful");
                 this.dispose();
                 return;
             }     

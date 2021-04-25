@@ -15,8 +15,11 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author schon
+ * Class <code>CurrentTime</code> is holding current application 
+ * time and date. It allows to simulate time changes, so it only allows 
+ * changing time forward.
+ * CurrentTime class is Singleton, so it can be accessed from any point 
+ * of application
  */
 public class CurrentTime implements Serializable{
     private static final long serialVersionUID = 0;
