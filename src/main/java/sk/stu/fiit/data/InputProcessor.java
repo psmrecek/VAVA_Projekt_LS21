@@ -14,13 +14,19 @@ import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author PeterSmrecek
+ * Class <code>InputProcessor</code> contains methods for date-string conversion,
+ * methods for checking, if number is valid price or valid index and method for 
+ * resizing images.
+ * 
  */
 public final class InputProcessor {
     
     private static final Logger logger = Logger.getLogger(InputProcessor.class.getName());
-    private static SimpleDateFormat sdfBasic = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat sdfBasic = new SimpleDateFormat("dd.MM.yyyy");
+    
+    private InputProcessor(){
+    }
+    
     public static Date dateWithoutTime(Date date) throws ParseException {
         
         String dateString = sdfBasic.format(date);
@@ -51,6 +57,7 @@ public final class InputProcessor {
         double price = Double.parseDouble(priceString);
         
         if (price < 0.0) {
+            logger.error("Given number is not valid price");
             throw new Exception("Wrong price");
         }
 
@@ -61,6 +68,7 @@ public final class InputProcessor {
         int number = Integer.parseInt(numberString);
         
         if (number <= 0) {
+            logger.error("Given number is not valid index");
             throw new Exception("Negative number given");
         }
         
