@@ -67,7 +67,7 @@ public class NewInvitationWindow extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Napísať správu");
+        setTitle("Nová pozvánka");
         setResizable(false);
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();

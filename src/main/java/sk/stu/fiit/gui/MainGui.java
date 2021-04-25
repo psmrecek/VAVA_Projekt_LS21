@@ -690,7 +690,7 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_profilButtonMouseReleased
 
     private void messages(){
-        MessageWindow messageWindow = new MessageWindow(this.loggedUser, this.lists);
+        MessageWindow messageWindow = new MessageWindow(this.loggedUser, this.lists, this);
     }
     
     private void playerMessagesButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playerMessagesButtonMouseReleased
