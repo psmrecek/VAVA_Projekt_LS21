@@ -279,6 +279,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
             file = fc.getSelectedFile();
         } else {
             errorMessage("Nie je vybraný žiaden súbor!");
+            logger.error("No file selected");
             return;
         }
 
