@@ -24,6 +24,7 @@ import sk.stu.fiit.gui.user.ProfileWindow;
 import sk.stu.fiit.gui.user.message.MessageWindow;
 import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
+import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.*;
 
 
@@ -351,6 +352,11 @@ public class MainGui extends javax.swing.JFrame {
         leaveButton.setText("Odísť z tímu");
         leaveButton.setMinimumSize(new java.awt.Dimension(150, 30));
         leaveButton.setPreferredSize(new java.awt.Dimension(150, 30));
+        leaveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                leaveButtonMouseReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -705,6 +711,10 @@ public class MainGui extends javax.swing.JFrame {
         new MatchWindow(this, lists, (LeagueOrganizer) loggedUser).setVisible(true);
     }//GEN-LAST:event_organizerButtonMouseReleased
 
+    private void leaveButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leaveButtonMouseReleased
+        leaveTeam();
+    }//GEN-LAST:event_leaveButtonMouseReleased
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton activeButton;
@@ -736,4 +746,17 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JPanel showPanel;
     private javax.swing.JLabel timeInfoLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private void leaveTeam() {
+        Player loggedPlayer = (Player) loggedUser;
+        Team playersTeam = loggedPlayer.getTeam();
+        if (playersTeam != null) {
+            if (playersTeam.removePlayer(loggedPlayer)) {
+                JOptionPane.showMessageDialog(rootPane, "Úspešne si opustil tím", "Odchod z tímu", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Nepodarilo sa opustiť tím!\nAdministrátor z tímu nemôže odísť.\nNajskôr presuňte administrátorské práva na iného hráča!", "Odchod z tímu", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        checkPlayerButtons();
+    }
 }
