@@ -5,6 +5,7 @@ import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.gui.league.LeagueInfoWindow;
@@ -43,6 +44,7 @@ public class League implements Serializable{
     private final ArrayList<LeagueOrganizer> leagueOrganizerList = new ArrayList<>();
     private final ArrayList<Team> teamList = new ArrayList<>();
     private final ArrayList<Match> matchList = new ArrayList<>();
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     public League(String name, String game, String genre, Date startDate, Date endDate, int minimalAge, int maxNumberTeams, int numberOfTeamsInMatch, String description, LeagueOrganizer leagueOrganizer, ArrayList<Prize> prizeList, ImageIcon icon) {
         this.name = name;
@@ -95,6 +97,7 @@ public class League implements Serializable{
     public boolean addTeam(Team team){
         if (teamList.size() < maxNumberTeams) {
             teamList.add(team);
+            logger.info("Team " + team.getName()+ " added to the league " + this.getName());
             return true;
         } else{
             return false;

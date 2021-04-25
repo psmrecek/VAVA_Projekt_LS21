@@ -9,10 +9,11 @@ import sk.stu.fiit.data.Lists;
 
 
 /**
- * Skupina hr��ov vystupuj�ca ako jeden s��a�n� celok.
- * @author PeterSmrecek
- * @version 1.0
- * @created 19-apr-2021 18:21:18
+ * Class <code>Team</code> represents a group of players participating 
+ * in a league. Each team has its own name, description, motto and logo.
+ * The founding member of the team is the administrator. An administrator can 
+ * promote players to administrators. The administrator can remove players, 
+ * cancel a team or join a league. 
  */
 public class Team implements Serializable{
 
@@ -22,7 +23,7 @@ public class Team implements Serializable{
     private String motto;
     private ImageIcon icon;
     private ArrayList<Player> playersList = new ArrayList<>();
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     public Team(String name, String description, String motto, Player player, ImageIcon icon) {
         this.name = name;
@@ -101,6 +102,7 @@ public class Team implements Serializable{
             return false;
         } else{
             playersList.remove(player);
+            logger.info("Player " + player.getNickname() + " removed from the team " + this.getName());
             player.setTeam(null);
             player.setAdmin(false);
             return true;
@@ -113,7 +115,7 @@ public class Team implements Serializable{
             player.setAdmin(false);
         }
         playersList.clear();
-        
+        logger.info("Canceled team " + this.getName());
         lists.removeTeam(this);
     }
 }
