@@ -375,7 +375,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
         infoPnl.add(ageRestrictionTf, gridBagConstraints);
 
         l7Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l7Lbl.setText("Vekové obmedzenie");
+        l7Lbl.setText("Odporúčaný minimálny vek");
         l7Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
         l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
