@@ -225,4 +225,14 @@ public class Lists implements Serializable{
         }
         return teamLeagues;
     }
+
+    public ArrayList<User> getFreePlayers() {
+       ArrayList<User> freePlayers = new ArrayList<>();
+       for(User determine : this.users){
+           if(determine.getClass().getSimpleName().equals("Player"))
+               if(((Player)determine).getTeam() == null)
+                   freePlayers.add(determine);
+       }
+       return freePlayers;
+    }
 } 

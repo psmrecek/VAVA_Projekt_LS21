@@ -20,16 +20,18 @@ import sk.stu.fiit.user.message.Message;
  *
  * @author schon
  */
-public class NewMessage extends javax.swing.JFrame {
-    private ArrayList<User> contacts = new ArrayList<>();
-    private ArrayList<String> description = new ArrayList<>();
-    private User user;
-    private Lists lists;
+public class NewMessageWindow extends javax.swing.JFrame {
+    private final ArrayList<User> contacts = new ArrayList<>();
+    private final ArrayList<String> description = new ArrayList<>();
+    private final User user;
+    private final Lists lists;
     
     /**
      * Creates new form NewMessage
+     * @param user
+     * @param lists
      */
-    public NewMessage(User user, Lists lists){
+    public NewMessageWindow(User user, Lists lists){
         initComponents();
         this.user = user;
         this.lists = lists;
@@ -42,8 +44,8 @@ public class NewMessage extends javax.swing.JFrame {
         ArrayList<League> leagues = this.lists.getTeamLeagues(((Player)this.user).getTeam());
         
         for (League league : leagues){
-            for(User user : league.getLeagueOrganizerList()){
-                this.contacts.add(user);
+            for(User OrgL : league.getLeagueOrganizerList()){
+                this.contacts.add(OrgL);
                 this.description.add(" (OrgL "+league.getName()+")");
             }
         }
@@ -51,8 +53,8 @@ public class NewMessage extends javax.swing.JFrame {
     }
     
     private void playerContacts(){
-        for(User user : ((Player)this.user).getTeam().getPlayersList()){
-            this.contacts.add(user);
+        for(User teammate : ((Player)this.user).getTeam().getPlayersList()){
+            this.contacts.add(teammate);
             this.description.add(" (Spoluhráč "+((Player)this.user).getTeam().getName()+")");
         }
     }

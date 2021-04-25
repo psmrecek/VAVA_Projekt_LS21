@@ -16,8 +16,8 @@ import sk.stu.fiit.user.message.Message;
  * @author schon
  */
 public class MessageWindow extends javax.swing.JFrame {
-    private User loggedUser;
-    private Lists lists;
+    private final User loggedUser;
+    private final Lists lists;
     
     /**
      * Creates new form MailWindow
@@ -157,11 +157,11 @@ public class MessageWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void teamInvitationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teamInvitationButtonMouseReleased
-        // TODO add your handling code here:
+        NewInvitationWindow newInvitationWindow = new NewInvitationWindow(this.loggedUser, this.lists);
     }//GEN-LAST:event_teamInvitationButtonMouseReleased
 
     private void newMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newMessageButtonMouseReleased
-        NewMessage newMessage = new NewMessage(this.loggedUser, this.lists);
+        NewMessageWindow newMessage = new NewMessageWindow(this.loggedUser, this.lists);
     }//GEN-LAST:event_newMessageButtonMouseReleased
 
     private void readMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_readMessageButtonMouseReleased
