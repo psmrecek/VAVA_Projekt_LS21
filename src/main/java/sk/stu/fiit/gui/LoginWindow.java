@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * VAVA project
+ * Esport League by Martin Schön and Peter Smreček
+ * FIIT STU, 2021
  */
 package sk.stu.fiit.gui;
 
@@ -15,16 +15,16 @@ import sk.stu.fiit.user.*;
 
 
 /**
- *
- * @author schon
+ * First window of the application. <code>LoginWindow</code> allows
+ * {@link User}s to Login or Register into the application with their
+ * credentials.
+ * 
+ * @see User
  */
 public class LoginWindow extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(LoginWindow.class.getName());
     private Lists lists = new Lists();
     
-    /**
-     * Creates new form MainGui
-     */
     public LoginWindow() {
         initComponents();
         initApplication();
@@ -180,9 +180,6 @@ public class LoginWindow extends javax.swing.JFrame {
         login();
     }//GEN-LAST:event_loginButtonMouseReleased
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

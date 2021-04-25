@@ -17,8 +17,12 @@ import sk.stu.fiit.user.User;
 import sk.stu.fiit.user.message.Message;
 
 /**
- *
- * @author schon
+ * Class <code>NewMessageWindow</code> allows logged {@link User} to write new
+ * messages to users they are allowed to. It shows up after choosing this option
+ * in {@link MessageWindow}.
+ * 
+ * @see Message
+ * @see MessageWindow
  */
 public class NewMessageWindow extends javax.swing.JFrame {
     private final ArrayList<User> contacts = new ArrayList<>();
@@ -27,11 +31,6 @@ public class NewMessageWindow extends javax.swing.JFrame {
     private final Lists lists;
     private final MessageWindow messageWindow;
     
-    /**
-     * Creates new form NewMessage
-     * @param user
-     * @param lists
-     */
     public NewMessageWindow(User user, Lists lists, MessageWindow messageWindow){
         initComponents();
         this.user = user;
@@ -92,9 +91,6 @@ public class NewMessageWindow extends javax.swing.JFrame {
             con[item] = this.contacts.get(item).getName()+this.description.get(item);
             
         contactsList.setListData(con);
-
-
-
 
         this.setVisible(true);
     }

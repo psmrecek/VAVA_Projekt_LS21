@@ -11,14 +11,16 @@ import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.user.User;
 
 /**
- *
- * @author schon
+ * <code>Message</code> class is used for chatting between {@link User}s.
+ * It contains message itself as well as sender information and time of sending.
+ * 
+ * @see User
  */
 public class Message implements Serializable{
     private static final long serialVersionUID = 0;
-    private String head, body;
-    private User sender;
-    private Date sendingTime;
+    private final String head, body;
+    private final User sender;
+    private final Date sendingTime;
 
     public Message(String head, String body, User sender) {
         this.head = head;
@@ -42,6 +44,5 @@ public class Message implements Serializable{
     public Date getSendingTime() {
         return sendingTime;
     }
-    
     
 }

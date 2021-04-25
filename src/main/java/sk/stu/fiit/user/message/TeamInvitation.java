@@ -10,8 +10,12 @@ import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.User;
 
 /**
- *
- * @author schon
+ * <code>TeamInvitation</code> inherits {@link Message} class. It serves
+ * as a way of inviting {@link Player}s to {@link Team}s. 
+ * 
+ * @see Player
+ * @see Team
+ * @see Message
  */
 public class TeamInvitation extends Message implements Serializable{
     private static final long serialVersionUID = 0;
