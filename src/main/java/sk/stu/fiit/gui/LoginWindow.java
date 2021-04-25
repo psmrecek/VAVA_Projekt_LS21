@@ -35,6 +35,10 @@ public class LoginWindow extends javax.swing.JFrame {
         lists = TestInputs.createInputs();
         
     }
+
+    public void setLists(Lists lists) {
+        this.lists = lists;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

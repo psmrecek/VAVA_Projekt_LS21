@@ -216,4 +216,23 @@ public class Lists implements Serializable{
            
         return errorMessage;
     }
+
+    public ArrayList<League> getTeamLeagues(Team team){
+        ArrayList<League> teamLeagues = new ArrayList<>();
+        for(League league: this.leagues){
+            if (league.getTeamList().contains(team))
+                teamLeagues.add(league);
+        }
+        return teamLeagues;
+    }
+
+    public ArrayList<User> getFreePlayers() {
+       ArrayList<User> freePlayers = new ArrayList<>();
+       for(User determine : this.users){
+           if(determine.getClass().getSimpleName().equals("Player"))
+               if(((Player)determine).getTeam() == null)
+                   freePlayers.add(determine);
+       }
+       return freePlayers;
+    }
 } 
