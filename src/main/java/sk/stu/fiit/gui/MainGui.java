@@ -26,12 +26,25 @@ import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.*;
+import sk.stu.fiit.user.message.Message;
+import sk.stu.fiit.user.message.TeamInvitation;
 
 
 /**
- *  
- * @author schon
+ * The main application window. Every logged in {@link User} gets to this window. 
+ * Shows current time, {@link League} information, shows action options for user 
+ * roles. Users can communicate with each other through {@link Message}s. 
+ * {@link Team} members can send {@link TeamInvitation} to other {@link Player}s.
+ * 
+ * @see User
+ * @see Player
+ * @see LeagueOrganizer
+ * @see Spectator
+ * @see League
+ * @see Message
+ * @see TeamInvitation
  */
+
 public class MainGui extends javax.swing.JFrame {
     private final Logger logger = Logger.getLogger(MainGui.class.getName());
     private Lists lists;
@@ -40,18 +53,14 @@ public class MainGui extends javax.swing.JFrame {
     private final LoginWindow loginWindow;
     private short mode = 0;
     
-    /**
-     * Creates new form MainGui
-     * @param loginWindow
-     * @param loggedUser
-     * @param lists
-     */
     public MainGui(LoginWindow loginWindow, User loggedUser, Lists lists) {
         this.lists = lists;
         initComponents();
         this.loggedUser = loggedUser;
         this.loginWindow = loginWindow;
         loginWindow.setVisible(false);
+        
+        nameLbl.setText(loggedUser.getName());
         initApplication();
     }
     
@@ -142,6 +151,8 @@ public class MainGui extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         futureButton = new javax.swing.JButton();
         profilButton = new javax.swing.JButton();
+        nameInfoLbl = new javax.swing.JLabel();
+        nameLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
@@ -149,7 +160,7 @@ public class MainGui extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(937, 590));
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
+        jPanel1Layout.columnWidths = new int[] {0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0};
         jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel1.setLayout(jPanel1Layout);
 
@@ -490,15 +501,33 @@ public class MainGui extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         jPanel1.add(profilButton, gridBagConstraints);
 
+        nameInfoLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nameInfoLbl.setText("Prihlásený používateľ: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(nameInfoLbl, gridBagConstraints);
+
+        nameLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nameLbl.setText("Administrátor aplikácie");
+        nameLbl.setPreferredSize(new java.awt.Dimension(200, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(nameLbl, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();
@@ -607,6 +636,8 @@ public class MainGui extends javax.swing.JFrame {
         this.loggedUser = null;
         //this.dispose();
         this.loginWindow.setVisible(true);
+        
+        logger.info("Logged out");
     }
     
     private void leagueInfo(){
@@ -736,6 +767,8 @@ public class MainGui extends javax.swing.JFrame {
     private javax.swing.JButton loadButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton manageTeamButton;
+    private javax.swing.JLabel nameInfoLbl;
+    private javax.swing.JLabel nameLbl;
     private javax.swing.JButton newMessageButton;
     private javax.swing.JButton organizerButton;
     private javax.swing.JButton playerMessagesButton;
