@@ -4,6 +4,7 @@ import java.io.Serializable;
 import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
 
 
@@ -21,6 +22,7 @@ public class Team implements Serializable{
     private String motto;
     private ImageIcon icon;
     private ArrayList<Player> playersList = new ArrayList<>();
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public Team(String name, String description, String motto, Player player, ImageIcon icon) {
         this.name = name;
@@ -79,6 +81,7 @@ public class Team implements Serializable{
     public void addPlayer(Player player){
         playersList.add(player);
         player.setTeam(this);
+        logger.info("Player "+player.getNickname()+" added to the team "+this.getName());
     }
     
     public ArrayList<Player> getListAdmins(){

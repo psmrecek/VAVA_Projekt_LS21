@@ -21,4 +21,8 @@ public class TeamInvitation extends Message implements Serializable{
         super(head, body, sender);
         this.team = team;
     }
+
+    public Team getTeam() {
+        return team;
+    }
 }
