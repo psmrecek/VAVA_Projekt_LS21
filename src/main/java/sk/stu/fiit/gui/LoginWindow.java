@@ -5,12 +5,12 @@
  */
 package sk.stu.fiit.gui;
 
-import sk.stu.fiit.gui.user.RegistrationWindow;
 import javax.swing.JOptionPane;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.TestInputs;
+import sk.stu.fiit.gui.user.RegistrationWindow;
 import sk.stu.fiit.user.*;
 
 

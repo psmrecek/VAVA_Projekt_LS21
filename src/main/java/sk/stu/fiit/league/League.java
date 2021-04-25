@@ -1,7 +1,6 @@
 package sk.stu.fiit.league;
 
 import java.io.Serializable;
-import sk.stu.fiit.user.LeagueOrganizer;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -10,6 +9,7 @@ import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.gui.league.LeagueInfoWindow;
 import sk.stu.fiit.team.Team;
+import sk.stu.fiit.user.LeagueOrganizer;
 
 
 /**

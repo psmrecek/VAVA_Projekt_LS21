@@ -7,6 +7,7 @@ package sk.stu.fiit.user.message;
 
 import java.io.Serializable;
 import sk.stu.fiit.team.Team;
+import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
 
 /**

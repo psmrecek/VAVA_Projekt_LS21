@@ -6,11 +6,11 @@
 package sk.stu.fiit.team;
 
 import java.io.Serializable;
-import sk.stu.fiit.user.Player;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.user.Player;
 
 
 /**

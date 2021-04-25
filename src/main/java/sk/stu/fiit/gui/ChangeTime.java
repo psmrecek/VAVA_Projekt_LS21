@@ -7,6 +7,7 @@ package sk.stu.fiit.gui;
 
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
+import sk.stu.fiit.data.CurrentTime;
 
 /**
  * ChangeTime allows admin to change date and time stored in {@link CurrentTime}

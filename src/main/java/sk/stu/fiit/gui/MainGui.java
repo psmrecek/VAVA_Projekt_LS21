@@ -6,10 +6,6 @@
 package sk.stu.fiit.gui;
 
 import java.awt.Window;
-import sk.stu.fiit.gui.team.AddTeamWindow;
-import sk.stu.fiit.gui.team.ManageTeamWindow;
-import sk.stu.fiit.gui.league.LeagueInfoWindow;
-import sk.stu.fiit.gui.league.AddLeagueWindow;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -20,9 +16,13 @@ import sk.stu.fiit.data.CurrentTime;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.data.Save;
+import sk.stu.fiit.gui.league.AddLeagueWindow;
+import sk.stu.fiit.gui.league.LeagueInfoWindow;
+import sk.stu.fiit.gui.league.MatchWindow;
+import sk.stu.fiit.gui.team.AddTeamWindow;
+import sk.stu.fiit.gui.team.ManageTeamWindow;
 import sk.stu.fiit.gui.user.ProfileWindow;
 import sk.stu.fiit.gui.user.message.MessageWindow;
-import sk.stu.fiit.gui.league.MatchWindow;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.*;

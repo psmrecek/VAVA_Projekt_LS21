@@ -1,0 +1,21 @@
+cmd.exe
+/X
+/C
+""C:\Program Files\Java\jdk1.8.0_281\jre\..\bin\javadoc.exe" @options @argfile"
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\allclasses-frame.html = 1619380726226
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\allclasses-noframe.html = 1619380726231
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\argfile = 1619380716597
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\constant-values.html = 1619380725502
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\deprecated-list.html = 1619380726223
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\help-doc.html = 1619380726259
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\index-all.html = 1619380726202
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\index.html = 1619380726239
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\javadoc.bat = 1619380613365
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\options = 1619380716595
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\overview-frame.html = 1619380725300
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\overview-summary.html = 1619380726248
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\overview-tree.html = 1619380726143
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\package-list = 1619380725298
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\script.js = 1619380726265
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\serialized-form.html = 1619380725637
+D:\00_Ja\Škola\4.Semester\VAVA\EsportLiga\target\site\apidocs\stylesheet.css = 1619380435361

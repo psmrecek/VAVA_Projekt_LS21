@@ -11,9 +11,6 @@ import java.util.Date;
 import java.util.regex.Pattern;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
-import sk.stu.fiit.user.LeagueOrganizer;
-import sk.stu.fiit.user.Player;
-import sk.stu.fiit.user.Spectator;
 import sk.stu.fiit.user.*;
 
 /**
