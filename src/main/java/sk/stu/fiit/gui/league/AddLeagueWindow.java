@@ -29,8 +29,12 @@ import sk.stu.fiit.league.Prize;
 import sk.stu.fiit.user.LeagueOrganizer;
 
 /**
- *
- * @author PeterSmrecek
+ * Window for creating a new league. {@link LeagueOrganizer}  enters {@link League}
+ * information, {@link Prize} list and logo in this window.
+ * 
+ * @see LeagueOrganizer
+ * @see League
+ * @see Prize
  */
 public class AddLeagueWindow extends javax.swing.JFrame {
 
@@ -596,6 +600,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     private void addPrizeAction() {
         if (isEmptyField(tfPrizeList)) {
             errorMessage("Žiadne pole Výhier nesmie zostať prázdne!");
+            logger.error("Empty field");
             return;
         }
         
@@ -611,6 +616,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             price = InputProcessor.priceFromString(priceString);
         } catch (Exception e) {
             errorMessage("Nie je zadaná platná finančná hodnota!");
+            logger.error("Not valid price");
             return;
         }
         
@@ -618,6 +624,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             position = InputProcessor.positiveIntFromString(positionString);
         } catch (Exception e) {
             errorMessage("Nie je zadaná platná pozícia!");
+            logger.error("Not valid position");
             return;
         }
         
@@ -629,6 +636,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
     private void removePrizeAction() {
         int prizteTableIndex = getRow(tableTbl, "Nie je vybraná žiadna výhra z tabuľky!");
         if (prizteTableIndex == -1) {
+            logger.error("Price not selected");
             return;
         }
         
@@ -644,6 +652,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             file = fc.getSelectedFile();
         } else {
             errorMessage("Nie je vybraný žiaden súbor!");
+            logger.error("No file selected");
             return;
         }
 
@@ -652,7 +661,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             icon = InputProcessor.resize(img, 280);
         } catch (IOException e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
-            logger.warn("Wrong image selected");
+            logger.error("Not image selected");
             return;
         }
         
@@ -663,6 +672,7 @@ public class AddLeagueWindow extends javax.swing.JFrame {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
+            logger.error("Empty field");
             return;
         }
         
@@ -682,12 +692,14 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             endDate = InputProcessor.convertDate(endDateString);
         } catch (ParseException ex) {
             errorMessage("Zadaný nesprávny formát dátumu!");
+            logger.error("Invalid date format");
             return;
         }
         
         Date current = CurrentTime.CurrentTime().getDateTime();
         if (!InputProcessor.validDateRange(current, startDate, endDate)) {
             errorMessage("Zadaný dátum musí byť neskorší ako súčasný dátum a dátum ukončenia musí byť neskorší ako dátum začiatku!");
+            logger.error("Incorrect date");
             return;
         }
         
@@ -701,22 +713,26 @@ public class AddLeagueWindow extends javax.swing.JFrame {
             teamsInMatch = InputProcessor.positiveIntFromString(teamsInMatchString);
         } catch (Exception e) {
             errorMessage("V informáciách môžu byť zadané iba celé kladné čísla!");
+            logger.error("Not integer given");
             return;
         }
         
         if (prizeList.isEmpty()) {
             errorMessage("Liga musí obsahovať aspoň jednu výhru!");
+            logger.error("Empty prize list");
             return;
         }
         
         if (icon == null) {
             errorMessage("Logo ligy nesmie zostať prázdne!");
+            logger.error("No logo chosen");
             return;
         }
         
         League league = new League(nameString, gameString, genreString, startDate, endDate, minimalAge, maxTeams, teamsInMatch, description, this.leagueOrganizer, prizeList, icon);
         
         lists.addLeague(league);
+        logger.info("New league created");
         this.dispose();
     }
     
