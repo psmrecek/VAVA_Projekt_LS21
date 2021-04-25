@@ -5,20 +5,22 @@
  */
 package sk.stu.fiit.gui.league;
 
+import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.league.Match;
+import sk.stu.fiit.team.Team;
 
 /**
- *
- * @author schon
+ * A window showing the detail of the {@link Match}. Displays the type, time, 
+ * winner, result and list of {@link Team}s in the match.
+ * 
+ * @see Match
+ * @see Team
  */
 public class MatchInfoWindow extends javax.swing.JFrame {
     private final Match match;
+    private final Logger logger = Logger.getLogger(MatchInfoWindow.class.getName());
     
-    /**
-     * Creates new form MatchInfoWindow
-     * @param match
-     */
     public MatchInfoWindow(Match match) {
         initComponents();
         this.match = match;
@@ -33,6 +35,7 @@ public class MatchInfoWindow extends javax.swing.JFrame {
         
         teamsList.setListData(getTeams());
         
+        logger.info("Match info displayed");
         this.setVisible(true);
     }
     
