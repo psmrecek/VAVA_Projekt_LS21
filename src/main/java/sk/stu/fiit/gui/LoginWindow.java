@@ -64,61 +64,72 @@ public class LoginWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(937, 590));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        loginPanel.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout loginPanelLayout = new java.awt.GridBagLayout();
+        loginPanelLayout.columnWidths = new int[] {0};
+        loginPanelLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        loginPanel.setLayout(loginPanelLayout);
 
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         loginButton.setText(bundle.getString("PRIHLÁSENIE")); // NOI18N
+        loginButton.setPreferredSize(new java.awt.Dimension(150, 29));
         loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 loginButtonMouseReleased(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
         loginPanel.add(loginButton, gridBagConstraints);
 
+        registrationButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         registrationButton.setText(bundle.getString("REGISTRÁCIA")); // NOI18N
+        registrationButton.setPreferredSize(new java.awt.Dimension(150, 29));
         registrationButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 registrationButtonMouseReleased(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 18;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
         loginPanel.add(registrationButton, gridBagConstraints);
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        passwordLabel.setText("Heslo");
+        passwordLabel.setText(bundle.getString("HESLO")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
         loginPanel.add(passwordLabel, gridBagConstraints);
 
         nicknameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nicknameLabel.setText("Nickname / email");
+        nicknameLabel.setText(bundle.getString("NICKNAME / EMAIL")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         loginPanel.add(nicknameLabel, gridBagConstraints);
+
+        nicknameTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nicknameTextField.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         loginPanel.add(nicknameTextField, gridBagConstraints);
+
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        passwordField.setPreferredSize(new java.awt.Dimension(150, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         loginPanel.add(passwordField, gridBagConstraints);
 
-        appLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        appLabel.setText("Vstup do aplikácie");
+        appLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        appLabel.setText(bundle.getString("VSTUP DO APLIKÁCIE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         loginPanel.add(appLabel, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -138,26 +149,26 @@ public class LoginWindow extends javax.swing.JFrame {
     }
 
     private void clear(){
-        passwordField.setText("");
-        nicknameTextField.setText("");
+        passwordField.setText(""); //NOI18N
+        nicknameTextField.setText(""); //NOI18N
     }
     
     private void login(){
         String errorMessage = lists.login(nicknameTextField.getText().trim(), String.valueOf(passwordField.getPassword()).trim());
-        if (errorMessage.equals("Admin")){
-            MainGui mainGui = new MainGui(this, "Admin", lists);
-            logger.info("Admin login");
+        if (errorMessage.equals("Admin")){ //NOI18N
+            MainGui mainGui = new MainGui(this, "Admin", lists); //NOI18N
+            logger.info("Admin login"); //NOI18N
             clear();
             return;
         }
        if (errorMessage.isEmpty()){
            User user = lists.getUser(nicknameTextField.getText().trim());
            MainGui mainGui = new MainGui(this, user, lists);
-           logger.info("Login succesful");
+           logger.info("Login succesful"); //NOI18N
            clear();
        } else {
-           JOptionPane.showMessageDialog(rootPane, errorMessage, "Chyba pri prihlasovaní", JOptionPane.WARNING_MESSAGE);
-           logger.error("Login error");
+           JOptionPane.showMessageDialog(rootPane, errorMessage, java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA PRI PRIHLASOVANÍ"), JOptionPane.WARNING_MESSAGE);
+           logger.error("Login error"); //NOI18N
        }
     }
     

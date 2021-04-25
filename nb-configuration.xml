@@ -19,6 +19,10 @@ Any value defined here will override the pom.xml file value but is only applicab
     <config-data xmlns="http://www.netbeans.org/ns/maven-config-data/1">
         <configurations>
             <configuration id="inputClass" profiles=""/>
+            <configuration id="localisation" profiles="">
+                <property name="user.country">US</property>
+                <property name="user.language">en</property>
+            </configuration>
         </configurations>
     </config-data>
 </project-shared-configuration>

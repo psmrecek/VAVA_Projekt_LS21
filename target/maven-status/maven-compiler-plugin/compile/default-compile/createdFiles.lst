@@ -19,6 +19,7 @@ sk\stu\fiit\gui\team\ManageTeamWindow$8.class
 sk\stu\fiit\gui\Template$6.class
 sk\stu\fiit\data\CurrentTime.class
 sk\stu\fiit\gui\MainGui$8.class
+sk\stu\fiit\gui\MainGui$18.class
 sk\stu\fiit\gui\ChangeTime$1.class
 sk\stu\fiit\gui\Template$9.class
 sk\stu\fiit\gui\user\message\NewMessageWindow.class
@@ -56,7 +57,6 @@ sk\stu\fiit\user\Player.class
 sk\stu\fiit\gui\ChangeTime.class
 sk\stu\fiit\gui\MainGui$4.class
 sk\stu\fiit\gui\user\message\SeeMessageWindow$1.class
-sk\stu\fiit\gui\team\ManageTeamWindow$13.class
 sk\stu\fiit\gui\user\ProfileWindow$1.class
 sk\stu\fiit\gui\MainGui$7.class
 sk\stu\fiit\gui\team\ManageTeamWindow$6.class
@@ -67,7 +67,6 @@ sk\stu\fiit\league\Prize.class
 sk\stu\fiit\gui\user\message\MessageWindow$4.class
 sk\stu\fiit\gui\team\AddTeamWindow$1.class
 sk\stu\fiit\data\InputProcessor.class
-sk\stu\fiit\gui\Template$13.class
 sk\stu\fiit\gui\user\message\NewInvitationWindow$1.class
 sk\stu\fiit\gui\user\message\NewMessageWindow$2.class
 sk\stu\fiit\gui\MainGui$14.class
@@ -79,7 +78,6 @@ sk\stu\fiit\gui\league\MatchWindow$5.class
 sk\stu\fiit\gui\league\LeagueInfoWindow$3.class
 sk\stu\fiit\gui\Template.class
 sk\stu\fiit\gui\league\MatchWindow$2.class
-sk\stu\fiit\gui\league\AddLeagueWindow$6.class
 sk\stu\fiit\gui\MainGui$1.class
 sk\stu\fiit\gui\MainGui$11.class
 sk\stu\fiit\user\LeagueOrganizer.class
@@ -95,11 +93,8 @@ sk\stu\fiit\gui\MainGui$5.class
 sk\stu\fiit\gui\team\ManageTeamWindow$4.class
 sk\stu\fiit\gui\league\MatchWindow$1.class
 sk\stu\fiit\gui\league\AddLeagueWindow$1.class
-sk\stu\fiit\gui\league\LeagueInfoWindow$5.class
-sk\stu\fiit\gui\team\AddTeamWindow$3.class
 sk\stu\fiit\gui\team\AddTeamWindow.class
 sk\stu\fiit\gui\LoginWindow$1.class
-sk\stu\fiit\gui\team\ManageTeamWindow$12.class
 sk\stu\fiit\gui\league\MatchWindow.class
 sk\stu\fiit\gui\MainGui$13.class
 sk\stu\fiit\league\Match.class
