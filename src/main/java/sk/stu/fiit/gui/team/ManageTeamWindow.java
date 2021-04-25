@@ -24,7 +24,6 @@ import sk.stu.fiit.gui.MainGui;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
-import sk.stu.fiit.user.User;
 
 /**
  *
@@ -82,7 +81,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         removePlayerBtn = new javax.swing.JButton();
         deleteTeamBtn = new javax.swing.JButton();
         leagueBtn = new javax.swing.JButton();
-        newPlayersBtn = new javax.swing.JButton();
         infoPnl = new javax.swing.JPanel();
         l1Lbl = new javax.swing.JLabel();
         mottoTf = new javax.swing.JTextField();
@@ -101,20 +99,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         plannedTbl = new javax.swing.JTable();
         teamLeaguesScroll = new javax.swing.JScrollPane();
         teamLeaguesTbl = new javax.swing.JTable();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manažovanie tímu");
@@ -205,15 +189,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
             }
         });
         controlsPnl.add(leagueBtn);
-
-        newPlayersBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        newPlayersBtn.setText("Nábor hráčov");
-        newPlayersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                newPlayersBtnMouseReleased(evt);
-            }
-        });
-        controlsPnl.add(newPlayersBtn);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -458,68 +433,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(leaguesPnl, gridBagConstraints);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Súbor");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Otvoriť");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Uložiť");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Uložiť ako");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Skončiť");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Upraviť");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Vystrihnúť");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Kopírovať");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Prilepiť");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Vymazať");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Pomocník");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Obsah");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("O aplikácií");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -535,10 +448,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void addIconBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIconBtnMouseReleased
         // TODO add your handling code here:
@@ -575,11 +484,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
         deleteTeamAction();
     }//GEN-LAST:event_deleteTeamBtnMouseReleased
 
-    private void newPlayersBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newPlayersBtnMouseReleased
-        // TODO add your handling code here:
-        newPlayersAction();
-    }//GEN-LAST:event_newPlayersBtnMouseReleased
-
     private void leagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leagueBtnMouseReleased
         // TODO add your handling code here:
         leagueAction();
@@ -587,23 +491,14 @@ public class ManageTeamWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton addAdminBtn;
     private javax.swing.JButton addIconBtn;
     private javax.swing.ButtonGroup bg1Bg;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JButton deleteTeamBtn;
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JCheckBox enableEdit;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
     private javax.swing.JPanel infoPnl;
@@ -613,20 +508,14 @@ public class ManageTeamWindow extends javax.swing.JFrame {
     private javax.swing.JButton leagueBtn;
     private javax.swing.JPanel leaguesPnl;
     private javax.swing.JPanel mainPnl;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
-    private javax.swing.JButton newPlayersBtn;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JScrollPane plannedScroll;
     private javax.swing.JTable plannedTbl;
     private javax.swing.JScrollPane playersScroll;
     private javax.swing.JTable playersTbl;
     private javax.swing.JButton removeAdminBtn;
     private javax.swing.JButton removePlayerBtn;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JScrollPane teamLeaguesScroll;
     private javax.swing.JTable teamLeaguesTbl;
     private javax.swing.JLabel titleLbl;
@@ -834,10 +723,6 @@ public class ManageTeamWindow extends javax.swing.JFrame {
             
             model.addRow(rowData);
         }
-    }
-
-    private void newPlayersAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void leagueAction() {

@@ -76,20 +76,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         l4Lbl = new javax.swing.JLabel();
         descriptionSp = new javax.swing.JScrollPane();
         descriptionTa = new javax.swing.JTextArea();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vytvor tím");
@@ -237,68 +223,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Súbor");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Otvoriť");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Uložiť");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Uložiť ako");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Skončiť");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Upraviť");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Vystrihnúť");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Kopírovať");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Prilepiť");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Vymazať");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Pomocník");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Obsah");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("O aplikácií");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -317,10 +241,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     private void addIconBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIconBtnMouseReleased
         // TODO add your handling code here:
         addIconAction();
@@ -333,21 +253,12 @@ public class AddTeamWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton addIconBtn;
     private javax.swing.ButtonGroup bg1Bg;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JButton createLeagueBtn;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
     private javax.swing.JPanel infoPnl;
@@ -355,13 +266,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l2Lbl;
     private javax.swing.JLabel l4Lbl;
     private javax.swing.JPanel mainPnl;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 
