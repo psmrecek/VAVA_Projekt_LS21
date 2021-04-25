@@ -47,6 +47,7 @@ public final class TestInputs {
             lists.addUser("Hráč", "x@x.x", "x", "x", "x", "xxxxxxxX1", "xxxxxxxX1", InputProcessor.convertDate("10.10.1999"));
             lists.addUser("Hráč", "y@y.y", "y", "y", "y", "yyyyyyyY1", "yyyyyyyY1", InputProcessor.convertDate("11.11.1999"));
             lists.addUser("Hráč", "z@z.z", "z", "z", "z", "zzzzzzzZ1", "zzzzzzzZ1", InputProcessor.convertDate("12.12.1999"));
+            lists.addUser("Hráč", "m@m.m" ,"m", "m", "m", "mmmmmmmM1", "mmmmmmmM1", InputProcessor.convertDate("7.5.2000"));
             
             logger.info("Users loaded correctly");
         } catch (ParseException ex) {
