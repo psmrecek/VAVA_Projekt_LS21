@@ -28,7 +28,7 @@ import sk.stu.fiit.user.*;
 
 
 /**
- *
+ *  
  * @author schon
  */
 public class MainGui extends javax.swing.JFrame {

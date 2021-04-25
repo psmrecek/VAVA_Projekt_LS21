@@ -3,7 +3,6 @@ package sk.stu.fiit.user;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import sk.stu.fiit.league.Information;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Match;
 
@@ -18,7 +17,6 @@ public class Spectator extends User implements Serializable{
 	private String name;
 	private ArrayList<League> leagueList;
 	private ArrayList<Match> matchList;
-	private ArrayList<Information> informationList;
 
 	
     public Spectator(String email, String name, String surrname, String nickname, String password, Date bornAt) {

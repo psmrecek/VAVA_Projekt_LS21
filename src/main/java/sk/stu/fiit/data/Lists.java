@@ -17,7 +17,7 @@ import sk.stu.fiit.user.Spectator;
 import sk.stu.fiit.user.*;
 
 /**
-Class <code>Lists</code> serves as class storing all information given
+ * Class <code>Lists</code> serves as class storing all information given
  * from GUI. Stores Arrays of registered {@link User}s. 
  * Also checks if given inputs are valid when creating classes. 
  * 
