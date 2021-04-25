@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
 import sk.stu.fiit.user.message.TeamInvitation;

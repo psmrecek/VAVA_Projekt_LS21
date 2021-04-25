@@ -1,10 +1,10 @@
 package sk.stu.fiit.league;
 
 import java.io.Serializable;
-import sk.stu.fiit.team.Team;
 import java.util.ArrayList;
 import java.util.Date;
 import sk.stu.fiit.data.InputProcessor;
+import sk.stu.fiit.team.Team;
 
 /**
  * <code>Match</code> is used for match simulation between {@link Team}s

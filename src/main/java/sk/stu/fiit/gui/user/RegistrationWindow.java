@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.user.User;
 
 /**
  * <code>RegistrationWindow</code> allows new {@link User}s to join our app.
