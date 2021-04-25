@@ -1,3 +1,8 @@
+/*
+ * VAVA project
+ * Esport League by Martin Schön and Peter Smreček
+ * FIIT STU, 2021
+ */
 package sk.stu.fiit.user;
 
 import java.io.Serializable;
@@ -6,11 +11,12 @@ import sk.stu.fiit.team.Team;
 
 
 /**
- * Osoba, ktor� sa z��ast�uje hier, zap�ja sa do t�mov a cez t�my sa zap�ja do l�g
- * a z�pasov.
- * @author PeterSmrecek
- * @version 1.0
- * @created 19-apr-2021 18:21:18
+ * <code>Player</code> extends {@link User} and represents players in 
+ * our application. It stores information about their {@link Team}, alongside with
+ * information, if player is administrator of the team.
+ * 
+ * @see User
+ * @see Team
  */
 public class Player extends User implements Serializable{
     private static final long serialVersionUID = 0;

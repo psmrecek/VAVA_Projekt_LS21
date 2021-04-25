@@ -13,12 +13,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.apache.log4j.Logger;
-import sk.stu.fiit.gui.LoginWindow;
 import sk.stu.fiit.gui.MainGui;
 
 /**
+ * Class <code>Save</code> is used for serialization. It allows 
+ * serializing objects of {@link Lists} and {@link CurrentTime} from
+ * running application status.
  *
- * @author schon
+ * @see Lists
+ * @see CurrentTime
  */
 public class Save implements Serializable{
 private static final long serialVersionUID = 0;

@@ -22,22 +22,22 @@ import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.Player;
 
 /**
- *
- * @author PeterSmrecek
+ * A window allowing the {@link Player} to create a new {@link Team}. The player
+ * chooses the team name, motto, description and logo. The player becomes the
+ * administrator of the new team. 
+ * 
+ * @see Player
+ * @see Team
  */
 public class AddTeamWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Template
-     */
-    
     private final Logger logger = Logger.getLogger(AddTeamWindow.class.getName());
     final JFileChooser fc = new JFileChooser();
     
-    private Player player;
-    private Lists lists;
-    private MainGui mainGui;
-    private List<JTextField> tfInfoList;
+    private final Player player;
+    private final Lists lists;
+    private final MainGui mainGui;
+    private final List<JTextField> tfInfoList;
     private ImageIcon icon;
     
     public AddTeamWindow(Player player, Lists lists, MainGui mainGui) {
@@ -76,20 +76,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         l4Lbl = new javax.swing.JLabel();
         descriptionSp = new javax.swing.JScrollPane();
         descriptionTa = new javax.swing.JTextArea();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vytvor tím");
@@ -237,68 +223,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(infoPnl, gridBagConstraints);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Súbor");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Otvoriť");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Uložiť");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Uložiť ako");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Skončiť");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Upraviť");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Vystrihnúť");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Kopírovať");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Prilepiť");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Vymazať");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Pomocník");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Obsah");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("O aplikácií");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -317,10 +241,6 @@ public class AddTeamWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     private void addIconBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIconBtnMouseReleased
         // TODO add your handling code here:
         addIconAction();
@@ -333,21 +253,12 @@ public class AddTeamWindow extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton addIconBtn;
     private javax.swing.ButtonGroup bg1Bg;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JButton createLeagueBtn;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
     private javax.swing.JPanel infoPnl;
@@ -355,13 +266,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
     private javax.swing.JLabel l2Lbl;
     private javax.swing.JLabel l4Lbl;
     private javax.swing.JPanel mainPnl;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField mottoTf;
     private javax.swing.JTextField nameTf;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 
@@ -373,6 +279,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
             file = fc.getSelectedFile();
         } else {
             errorMessage("Nie je vybraný žiaden súbor!");
+            logger.error("No file selected");
             return;
         }
 
@@ -381,7 +288,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
             icon = InputProcessor.resize(img, 280);
         } catch (Exception e) {
             errorMessage("Vybraný súbor nie je možné použiť ako logo!");
-            logger.warn("Wrong image selected");
+            logger.error("Not image selected");
             return;
         }
         
@@ -392,6 +299,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         String description = descriptionTa.getText();
         if (isEmptyField(tfInfoList) || description.isEmpty()) {
             errorMessage("Žiadne pole Informácií nesmie zostať prázdne!");
+            logger.error("Empty field");
             return;
         }
         
@@ -400,6 +308,7 @@ public class AddTeamWindow extends javax.swing.JFrame {
         
         if (icon == null) {
             errorMessage("Logo tímu nesmie zostať prázdne!");
+            logger.error("Empty logo");
             return;
         }
         
@@ -408,6 +317,8 @@ public class AddTeamWindow extends javax.swing.JFrame {
         lists.addTeam(team);
         
         mainGui.checkPlayerButtons();
+        
+        logger.info("New team " + team.getName() + " created.");
         
         this.dispose();
     }

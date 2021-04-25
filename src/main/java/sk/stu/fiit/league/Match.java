@@ -1,26 +1,26 @@
 package sk.stu.fiit.league;
 
 import java.io.Serializable;
-import sk.stu.fiit.team.Team;
 import java.util.ArrayList;
 import java.util.Date;
 import sk.stu.fiit.data.InputProcessor;
+import sk.stu.fiit.team.Team;
 
 /**
- * S��a�n� tretnutie t�mov, ktor� vy�sti v rozdelenie bodov pod�a poradia.
- * @author PeterSmrecek
- * @version 1.0
- * @created 19-apr-2021 18:21:18
+ * <code>Match</code> is used for match simulation between {@link Team}s
+ * It provides all of the important information about the match and it's result.
+ * 
+ * @see Team
  */
 public class Match implements Serializable{
 
         private static final long serialVersionUID = 0;
-	private Date date;
+	private final Date date;
 	private String result;
-	private String type;
-	private ArrayList<Team> teamList;
+	private final String type;
+	private final ArrayList<Team> teamList;
         private String winner;
-        private String activeLink;
+        private final String activeLink;
 
     public Match(Date date, String type, ArrayList<Team> teamList, String activeLink) {
         this.date = date;
@@ -74,8 +74,7 @@ public class Match implements Serializable{
         for (Team team : teamList) {
             names.add(team.getName());
         }
-        
         return String.join(", ", names);
     }
     
-}//end Match
+}

@@ -11,21 +11,22 @@ import java.util.Date;
 import java.util.regex.Pattern;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.team.Team;
-import sk.stu.fiit.user.LeagueOrganizer;
-import sk.stu.fiit.user.Player;
-import sk.stu.fiit.user.Spectator;
 import sk.stu.fiit.user.*;
 
 /**
-Class <code>Lists</code> serves as class storing all information given
- * from GUI. Stores Arrays of registered {@link User}s. 
- * Also checks if given inputs are valid when creating classes. 
+ * Class <code>Lists</code> serves as class storing all information given
+ * from GUI. Stores Arrays of registered {@link User}s, {@link League}s and
+ * {@link Team}s. 
+ * Also checks if given inputs are valid when creating classes, returns 
+ * lists and allows needed kinds of filtering.
  * 
  * @see User
+ * @see League
+ * @see Team
  */
 public class Lists implements Serializable{
     private static final long serialVersionUID = 0;
-    private final ArrayList<User> users = new ArrayList<>();
+    private final ArrayList<User> users = new ArrayList<>();;
     private final ArrayList<League> leagues = new ArrayList<>();
     private final ArrayList<Team> teams = new ArrayList<>();
     
@@ -138,7 +139,6 @@ public class Lists implements Serializable{
                 teamsLeaguesList.add(league);
             }
         }
-        
         return teamsLeaguesList;
     }
     
@@ -210,10 +210,6 @@ public class Lists implements Serializable{
             user.setEmail(email);
             user.setNickname(nickname);
         }
-
-
-        
-           
         return errorMessage;
     }
 

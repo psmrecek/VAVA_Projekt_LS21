@@ -10,18 +10,16 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.user.User;
 
 /**
- *
- * @author schon
+ * <code>RegistrationWindow</code> allows new {@link User}s to join our app.
+ * 
+ * @see User
  */
 public class RegistrationWindow extends javax.swing.JFrame {
     private final Lists lists;
     
-    /**
-     * Creates new form RegistrationGui
-     * @param lists 
-     */
     public RegistrationWindow(Lists lists){
         initComponents();
         this.lists = lists;

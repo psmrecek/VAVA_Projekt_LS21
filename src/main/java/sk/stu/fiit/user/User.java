@@ -11,8 +11,9 @@ import java.util.Date;
 import sk.stu.fiit.user.message.Message;
 
 /**
- * Abstract class for storing information about all users.
- * @author schon
+ * Abstract class <code>User</code> for storing information about all kinds of users.
+ * It holds login information as well as other required data about user 
+ * that is currently using application.
  */
 public abstract class User implements Serializable{
     private static final long serialVersionUID = 0;

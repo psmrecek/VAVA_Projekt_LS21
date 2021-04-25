@@ -5,20 +5,22 @@
  */
 package sk.stu.fiit.gui.league;
 
+import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.league.Match;
+import sk.stu.fiit.team.Team;
 
 /**
- *
- * @author schon
+ * A window showing the detail of the {@link Match}. Displays the type, time, 
+ * winner, result and list of {@link Team}s in the match.
+ * 
+ * @see Match
+ * @see Team
  */
 public class MatchInfoWindow extends javax.swing.JFrame {
     private final Match match;
+    private final Logger logger = Logger.getLogger(MatchInfoWindow.class.getName());
     
-    /**
-     * Creates new form MatchInfoWindow
-     * @param match
-     */
     public MatchInfoWindow(Match match) {
         initComponents();
         this.match = match;
@@ -33,6 +35,7 @@ public class MatchInfoWindow extends javax.swing.JFrame {
         
         teamsList.setListData(getTeams());
         
+        logger.info("Match info displayed");
         this.setVisible(true);
     }
     
@@ -82,52 +85,52 @@ public class MatchInfoWindow extends javax.swing.JFrame {
         teamsInfoLabel.setText("Zúčastnené tímy");
         jPanel1.add(teamsInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
-        winnerInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         winnerInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         winnerInfoLabel.setText("Víťaz");
+        winnerInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(winnerInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 20, 250, -1));
         winnerInfoLabel.getAccessibleContext().setAccessibleName("");
 
-        winnerLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        winnerLabel.setForeground(new java.awt.Color(0, 51, 102));
         winnerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         winnerLabel.setText("------");
+        winnerLabel.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        winnerLabel.setForeground(new java.awt.Color(0, 51, 102));
         jPanel1.add(winnerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 50, 250, -1));
         winnerLabel.getAccessibleContext().setAccessibleName("");
 
-        timeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeInfoLabel.setText("Dátum konania");
+        timeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(timeInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 180, 250, -1));
         timeInfoLabel.getAccessibleContext().setAccessibleName("");
 
-        timeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeLabel.setText("jLabel5");
+        timeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 210, 250, -1));
         timeLabel.getAccessibleContext().setAccessibleName("");
 
-        resultInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         resultInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultInfoLabel.setText("Výsledok");
+        resultInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(resultInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 100, 250, -1));
         resultInfoLabel.getAccessibleContext().setAccessibleName("");
 
-        resultLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         resultLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultLabel.setText("jLabel7");
+        resultLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 130, 250, -1));
         resultLabel.getAccessibleContext().setAccessibleName("");
 
-        typeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         typeInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         typeInfoLabel.setText("Typ");
+        typeInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(typeInfoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 260, 250, -1));
         typeInfoLabel.getAccessibleContext().setAccessibleName("");
 
-        typeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         typeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         typeLabel.setText("jLabel9");
+        typeLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jPanel1.add(typeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 290, 250, -1));
         typeLabel.getAccessibleContext().setAccessibleName("");
 

@@ -15,8 +15,13 @@ import sk.stu.fiit.league.Match;
 import sk.stu.fiit.league.Prize;
 
 /**
- *
- * @author PeterSmrecek
+ * A window containing information about the {@link League}, its description 
+ * and logo, a list of {@link Prize}s and {@link Match}es. It is possible to 
+ * select a match and view its detail, or a link to the match stream.
+ * 
+ * @see League
+ * @see Prize
+ * @see Match
  */
 public class LeagueInfoWindow extends javax.swing.JFrame {
     /**
@@ -39,7 +44,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         genreTf.setText(this.league.getGenre());
         dateStartTf.setText(InputProcessor.dateToString(this.league.getStartDate()));
         dateEndTf.setText(InputProcessor.dateToString(this.league.getEndDate()));
-        ageRestrictionTf.setText(String.valueOf(this.league.getMinimalAge()));
+        ageRestrictionTf.setText(String.valueOf(this.league.getRecommendedAge()));
         maxTeamsTf.setText(String.valueOf(this.league.getMaxNumberTeams()));
         teamsInMatchTf.setText(String.valueOf(this.league.getNumberOfTeamsInMatch()));
         descriptionTa.setText(this.league.getDescription());
@@ -131,20 +136,6 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         l4Lbl = new javax.swing.JLabel();
         descriptionSp = new javax.swing.JScrollPane();
         descriptionTa = new javax.swing.JTextArea();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informácie o lige");
@@ -396,7 +387,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         infoPnl.add(ageRestrictionTf, gridBagConstraints);
 
         l7Lbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        l7Lbl.setText("Vekové obmedzenie");
+        l7Lbl.setText("Odporúčaný minimálny vek");
         l7Lbl.setMinimumSize(new java.awt.Dimension(200, 26));
         l7Lbl.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -420,7 +411,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Víťaz", "Skóre", "Dátum", "Typ zápasu"
+                "Víťaz", "Výsledok", "Dátum", "Typ zápasu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -483,68 +474,6 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         mainPnl.add(descriptionPnl, gridBagConstraints);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Súbor");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Otvoriť");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Uložiť");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Uložiť ako");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Skončiť");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Upraviť");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Vystrihnúť");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Kopírovať");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Prilepiť");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Vymazať");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Pomocník");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Obsah");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("O aplikácií");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -553,15 +482,11 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void matchInfoLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchInfoLeagueBtnMouseReleased
         if (matchesTable.getSelectedRow() == -1) {
@@ -590,25 +515,16 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JTextField ageRestrictionTf;
     private javax.swing.ButtonGroup bg1Bg;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JTextField dateEndTf;
     private javax.swing.JTextField dateStartTf;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JPanel descriptionPnl;
     private javax.swing.JScrollPane descriptionSp;
     private javax.swing.JTextArea descriptionTa;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField gameTf;
     private javax.swing.JTextField genreTf;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JPanel imagePnl;
     private javax.swing.JPanel infoPnl;
@@ -627,12 +543,7 @@ public class LeagueInfoWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane matchesScroll;
     private javax.swing.JTable matchesTable;
     private javax.swing.JTextField maxTeamsTf;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField nameTf;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JScrollPane tableScroll;
     private javax.swing.JTable tableTbl;
     private javax.swing.JTextField teamsInMatchTf;

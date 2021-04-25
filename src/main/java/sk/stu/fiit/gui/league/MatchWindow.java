@@ -6,12 +6,10 @@
 package sk.stu.fiit.gui.league;
 
 import java.text.ParseException;
-import sk.stu.fiit.gui.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -19,27 +17,30 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.gui.*;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Match;
 import sk.stu.fiit.team.Team;
 import sk.stu.fiit.user.LeagueOrganizer;
 
 /**
- *
- * @author PeterSmrecek
+ * A window that allows the {@link LeagueOrganizer} to select the {@link League} 
+ * for which they wants to schedule {@link Match}es, view scheduled matches 
+ * in the league, schedule a new match and record the result of the scheduled 
+ * match.
+ * 
+ * @see LeagueOrganizer
+ * @see League
+ * @see Match
  */
 public class MatchWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Template
-     */
-    
     private final Logger logger = Logger.getLogger(MatchWindow.class.getName());
-    private MainGui mainGui;
-    private Lists lists;
-    private LeagueOrganizer leagueOrganizer;
-    private ArrayList<League> organizersLeagues;
-    private ArrayList<String> organizersLeaguesStrings = new ArrayList<>();
+    private final MainGui mainGui;
+    private final Lists lists;
+    private final LeagueOrganizer leagueOrganizer;
+    private final ArrayList<League> organizersLeagues;
+    private final ArrayList<String> organizersLeaguesStrings = new ArrayList<>();
     private League selectedLeague = null;
     private ArrayList<Team> selectedLeagueTeams;
     private final List<JTextField> tfInfoList;
@@ -595,27 +596,22 @@ public class MatchWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createMatchBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createMatchBtnMouseReleased
-        // TODO add your handling code here:
         createMatchAction();
     }//GEN-LAST:event_createMatchBtnMouseReleased
 
     private void resultsBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultsBtnMouseReleased
-        // TODO add your handling code here:
         resultsBtnAction();
     }//GEN-LAST:event_resultsBtnMouseReleased
 
     private void selectLeagueBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectLeagueBtnMouseReleased
-        // TODO add your handling code here:
         selectLeagueAction();
     }//GEN-LAST:event_selectLeagueBtnMouseReleased
 
     private void resultsRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultsRbActionPerformed
-        // TODO add your handling code here:
         resultsAction();
     }//GEN-LAST:event_resultsRbActionPerformed
 
     private void newMatchRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMatchRbActionPerformed
-        // TODO add your handling code here:
         newMatchAction();
     }//GEN-LAST:event_newMatchRbActionPerformed
 
@@ -698,6 +694,7 @@ public class MatchWindow extends javax.swing.JFrame {
         
         if (teamsInMatch.size() != inMatch) {
             errorMessage("Nie je zvolený správny počet tímov pre vytvorenie zápasu!\nZvoľte "+ inMatch + " tímy!");
+            logger.error("Incorrect number of teams selected. Select " + inMatch + " teams");
             return;
         }
         
@@ -710,26 +707,31 @@ public class MatchWindow extends javax.swing.JFrame {
             date = InputProcessor.convertDate(dateString);
         } catch (ParseException ex) {
             errorMessage("Nie je zadaný správny formát dátumu!");
+            logger.error("Incorrect date format");
             return;
         }
         
         if (!selectedLeague.isBetween(date)) {
             errorMessage("Nie je zadaný platný dátumu!\nDátum musí byť medzi začiatkom a koncom ligy.");
+            logger.error("Invalid date - the date is not in the range of league dates");
             return;
         }
         
         if (typeString.isEmpty()) {
             errorMessage("Typ zápasu musí byť vyplnený!");
+            logger.error("Match type is empty");
             return;
         }
         
         if (linkString.isEmpty()) {
             errorMessage("Link na zápas musí byť vyplnený!");
+            logger.error("Match link is empty");
             return;
         }
         
         Match match = new Match(date, typeString, teamsInMatch, linkString);
         selectedLeague.addMatch(match);
+        logger.info("New match created and added to league " + selectedLeague.getName());
         
         updateAll();
         
@@ -738,6 +740,7 @@ public class MatchWindow extends javax.swing.JFrame {
     private void resultsBtnAction() {
         int matchTableIndex = getRow(matchesTbl, "Nie je vybraný žiaden zápas z tabuľky!");
         if (matchTableIndex == -1) {
+            logger.error("No match selected from table");
             return;
         }
         
@@ -748,11 +751,13 @@ public class MatchWindow extends javax.swing.JFrame {
         
         if (winnerString.isEmpty() || resultString.isEmpty()) {
             errorMessage("Víťaz aj výsledok musia byť vyplnené!");
+            logger.error("Empty winner or result");
             return;
         }
         
         match.setWinner(winnerString);
         match.setResult(resultString);
+        logger.info("Winner and result set for match");
         
         updateAll();
     }
@@ -768,12 +773,14 @@ public class MatchWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                     "Výber ligy nemôže byť prázdny!",
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
+            logger.error("No league selected");
             return;
         }
         
         int index = organizersLeaguesStrings.indexOf(atribute);
         
         if (!(index >= 0)) {
+            logger.error("Invalid index selected");
             return;
         }
         

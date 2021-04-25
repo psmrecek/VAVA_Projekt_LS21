@@ -11,17 +11,15 @@ import sk.stu.fiit.data.Lists;
 import sk.stu.fiit.user.User;
 
 /**
- *
- * @author PeterSmrecek
+ * <code>ProfileWindow</code> allows {@link User} to see and/or change 
+ * information about them.
+ * 
+ * @see User
  */
 public class ProfileWindow extends javax.swing.JFrame {
     private final User user;
     private final Lists lists;
 
-    /**
-     * Creates new form Template
-     */
-    
     private final Logger logger = Logger.getLogger(ProfileWindow.class.getName());
     
     public ProfileWindow(User user, Lists lists) {
@@ -58,6 +56,7 @@ public class ProfileWindow extends javax.swing.JFrame {
         surrnameLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Profil");
 
         mainPnl.setMinimumSize(new java.awt.Dimension(885, 478));
         mainPnl.setPreferredSize(new java.awt.Dimension(885, 478));
@@ -234,9 +233,5 @@ public class ProfileWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Zmena údajov prebehla úspešne");
             this.dispose();
         }
-        
-        
     }
-
-
 }

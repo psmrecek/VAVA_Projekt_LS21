@@ -3,17 +3,16 @@ package sk.stu.fiit.league;
 import java.io.Serializable;
 
 /**
- * @author PeterSmrecek
- * @version 1.0
- * @created 19-apr-2021 18:21:18
+ * Class <code>Prize</code> represents a thing given as a reward to the 
+ * winner(s) of a league. Prize has its name, description, price and position.
  */
 public class Prize implements Serializable{
         
     private static final long serialVersionUID = 0;
-    private String name;
-    private String description;
-    private int position;
-    private double price;
+    private final String name;
+    private final String description;
+    private final int position;
+    private final double price;
 
     public Prize(String name, String description, int position, double price) {
         this.name = name;
