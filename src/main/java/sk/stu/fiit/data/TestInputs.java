@@ -20,8 +20,9 @@ import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
 
 /**
- *
- * @author PeterSmrecek
+ * This class adds sample inputs to the application for testing and presentation
+ * purposes.
+ * 
  */
 public final class TestInputs {
     
@@ -48,6 +49,7 @@ public final class TestInputs {
             lists.addUser("Hráč", "y@y.y", "y", "y", "y", "yyyyyyyY1", "yyyyyyyY1", InputProcessor.convertDate("11.11.1999"));
             lists.addUser("Hráč", "z@z.z", "z", "z", "z", "zzzzzzzZ1", "zzzzzzzZ1", InputProcessor.convertDate("12.12.1999"));
             lists.addUser("Hráč", "m@m.m" ,"m", "m", "m", "mmmmmmmM1", "mmmmmmmM1", InputProcessor.convertDate("7.5.2000"));
+            lists.addUser("Divák", "divak@divak.divak", "divak", "divak", "d", "dddddddD1", "dddddddD1", InputProcessor.convertDate("14.12.2002"));
             
             logger.info("Users loaded correctly");
         } catch (ParseException ex) {
