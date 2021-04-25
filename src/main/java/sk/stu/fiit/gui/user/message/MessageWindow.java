@@ -5,8 +5,12 @@
  */
 package sk.stu.fiit.gui.user.message;
 
+
+import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.gui.MainGui;
 import sk.stu.fiit.user.Player;
 import sk.stu.fiit.user.User;
 import sk.stu.fiit.user.message.Message;
@@ -16,22 +20,25 @@ import sk.stu.fiit.user.message.Message;
  * @author schon
  */
 public class MessageWindow extends javax.swing.JFrame {
-    private User loggedUser;
-    private Lists lists;
+    private final User loggedUser;
+    private final Lists lists;
+    private final MainGui mainGui;
     
     /**
      * Creates new form MailWindow
      * @param user User logged in application
      * @param lists So we can pass lists to newMessage for users
+     * @param mainGui
      */
-    public MessageWindow(User user, Lists lists){
+    public MessageWindow(User user, Lists lists, MainGui mainGui){
         initComponents();
         this.loggedUser = user;
         this.lists = lists;
+        this.mainGui = mainGui;
         updateAll();
     }
     
-    private void updateAll(){
+    public final void updateAll(){
         String[] messages = new String[this.loggedUser.getMessages().size()];
         
         for(int item = 0; item < this.loggedUser.getMessages().size(); item++){
@@ -157,15 +164,22 @@ public class MessageWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void teamInvitationButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teamInvitationButtonMouseReleased
-        // TODO add your handling code here:
+        NewInvitationWindow newInvitationWindow = new NewInvitationWindow(this.loggedUser, this.lists);
     }//GEN-LAST:event_teamInvitationButtonMouseReleased
 
     private void newMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newMessageButtonMouseReleased
-        NewMessage newMessage = new NewMessage(this.loggedUser, this.lists);
+        NewMessageWindow newMessage = new NewMessageWindow(this.loggedUser, this.lists, this);
     }//GEN-LAST:event_newMessageButtonMouseReleased
 
     private void readMessageButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_readMessageButtonMouseReleased
-        // TODO add your handling code here:
+        for(int index = 0; index < this.loggedUser.getMessages().size(); index++){
+            if(messagesList.isSelectedIndex(index)){
+                SeeMessageWindow seeMessageWindow = new SeeMessageWindow(loggedUser, loggedUser.getMessages().get(index), this, this.mainGui);
+                return;
+            }     
+        }
+        JOptionPane.showMessageDialog(rootPane, "Vyber sprácu, ktorú chceš zobraziť", "Nemožno načítať správu", JOptionPane.WARNING_MESSAGE);
+        Logger.getLogger(this.getClass().getName()).error("User didn't choose message to display");
     }//GEN-LAST:event_readMessageButtonMouseReleased
 
 

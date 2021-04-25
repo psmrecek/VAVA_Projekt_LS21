@@ -20,19 +20,23 @@ import sk.stu.fiit.user.message.Message;
  *
  * @author schon
  */
-public class NewMessage extends javax.swing.JFrame {
-    private ArrayList<User> contacts = new ArrayList<>();
-    private ArrayList<String> description = new ArrayList<>();
-    private User user;
-    private Lists lists;
+public class NewMessageWindow extends javax.swing.JFrame {
+    private final ArrayList<User> contacts = new ArrayList<>();
+    private final ArrayList<String> description = new ArrayList<>();
+    private final User user;
+    private final Lists lists;
+    private final MessageWindow messageWindow;
     
     /**
      * Creates new form NewMessage
+     * @param user
+     * @param lists
      */
-    public NewMessage(User user, Lists lists){
+    public NewMessageWindow(User user, Lists lists, MessageWindow messageWindow){
         initComponents();
         this.user = user;
         this.lists = lists;
+        this.messageWindow = messageWindow;
         updateAll();
     }
     
@@ -42,8 +46,8 @@ public class NewMessage extends javax.swing.JFrame {
         ArrayList<League> leagues = this.lists.getTeamLeagues(((Player)this.user).getTeam());
         
         for (League league : leagues){
-            for(User user : league.getLeagueOrganizerList()){
-                this.contacts.add(user);
+            for(User OrgL : league.getLeagueOrganizerList()){
+                this.contacts.add(OrgL);
                 this.description.add(" (OrgL "+league.getName()+")");
             }
         }
@@ -51,8 +55,8 @@ public class NewMessage extends javax.swing.JFrame {
     }
     
     private void playerContacts(){
-        for(User user : ((Player)this.user).getTeam().getPlayersList()){
-            this.contacts.add(user);
+        for(User teammate : ((Player)this.user).getTeam().getPlayersList()){
+            this.contacts.add(teammate);
             this.description.add(" (Spoluhráč "+((Player)this.user).getTeam().getName()+")");
         }
     }
@@ -139,7 +143,9 @@ public class NewMessage extends javax.swing.JFrame {
         jPanel1.add(allToggleButton, gridBagConstraints);
 
         jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(259, 131));
 
+        contactsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         contactsList.setMaximumSize(new java.awt.Dimension(37, 90));
         contactsList.setMinimumSize(new java.awt.Dimension(37, 90));
         contactsList.setPreferredSize(new java.awt.Dimension(37, 90));
@@ -171,6 +177,8 @@ public class NewMessage extends javax.swing.JFrame {
         jPanel1.add(jLabel1, gridBagConstraints);
 
         headerTextField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        headerTextField.setMinimumSize(new java.awt.Dimension(259, 28));
+        headerTextField.setPreferredSize(new java.awt.Dimension(259, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -178,6 +186,9 @@ public class NewMessage extends javax.swing.JFrame {
         jPanel1.add(headerTextField, gridBagConstraints);
 
         jScrollPane3.setAutoscrolls(true);
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(259, 131));
+        jScrollPane3.setName(""); // NOI18N
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(259, 131));
 
         bodyTextArea.setColumns(20);
         bodyTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -249,6 +260,7 @@ public class NewMessage extends javax.swing.JFrame {
            }
            Logger.getLogger(this.getClass().getName()).info("Message succesfully sent to whole list");
            JOptionPane.showMessageDialog(rootPane, "Správy úspešne odoslané");
+           this.messageWindow.updateAll();
            this.dispose();
        } else {
             for(int index = 0; index < contacts.size(); index++){
@@ -256,6 +268,7 @@ public class NewMessage extends javax.swing.JFrame {
                 contacts.get(index).addMessage(message);
                 Logger.getLogger(this.getClass().getName()).info("Message succesfully sent to "+contacts.get(index).getNickname());
                 JOptionPane.showMessageDialog(rootPane, "Správa úspešne odoslaná");
+                this.messageWindow.updateAll();
                 this.dispose();
                 return;
             }     
