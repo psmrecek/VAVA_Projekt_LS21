@@ -235,7 +235,11 @@ public class MainGui extends javax.swing.JFrame {
         leaguesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         leaguesScrollPane.setViewportView(leaguesTable);
         if (leaguesTable.getColumnModel().getColumnCount() > 0) {
-            leaguesTable.getColumnModel().getColumn(4).setResizable(false);
+            leaguesTable.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("MENO")); // NOI18N
+            leaguesTable.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("HRA")); // NOI18N
+            leaguesTable.getColumnModel().getColumn(2).setHeaderValue(bundle.getString("POČET TÍMOV")); // NOI18N
+            leaguesTable.getColumnModel().getColumn(3).setHeaderValue(bundle.getString("OD")); // NOI18N
+            leaguesTable.getColumnModel().getColumn(4).setHeaderValue(bundle.getString("DO")); // NOI18N
         }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
