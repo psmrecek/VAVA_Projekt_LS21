@@ -16,20 +16,19 @@ import sk.stu.fiit.user.User;
 import sk.stu.fiit.user.message.Message;
 
 /**
- *
- * @author schon
+ * Class <code>MessageWindow</code> is used as graphical interface for chat
+ * function. User can access {@link NewInvitationWindow}, {@link SeeMessageWindow} 
+ * and {@link NewMessageWindow}.
+ * 
+ * @see NewInvitationWindow
+ * @see SeeMessageWindow
+ * @see NewMessageWindow
  */
 public class MessageWindow extends javax.swing.JFrame {
     private final User loggedUser;
     private final Lists lists;
     private final MainGui mainGui;
     
-    /**
-     * Creates new form MailWindow
-     * @param user User logged in application
-     * @param lists So we can pass lists to newMessage for users
-     * @param mainGui
-     */
     public MessageWindow(User user, Lists lists, MainGui mainGui){
         initComponents();
         this.loggedUser = user;

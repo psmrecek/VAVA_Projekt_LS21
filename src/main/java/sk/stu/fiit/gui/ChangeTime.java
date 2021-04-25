@@ -9,15 +9,13 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author schon
+ * ChangeTime allows admin to change date and time stored in {@link CurrentTime}
+ * 
+ * @see CurrentTime
  */
 public class ChangeTime extends javax.swing.JFrame {
     private MainGui mainGui;
 
-    /**
-     * Creates new form ChangeTime
-     */
     public ChangeTime() {
         initComponents();
     }
