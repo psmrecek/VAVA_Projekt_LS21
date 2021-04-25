@@ -791,7 +791,7 @@ public class MainGui extends javax.swing.JFrame {
             if (playersTeam.removePlayer(loggedPlayer)) {
                 JOptionPane.showMessageDialog(rootPane, java.util.ResourceBundle.getBundle("Bundle").getString("ÚSPEŠNE SI OPUSTIL TÍM"), java.util.ResourceBundle.getBundle("Bundle").getString("ODCHOD Z TÍMU"), JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(rootPane, java.util.ResourceBundle.getBundle("Bundle").getString("NEPODARILO SA OPUSTIŤ TÍM!\nADMINISTRÁTOR Z TÍMU NEMÔŽE ODÍSŤ.\nNAJSKÔR PRESUŇTE ADMINISTRÁTORSKÉ PRÁVA NA INÉHO HRÁČA!"), java.util.ResourceBundle.getBundle("Bundle").getString("ODCHOD Z TÍMU"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, java.util.ResourceBundle.getBundle("Bundle").getString("NEPODARILO SA OPUSTIŤ TÍM"), java.util.ResourceBundle.getBundle("Bundle").getString("ODCHOD Z TÍMU"), JOptionPane.ERROR_MESSAGE);
             }
         }
         checkPlayerButtons();

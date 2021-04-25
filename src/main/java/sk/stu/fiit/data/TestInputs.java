@@ -146,7 +146,7 @@ public final class TestInputs {
             league2 = new League("Zaváraná liga", "Zaváranie pohárov", "Kuchárska", InputProcessor.convertDate("25.6.2021") , InputProcessor.convertDate("24.7.2021"), 15, 90, 3, "Prináša hrášom jedinečný zážitok zo zavárania úrody", (LeagueOrganizer) organizer2, prizeList2, icons.get(5));
         lists.addLeague(league2);
         
-            league3 = new League("Priemyselne spracovaná liga", "Plastový obal", "Recyklovateľná", InputProcessor.convertDate("25.8.2021") , InputProcessor.convertDate("24.9.2021"), 14, 3, 4, "Hráči môžu vyhrať fantastické ceny devastujúce zdravie", (LeagueOrganizer) organizer3, prizeList3, icons.get(6));
+            league3 = new League("Priemyselne spracovaná liga", "Hon na infarkt", "Recyklovateľná", InputProcessor.convertDate("25.8.2021") , InputProcessor.convertDate("24.9.2021"), 14, 3, 4, "Hráči môžu vyhrať fantastické ceny devastujúce zdravie", (LeagueOrganizer) organizer3, prizeList3, icons.get(6));
         lists.addLeague(league3);
         
             logger.info("Leagues created correctly");
@@ -164,7 +164,11 @@ public final class TestInputs {
         league3.addTeam(team3);
         league3.addTeam(team4);
         
-        league1.addMatch(new Match(CurrentTime.CurrentTime().getDateTime(), "Superko", lists.getTeams(), "www.google.com"));
+        ArrayList<Team> teamsList = new ArrayList<>();
+        teamsList.add(team1);
+        teamsList.add(team2);
+        
+        league1.addMatch(new Match(CurrentTime.CurrentTime().getDateTime(), "Superko", teamsList, "www.google.com"));
         
         return lists;
     }
