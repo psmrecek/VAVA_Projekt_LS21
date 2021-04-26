@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.gui.MainGui;
 
@@ -27,11 +28,11 @@ public class Save implements Serializable{
 private static final long serialVersionUID = 0;
     private static final Logger logger = Logger.getLogger(Save.class.getName());
     private Lists lists;
-    private CurrentTime currentTime;
+    private Date currentDate;
     
     public void save(Lists lists, CurrentTime currentTime) throws IOException, FileNotFoundException{
         this.lists = lists;
-        this.currentTime = currentTime;
+        this.currentDate = currentTime.getDateTime();
         try (ObjectOutputStream ser = new ObjectOutputStream(new FileOutputStream("leaguesaves.out"))) {
             ser.writeObject(this);
             logger.info("Serialized objects");
@@ -46,9 +47,11 @@ private static final long serialVersionUID = 0;
             logger.info("Loading was succesful");
             in.close();
         }
-        this.currentTime = lastSave.currentTime;
+        this.currentDate = lastSave.currentDate;
         this.lists = lastSave.lists;
-        mainGui.setCurrentTime(this.currentTime);
+        CurrentTime.CurrentTime().setDateTime(this.currentDate);
+        mainGui.refreshTime();
+        mainGui.getLoginWindow().setLists(lists);
         mainGui.setLists(lists);
     }
 }
