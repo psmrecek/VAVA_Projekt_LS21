@@ -32,7 +32,8 @@ public class CurrentTime implements Serializable{
     
     public static CurrentTime CurrentTime(){
         if (currentTime == null)
-            currentTime = new CurrentTime();      
+            currentTime = new CurrentTime();     
+        System.out.println(InputProcessor.dateToString(currentTime.getDateTime()));
         return currentTime;
     }
 
@@ -52,6 +53,11 @@ public class CurrentTime implements Serializable{
         Logger.getLogger(CurrentTime.class.getName()).info("Time change succesful");
         return true;
     }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+    
     
     
     public static Date LocalDateTimeToDate(LocalDateTime localDateTime){
