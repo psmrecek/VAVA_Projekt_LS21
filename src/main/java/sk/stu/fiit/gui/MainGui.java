@@ -63,6 +63,11 @@ public class MainGui extends javax.swing.JFrame {
         nameLbl.setText(loggedUser.getName());
         initApplication();
     }
+
+    public LoginWindow getLoginWindow() {
+        return loginWindow;
+    }
+    
     
     public MainGui(LoginWindow loginWindow, String loggedUser, Lists lists) {
         this.lists = lists;
@@ -91,6 +96,10 @@ public class MainGui extends javax.swing.JFrame {
                 model.removeRow(i);
             }
         }
+    }
+    
+    public void refreshTime(){
+        currentTimeLabel.setText(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(currentTime.getDateTime()));
     }
     
     public void setTable(){ //TODO only active leagues
