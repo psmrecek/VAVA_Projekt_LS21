@@ -6,12 +6,10 @@
 package sk.stu.fiit.gui.league;
 
 import java.text.ParseException;
-import sk.stu.fiit.gui.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -19,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.data.InputProcessor;
 import sk.stu.fiit.data.Lists;
+import sk.stu.fiit.gui.*;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Match;
 import sk.stu.fiit.team.Team;

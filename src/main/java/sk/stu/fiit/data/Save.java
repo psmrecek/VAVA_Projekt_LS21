@@ -20,7 +20,7 @@ import sk.stu.fiit.gui.MainGui;
  * serializing objects of {@link Lists} and {@link CurrentTime} from
  * running application status.
  *
- * @see Link
+ * @see Lists
  * @see CurrentTime
  */
 public class Save implements Serializable{
