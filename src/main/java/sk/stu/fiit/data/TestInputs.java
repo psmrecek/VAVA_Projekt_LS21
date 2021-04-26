@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.league.League;
 import sk.stu.fiit.league.Match;
 import sk.stu.fiit.league.Prize;
@@ -26,7 +27,7 @@ import sk.stu.fiit.user.User;
  */
 public final class TestInputs {
     
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(TestInputs.class.getName());
+    private static final Logger logger = Logger.getLogger(TestInputs.class.getName());
     
     public static Lists createInputs(){
         Lists lists = new Lists();

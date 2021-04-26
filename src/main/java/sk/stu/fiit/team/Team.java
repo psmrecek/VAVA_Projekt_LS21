@@ -30,7 +30,7 @@ public class Team implements Serializable{
     private String motto;
     private ImageIcon icon;
     private ArrayList<Player> playersList = new ArrayList<>();
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private transient final Logger logger = Logger.getLogger(this.getClass().getName());
 
     public Team(String name, String description, String motto, Player player, ImageIcon icon) {
         this.name = name;
