@@ -33,7 +33,6 @@ public class CurrentTime implements Serializable{
     public static CurrentTime CurrentTime(){
         if (currentTime == null)
             currentTime = new CurrentTime();     
-        System.out.println(InputProcessor.dateToString(currentTime.getDateTime()));
         return currentTime;
     }
 
